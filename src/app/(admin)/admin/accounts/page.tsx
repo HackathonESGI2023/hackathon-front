@@ -9,7 +9,6 @@ import { ModalAcceptContent } from '@components/Modal/modalAcceptContent';
 import { Badge, Col, Row, Table, Text, Tooltip, User } from '@nextui-org/react';
 import { PawPrint, Pencil, Trash } from '@phosphor-icons/react';
 import { EditUserType } from 'src/model/user.schema';
-import { useLoginMutation } from 'src/store/application/slice';
 import { Modals } from '../../components/Modal/modalAccounts';
 import { ModalsMonster } from '../../components/Modal/modalMonster';
 

@@ -1,6 +1,5 @@
 'use client';
 import { Card, Col, Row, Text } from '@nextui-org/react';
-import { Monster } from 'src/store/monsters/monsters.model';
 import { parseWheightCategory } from 'src/utils/utils';
 
 export const MonsterCard = (props: { monster: Monster }) => {
