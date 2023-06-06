@@ -5,7 +5,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const NavbarTest = () => {
+type NavbarTestProps = {
+  className?: string;
+};
+
+const NavbarTest = ({ className }: NavbarTestProps) => {
   const [variant, setVariant] = useState('default');
   const [activeColor, setActiveColor] = useState('primary');
 
@@ -14,7 +18,12 @@ const NavbarTest = () => {
   const { setTheme } = useNextTheme();
 
   return (
-    <Navbar isBordered={isDark} variant="floating" maxWidth="fluid">
+    <Navbar
+      isBordered={isDark}
+      variant="floating"
+      maxWidth="fluid"
+      className={className}
+    >
       <Navbar.Brand>
         <Image
           src="/images/carbon-logo.svg"
