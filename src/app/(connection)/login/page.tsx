@@ -2,7 +2,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthLoginDto, authLoginSchema } from '@schemas/auth.schema';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { loginUser } from 'src/app/api/Auth/login';
 
@@ -11,6 +10,7 @@ import Input from '@components/UI/Input';
 import { Button, Spacer } from '@nextui-org/react';
 import Link from 'next/link';
 
+import { toast } from 'react-hot-toast';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -22,14 +22,13 @@ export default function Home() {
   } = useForm<AuthLoginDto>({ resolver: zodResolver(authLoginSchema) });
 
   const onSubmit = (data: AuthLoginDto) => {
-    console.log('submit', data);
+    console.log('data submite to Mutation', data);
     authLoginMutation.mutate(data);
-    toast.error('Connexion échouée. Vérifiez vos identifiants et réessayez');
   };
 
   const authLoginMutation = useMutation(loginUser, {
     onSuccess: (data) => {
-      console.log('data', data);
+      toast.success('Vous êtes connecté !');
     },
   });
 

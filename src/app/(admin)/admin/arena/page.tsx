@@ -31,7 +31,6 @@ export default function ArenaAdmin() {
   const { data } = useQuery(['arena'], getArenas, {
     onSuccess: (data) => {
       setArenas(data);
-      console.log(arenas);
     },
   });
 
