@@ -1,12 +1,5 @@
 'use client';
-import {
-  Button,
-  Link,
-  Navbar,
-  Switch,
-  Text,
-  useTheme,
-} from '@nextui-org/react';
+import { Button, Link, Navbar, Switch, useTheme } from '@nextui-org/react';
 import { useTheme as useNextTheme } from 'next-themes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -24,14 +17,11 @@ const NavbarTest = () => {
     <Navbar isBordered={isDark} variant="floating" maxWidth="fluid">
       <Navbar.Brand>
         <Image
-          src="/images/ffc-logo.svg"
+          src="/images/carbon-logo.svg"
           alt="Acme Logo"
-          width={50}
-          height={50}
+          width={100}
+          height={100}
         />
-        <Text b color="inherit" hideIn="xs">
-          ACME
-        </Text>
       </Navbar.Brand>
       <Navbar.Content
         activeColor="primary"

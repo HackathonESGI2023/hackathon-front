@@ -31,9 +31,9 @@ export default function LoginLayout({ children }: LoginLayoutProps) {
           <Link href="/">
             <Image
               className={styles.logo}
-              src="/images/ffc-logo.svg"
-              width={90}
-              height={90}
+              src="/images/carbon-logo.svg"
+              width={120}
+              height={120}
               alt="logo"
             />
           </Link>
