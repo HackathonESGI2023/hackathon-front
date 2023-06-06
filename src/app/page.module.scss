@@ -16,7 +16,7 @@
 
 .content {
   z-index: 10;
-  transform: translateY(-15%);
+  transform: translateY(-18%);
 
   display: flex;
   flex-direction: column;
@@ -42,4 +42,8 @@
 
 .cta {
   margin-top: 1.5rem;
+}
+
+.navbar {
+  padding: 1rem;
 }

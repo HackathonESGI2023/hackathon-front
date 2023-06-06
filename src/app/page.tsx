@@ -12,7 +12,7 @@ import styles from './page.module.scss';
 export default function Home() {
   return (
     <>
-      <NavbarTest />
+      <NavbarTest className={styles.navbar} />
       <main className={styles.main}>
         <div className={styles.lottieBox}>
           <Lottie animationData={homeAnimation} className={styles.lottie} />
