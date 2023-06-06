@@ -4,17 +4,59 @@
 
 // main colors
 
+$primaryT200: #535555;
+$primaryT100: #3e403f;
 $primary: #282b2a;
+$primaryS100: #202222;
+$primaryS200: #141615;
 
+$secondaryT500: #f5b2b6;
+$secondaryT400: #ef8c92;
+$secondaryT300: #ed7980;
+$secondaryT200: #ea656d;
+$secondaryT100: #e8525b;
 $secondary: #e53f49;
+$secondaryS100: #ce3942;
+$secondaryS200: #b7323a;
+$secondaryS300: #a02c33;
+$secondaryS400: #89262c;
+$secondaryS500: #732025;
 
+$terciaryT500: #80ddbf;
+$terciaryT400: #66d6b2;
+$terciaryT300: #4dcfa5;
+$terciaryT200: #33c998;
+$terciaryT100: #1ac28b;
 $terciary: #00bb7e;
+$terciaryS100: #00a871;
+$terciaryS200: #009665;
+$terciaryS300: #008358;
+$terciaryS400: #00704c;
+$terciaryS500: #004b32;
 
+$quaternaryT500: #adcce9;
+$quaternaryT400: #9dc1e4;
+$quaternaryT300: #8cb7e0;
+$quaternaryT200: #7caddb;
+$quaternaryT100: #6ba2d7;
 $quaternary: #5b98d2;
+$quaternaryS100: #5289bd;
+$quaternaryS200: #497aa8;
+$quaternaryS300: #406a93;
+$quaternaryS400: #375b7e;
+$quaternaryS500: #243d54;
 
-// neutral colors
+// black and white colors
 
+$whiteT200: #fff;
+$whiteT100: #fefefe;
 $white: #fdfdfd;
+$whiteS100: #e4e4e4;
+$whiteS200: #cacaca;
+$whiteS300: #b1b1b1;
+$whiteS400: #989898;
+$whiteS500: #7f7f7f;
+
 $black: #000;
 
 // feedback colors
@@ -30,20 +72,60 @@ $secondary3: #ff9077;
 $primaryLight: #b9191947;
 
 :export {
+  primaryT200: $primaryT200;
+  primaryT100: $primaryT100;
   primary: $primary;
+  primaryS100: $primaryS100;
+  primaryS200: $primaryS200;
 
+  secondaryT500: $secondaryT500;
+  secondaryT400: $secondaryT400;
+  secondaryT300: $secondaryT300;
+  secondaryT200: $secondaryT200;
+  secondaryT100: $secondaryT100;
   secondary: $secondary;
+  secondaryS100: $secondaryS100;
+  secondaryS200: $secondaryS200;
+  secondaryS300: $secondaryS300;
+  secondaryS400: $secondaryS400;
+  secondaryS500: $secondaryS500;
 
+  terciaryT500: $terciaryT500;
+  terciaryT400: $terciaryT400;
+  terciaryT300: $terciaryT300;
+  terciaryT200: $terciaryT200;
+  terciaryT100: $terciaryT100;
   terciary: $terciary;
+  terciaryS100: $terciaryS100;
+  terciaryS200: $terciaryS200;
+  terciaryS300: $terciaryS300;
+  terciaryS400: $terciaryS400;
+  terciaryS500: $terciaryS500;
 
+  quaternaryT500: $quaternaryT500;
+  quaternaryT400: $quaternaryT400;
+  quaternaryT300: $quaternaryT300;
+  quaternaryT200: $quaternaryT200;
+  quaternaryT100: $quaternaryT100;
   quaternary: $quaternary;
+  quaternaryS100: $quaternaryS100;
+  quaternaryS200: $quaternaryS200;
+  quaternaryS300: $quaternaryS300;
+  quaternaryS400: $quaternaryS400;
+  quaternaryS500: $quaternaryS500;
+
+  whiteT200: $whiteT200;
+  whiteT100: $whiteT100;
+  white: $white;
+  whiteS100: $whiteS100;
+  whiteS200: $whiteS200;
+  whiteS300: $whiteS300;
+  whiteS400: $whiteS400;
+  whiteS500: $whiteS500;
 
   black: $black;
-  white: $white;
 
   danger: $danger;
   success: $success;
   warning: $warning;
-
-  primaryLight: $primaryLight;
 }

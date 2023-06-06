@@ -50,10 +50,10 @@ const lightTheme = createTheme({
   theme: {
     colors: {
       primaryLight: '$green200',
-      primaryLightHover: styles.primaryLight,
-      primaryLightActive: styles.secondaryLight,
+      primaryLightHover: styles.secondaryT200,
+      primaryLightActive: styles.secondary,
       primaryLightContrast: '$green600',
-      primary: styles.primary,
+      primary: styles.secondary,
       primaryBorder: '$green500',
       primaryBorderHover: '$green600',
       primarySolidHover: '$green700',
