@@ -4,16 +4,17 @@
 
 // main colors
 
-$primary: #b91919;
-$primaryLight: #b9191947;
+$primary: #282b2a;
 
-$secondary: #d93501;
-$secondary2: #e3593b;
-$secondary3: #ff9077;
+$secondary: #e53f49;
+
+$terciary: #00bb7e;
+
+$quaternary: #5b98d2;
 
 // neutral colors
 
-$white: #fff;
+$white: #fdfdfd;
 $black: #000;
 
 // feedback colors
@@ -22,11 +23,20 @@ $success: #44c969;
 $warning: #ffb800;
 $danger: #ee2828;
 
+// DELETE LATER OR CHANGE WITH THE REAL COLORS
+
+$secondary2: #e3593b;
+$secondary3: #ff9077;
+$primaryLight: #b9191947;
+
 :export {
   primary: $primary;
-  primaryLight: $primaryLight;
 
   secondary: $secondary;
+
+  terciary: $terciary;
+
+  quaternary: $quaternary;
 
   black: $black;
   white: $white;
@@ -34,4 +44,6 @@ $danger: #ee2828;
   danger: $danger;
   success: $success;
   warning: $warning;
+
+  primaryLight: $primaryLight;
 }
