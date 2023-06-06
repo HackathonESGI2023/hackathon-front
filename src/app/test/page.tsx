@@ -1,9 +1,11 @@
+"use client";
 import { Wysiwyg } from "@components/Wysiwyg/Wysiwyg.component";
 import * as React from "react";
 
 interface TestPageProps {}
 
 export default function Test() {
+  const [message, setMessage] = React.useState("");
   return (
     <div
       style={{
@@ -15,7 +17,14 @@ export default function Test() {
         display: "flex",
       }}
     >
-      <Wysiwyg width={"70%"} />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Wysiwyg
+          width={"70%"}
+          value={message}
+          setValue={setMessage}
+          onSubmit={() => console.log("submit", message)}
+        />
+      </React.Suspense>
     </div>
   );
 }
