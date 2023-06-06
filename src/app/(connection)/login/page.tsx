@@ -7,7 +7,11 @@ import { Button, Spacer } from '@nextui-org/react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { LoginType, loginSchema } from 'src/model/user.schema';
+import { useMutation } from 'react-query';
+import { loginUser } from 'src/app/api/Auth/login';
+
+import { AuthLoginDto } from '@zod/auth/auth.schema';
+import { authLoginSchema } from 'src/model/auth.schema';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -16,13 +20,19 @@ export default function Home() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<LoginType>({ resolver: zodResolver(loginSchema) });
+  } = useForm<AuthLoginDto>({ resolver: zodResolver(authLoginSchema) });
 
-  const onSubmit = (data: LoginType) => {
+  const onSubmit = (data: AuthLoginDto) => {
     console.log('submit', data);
-    // TODO : call api and check error return
+    authLoginMutation.mutate(data);
     toast.error('Connexion échouée. Vérifiez vos identifiants et réessayez');
   };
+
+  const authLoginMutation = useMutation(loginUser, {
+    onSuccess: (data) => {
+      console.log('data', data);
+    },
+  });
 
   console.log(watch('email'), watch('password'));
 

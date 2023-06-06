@@ -13,13 +13,14 @@ export async function GET(request: string) {
   return NextResponse.json(await res.json());
 }
 
-export async function POST(request: string) {
+export async function POST(request: string, bodyData: any) {
   const req = new URL(request);
   const res = await fetch(req, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(bodyData),
   });
 
   return NextResponse.json(await res.json());

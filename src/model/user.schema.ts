@@ -1,19 +1,24 @@
 import { z } from 'zod';
 
-export const roleEnum = z.enum(['USER', 'ADMIN']);
-export type RoleType = z.infer<typeof roleEnum>;
+const rolesEnum = z.enum(['CONSULTANT', 'SUPPORT']);
+export type RolesEnum = z.infer<typeof rolesEnum>;
 
-const userBaseSchema = z.object({
-  id: z.number().optional(),
+const skillLevelEnum = z.enum(['JUNIOR', 'INTERMEDIATE', 'SENIOR']);
+export type SkillLevelEnum = z.infer<typeof skillLevelEnum>;
+
+export const usersSchema = z.object({
+  id: z.number().int().positive(),
+  email: z.string().email({ message: 'Invalid email address' }),
   firstname: z
     .string()
     .min(2, { message: 'Firstname must be at least 2 characters long' })
-    .max(255),
+    .max(255)
+    .optional(),
   lastname: z
     .string()
     .min(2, { message: 'Lastname must be at least 2 characters long' })
-    .max(255),
-  email: z.string().email({ message: 'Invalid email address' }),
+    .max(255)
+    .optional(),
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters long' })
@@ -25,38 +30,62 @@ const userBaseSchema = z.object({
     })
     .refine((password) => /[0-9]/.test(password), {
       message: 'Password must contain at least one digit',
-    })
-    .refine((password) => /[^a-zA-Z0-9]/.test(password), {
-      message: 'Password must contain at least one special character',
     }),
   confirmPassword: z.string().optional(),
-  role: roleEnum.optional(),
+  roles: z.array(rolesEnum).optional(),
+  profile_picture: z.string(),
+  address: z.string(),
 });
+export type UsersDto = z.infer<typeof usersSchema>;
 
-export const loginSchema = userBaseSchema.pick({ email: true, password: true });
-export type LoginType = z.infer<typeof loginSchema>;
+const usersCreateSchema = usersSchema.omit({
+  id: true,
+  confirmPassword: true,
+});
+export type UsersCreateDto = z.infer<typeof usersCreateSchema>;
 
-export const editUserSchema = userBaseSchema.omit({ password: true });
-export type EditUserType = z.infer<typeof editUserSchema>;
+const userGetSchema = usersSchema.pick({
+  email: true,
+});
+export type UserGetDto = z.infer<typeof userGetSchema>;
 
-export const registerSchema = userBaseSchema
-  .pick({
-    firstname: true,
-    lastname: true,
-    email: true,
-    password: true,
-    confirmPassword: true,
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  });
-export type RegisterType = z.infer<typeof registerSchema>;
-
-export const resetPasswordSchema = userBaseSchema.pick({ email: true });
-export type ResetPasswordType = z.infer<typeof resetPasswordSchema>;
-
-const getMonstersOfUserSchema = userBaseSchema.pick({
+const userDeleteSchema = usersSchema.pick({
   id: true,
 });
-export type GetMonstersOfUserType = z.infer<typeof getMonstersOfUserSchema>;
+export type UsersDeleteDto = z.infer<typeof userDeleteSchema>;
+
+const userUpdateSchema = usersSchema.pick({
+  email: true,
+  firstname: true,
+  lastname: true,
+  roles: true,
+  profile_picture: true,
+  address: true,
+});
+export type UserUpdateDto = z.infer<typeof userUpdateSchema>;
+
+const updateProfileSchema = userUpdateSchema.extend({
+  skills: z.array(
+    z.object({
+      id: z.number().int().positive(),
+      level: skillLevelEnum,
+    })
+  ),
+});
+export type UpdateProfileDto = z.infer<typeof updateProfileSchema>;
+
+const upsertSkillSchema = z.object({
+  skills: z.array(
+    z.object({
+      id: z.number().int().positive(),
+      level: skillLevelEnum,
+    })
+  ),
+});
+export type UpsertSkillDto = z.infer<typeof upsertSkillSchema>;
+
+const updatePasswordSchema = z.object({
+  oldPassword: z.string(),
+  newPassword: z.string(),
+});
+export type UpdatePasswordDto = z.infer<typeof updatePasswordSchema>;

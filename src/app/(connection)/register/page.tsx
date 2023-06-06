@@ -1,14 +1,16 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-
 import Divider from '@components/UI/Divider';
 import Input from '@components/UI/Input';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Row, Spacer } from '@nextui-org/react';
+
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { RegisterType, registerSchema } from 'src/model/user.schema';
+import { useMutation } from 'react-query';
+import { registerUser } from 'src/app/api/Auth/register';
+import { AuthRegisterDto, authRegisterSchema } from 'src/model/auth.schema';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -17,15 +19,21 @@ export default function Home() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<RegisterType>({ resolver: zodResolver(registerSchema) });
+  } = useForm<AuthRegisterDto>({ resolver: zodResolver(authRegisterSchema) });
 
-  const onSubmit = (data: RegisterType) => {
+  const onSubmit = (data: AuthRegisterDto) => {
     console.log('submit', data);
-    // TODO : call api and check error return
+    authRegisterMutation.mutate(data);
     toast.success(
       'Inscription réussie ! Allez vérifier vos emails pour valider votre compte'
     );
   };
+
+  const authRegisterMutation = useMutation(registerUser, {
+    onSuccess: (data) => {
+      console.log('data', data);
+    },
+  });
 
   console.log(
     watch('lastname'),
