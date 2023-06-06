@@ -7,7 +7,7 @@ import { Button, Spacer } from '@nextui-org/react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { ResetPasswordType, resetPasswordSchema } from 'src/model/user.schema';
+import { ResetPasswordDto, resetPasswordSchema } from 'src/model/user.schema';
 import styles from './page.module.scss';
 
 export default function Home() {
@@ -16,11 +16,11 @@ export default function Home() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<ResetPasswordType>({
+  } = useForm<ResetPasswordDto>({
     resolver: zodResolver(resetPasswordSchema),
   });
 
-  const onSubmit = (data: ResetPasswordType) => {
+  const onSubmit = (data: ResetPasswordDto) => {
     console.log('submit', data);
     // TODO : call api and check error return
     toast.success(

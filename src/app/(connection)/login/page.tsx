@@ -1,17 +1,16 @@
 'use client';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-import Divider from '@components/UI/Divider';
-import Input from '@components/UI/Input';
-import { Button, Spacer } from '@nextui-org/react';
-import Link from 'next/link';
+import { AuthLoginDto, authLoginSchema } from '@schemas/auth.schema';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { loginUser } from 'src/app/api/Auth/login';
 
-import { AuthLoginDto } from '@zod/auth/auth.schema';
-import { authLoginSchema } from 'src/model/auth.schema';
+import Divider from '@components/UI/Divider';
+import Input from '@components/UI/Input';
+import { Button, Spacer } from '@nextui-org/react';
+import Link from 'next/link';
+
 import styles from './page.module.scss';
 
 export default function Home() {

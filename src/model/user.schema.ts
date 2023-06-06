@@ -89,3 +89,6 @@ const updatePasswordSchema = z.object({
   newPassword: z.string(),
 });
 export type UpdatePasswordDto = z.infer<typeof updatePasswordSchema>;
+
+export const resetPasswordSchema = usersSchema.pick({ email: true });
+export type ResetPasswordDto = z.infer<typeof resetPasswordSchema>;

@@ -1,16 +1,16 @@
 'use client';
 
-import Divider from '@components/UI/Divider';
-import Input from '@components/UI/Input';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Row, Spacer } from '@nextui-org/react';
-
-import Link from 'next/link';
+import { AuthRegisterDto, authRegisterSchema } from '@schemas/auth.schema';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { registerUser } from 'src/app/api/Auth/register';
-import { AuthRegisterDto, authRegisterSchema } from 'src/model/auth.schema';
+
+import Divider from '@components/UI/Divider';
+import Input from '@components/UI/Input';
+import { Button, Row, Spacer } from '@nextui-org/react';
+import Link from 'next/link';
 import styles from './page.module.scss';
 
 export default function Home() {
