@@ -49,16 +49,16 @@ const lightTheme = createTheme({
   type: 'light',
   theme: {
     colors: {
-      primaryLight: '$green200',
+      primaryLight: styles.secondaryT200,
       primaryLightHover: styles.secondaryT200,
-      primaryLightActive: styles.secondary,
-      primaryLightContrast: '$green600',
+      primaryLightActive: styles.secondaryT200,
+      primaryLightContrast: styles.secondaryS500,
       primary: styles.secondary,
-      primaryBorder: '$green500',
-      primaryBorderHover: '$green600',
-      primarySolidHover: '$green700',
-      primarySolidContrast: '$white',
-      primaryShadow: '$green500',
+      primaryBorder: styles.secondaryS100,
+      primaryBorderHover: styles.secondaryS200,
+      primarySolidHover: styles.secondaryS300,
+      primarySolidContrast: styles.white,
+      primaryShadow: styles.secondary,
 
       gradient:
         'linear-gradient(112deg, $blue100 -25%, $pink500 -10%, $purple500 80%)',
