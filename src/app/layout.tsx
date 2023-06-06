@@ -115,7 +115,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             }}
           >
             <Toaster
-              position="bottom-left"
+              position="top-center"
               reverseOrder={false}
               gutter={8}
               containerClassName=""

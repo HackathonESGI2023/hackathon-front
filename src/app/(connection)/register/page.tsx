@@ -22,7 +22,6 @@ export default function Home() {
   } = useForm<AuthRegisterDto>({ resolver: zodResolver(authRegisterSchema) });
 
   const onSubmit = (data: AuthRegisterDto) => {
-    console.log('submit', data);
     authRegisterMutation.mutate(data);
     toast.success(
       'Inscription réussie ! Allez vérifier vos emails pour valider votre compte'
