@@ -1,6 +1,6 @@
 'use client';
 
-import fireAnimation from '@assets/animations/swords.json';
+import fireAnimation from '@assets/animations/mobile.json';
 import { CaretLeft } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
