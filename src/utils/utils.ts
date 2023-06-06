@@ -34,3 +34,9 @@ export const contractTypeColor = (contractType: ContractTypeEnum) => {
       return "#000000";
   }
 };
+
+export const mergeClassNames = (
+  classNames: (string | null | undefined | false)[]
+) => {
+  return classNames.filter(Boolean).join(" ");
+};

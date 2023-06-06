@@ -1,15 +1,11 @@
-"use client";
 import { Grid } from "@nextui-org/react";
 import ProfileCards from "../components/Cards/ProfileCards/ProfileCards";
 
-type DashboardProps = {
-  children: React.ReactNode;
-};
+type ProfileProps = {};
 
-const Dashboard = ({ children }: DashboardProps) => {
+const Dashboard = ({}: ProfileProps) => {
   return (
-    <>
-      <h1>Page profile{children}</h1>
+    <h1>
       <Grid.Container gap={3} justify="center">
         <Grid xs={6} md={3}>
           <ProfileCards />
@@ -24,7 +20,7 @@ const Dashboard = ({ children }: DashboardProps) => {
           <ProfileCards />
         </Grid>
       </Grid.Container>
-    </>
+    </h1>
   );
 };
 

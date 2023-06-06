@@ -25,7 +25,8 @@
       "@components/*": ["./src/components/*"],
       "@api/*": ["./src/api/*"],
       "@styles/*": ["./src/styles/*"],
-      "@schemas/*": ["./src/model/*"]
+      "@schemas/*": ["./src/model/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": [
