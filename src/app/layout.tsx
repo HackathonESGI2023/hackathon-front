@@ -2,7 +2,7 @@
 import { NextUIProvider, createTheme } from '@nextui-org/react';
 import styles from '@styles/_colors.module.scss';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 import * as React from 'react';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -10,10 +10,39 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import './globals.scss';
 
-const poppins = Poppins({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
+const larsseitFont = localFont({
+  src: [
+    {
+      path: '../assets/fonts/Larsseit/Larsseit-Thin.otf',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Larsseit/Larsseit-Light.otf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Larsseit/Larsseit.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Larsseit/Larsseit-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Larsseit/Larsseit-ExtraBold.otf',
+      weight: '800',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/Larsseit/Larsseit-BoldItalic.otf',
+      weight: '700',
+      style: 'italic',
+    },
+  ],
 });
 
 const lightTheme = createTheme({
@@ -75,7 +104,7 @@ const queryClient = new QueryClient();
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="fr">
-      <body className={poppins.className} style={{ minHeight: '100vh' }}>
+      <body className={larsseitFont.className} style={{ minHeight: '100vh' }}>
         <QueryClientProvider client={queryClient}>
           <NextThemesProvider
             defaultTheme="light"
