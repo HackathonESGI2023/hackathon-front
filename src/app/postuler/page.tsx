@@ -16,10 +16,10 @@ import {
 import { FilePdf } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Wysiwyg } from "@components/Wysiwyg/Wysiwyg.component";
 
 export default function Postuler() {
   const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [about, setAbout] = useState<string>("");
   const [proposing, setProposing] = useState<string>("");
 
@@ -109,6 +109,16 @@ export default function Postuler() {
                   label="Quel est votre nom ?"
                   onChange={(e) => {
                     setName(e.target.value);
+                  }}
+                />
+                <Spacer y={1} />
+                <Input
+                  placeholder="jdoe@gmail.com"
+                  fullWidth
+                  size="xl"
+                  label="Quel est votre adresse mail ?"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
                   }}
                 />
                 <Spacer y={1} />
