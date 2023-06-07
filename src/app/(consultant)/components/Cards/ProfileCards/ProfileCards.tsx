@@ -1,4 +1,5 @@
 "use client";
+import { BadgeContract } from "@components/UI/Badge/BadgeContract";
 import { BadgeMission } from "@components/UI/Badge/BadgeMission";
 import { BadgeSeniority } from "@components/UI/Badge/BadgeSeniority";
 import { BadgeSkill } from "@components/UI/Badge/BadgeSkill";
@@ -16,9 +17,9 @@ import { CaretRight, Confetti, Trophy } from "@phosphor-icons/react";
 
 const ProfileCards = () => {
   return (
-    <Card css={{ mw: "300px" }} isPressable isHoverable>
+    <Card isPressable isHoverable>
       <Card.Body>
-        <Row justify="flex-start" css={{ mx: "10px", pt: "5px" }}>
+        <Row justify="flex-start" css={{ pt: "5px" }}>
           <Grid md={7}>
             <Avatar
               size={"xl"}
@@ -33,6 +34,7 @@ const ProfileCards = () => {
               </Row>
               <Row justify="flex-start">
                 <BadgeMission inMission={false} />
+                <BadgeContract contractType="FREELANCE" />
               </Row>
             </Col>
           </Grid>
@@ -41,7 +43,7 @@ const ProfileCards = () => {
           </Grid>
         </Row>
 
-        <Col css={{ mx: "5px", pt: "10px" }}>
+        <Col css={{ pt: "10px", mx: 13 }}>
           <Row justify="flex-start">
             <Grid.Container gap={1}>
               <Grid>

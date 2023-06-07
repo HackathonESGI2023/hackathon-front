@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-const contractTypeEnum = z.enum([
-  'CDI',
-  'CDD',
-  'FREELANCE',
-  'ALTERNANT',
-  'STAGIAIRE',
+export const contractTypeEnum = z.enum([
+  "CDI",
+  "CDD",
+  "FREELANCE",
+  "ALTERNANT",
+  "STAGIAIRE",
 ]);
 export type ContractTypeEnum = z.infer<typeof contractTypeEnum>;
 
