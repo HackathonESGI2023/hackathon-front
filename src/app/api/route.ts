@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
-const token = localStorage.getItem("token");
+const isBrowser = typeof window !== "undefined";
+
+const token = isBrowser ? localStorage.getItem("token") || null : null;
 
 export async function GET(request: string) {
   const req = new URL(request);

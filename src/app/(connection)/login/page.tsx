@@ -2,19 +2,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthLoginDto, authLoginSchema } from "@schemas/auth.schema";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { LoginResponse, loginUser } from "src/app/api/Auth/login";
 
 import Divider from "@components/UI/Divider";
 import Input from "@components/UI/Input";
 import { Button, Spacer } from "@nextui-org/react";
 import Link from "next/link";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { toast } from "react-hot-toast";
 import styles from "./page.module.scss";
 import { tokenAtom, userAtom } from "src/utils/recoilAtoms.utils";
-import { UserResponse, getUsers } from "src/app/api/Users/getUsers";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const {
@@ -24,26 +24,22 @@ export default function Home() {
     formState: { errors },
   } = useForm<AuthLoginDto>({ resolver: zodResolver(authLoginSchema) });
 
+  const router = useRouter();
+
   const onSubmit = (data: AuthLoginDto) => {
     console.log("data submite to Mutation", data);
     authLoginMutation.mutate(data);
   };
 
   const [token, setToken] = useRecoilState(tokenAtom);
+  const [user, setUser] = useRecoilState(userAtom);
 
   const authLoginMutation = useMutation(loginUser, {
-    onSuccess: (data: LoginResponse) => {
+    onSuccess: async (data: LoginResponse) => {
       toast.success("Vous êtes connecté !");
       setToken(data.access_token);
-      getUserQuery.mutate();
-    },
-  });
-
-  const [user, setUser] = useRecoilState<UserResponse>(userAtom);
-  const getUserQuery = useMutation(getUsers, {
-    onSuccess: (data: UserResponse) => {
-      setUser(data);
-      window.location.href = "/";
+      setUser(data.user);
+      router.push("/");
     },
   });
 
@@ -79,12 +75,6 @@ export default function Home() {
         <Button type="submit">Connexion</Button>
       </form>
       <Divider />
-      <p className={styles.linkLabel}>
-        Pas de compte ?{" "}
-        <Link href={"/register"}>
-          <span className={styles.ctaLabel}>Inscrivez-vous ici</span>
-        </Link>
-      </p>
       <p className={styles.linkLabel}>
         Mot de passe oublié ?{" "}
         <Link href={"/reset-password"}>

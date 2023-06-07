@@ -8,9 +8,12 @@ import Lottie from "lottie-react";
 import { useRouter } from "next/navigation";
 import FeatureLabel from "./components/FeatureLabel/FeatureLabel";
 import styles from "./page.module.scss";
+import { useRecoilState } from "recoil";
+import { tokenAtom } from "src/utils/recoilAtoms.utils";
 
 export default function Home() {
   const router = useRouter();
+  const [token] = useRecoilState(tokenAtom);
   return (
     <>
       <NavbarTest className={styles.navbar} />
@@ -38,7 +41,9 @@ export default function Home() {
               <Button
                 size={"lg"}
                 className={styles.cta}
-                onClick={() => router.push("/login")}
+                onClick={() =>
+                  token ? router.push("/profile") : router.push("/login")
+                }
               >
                 <Text color={colors.white} size={"$md"}>
                   {"Accéder à votre espace"}

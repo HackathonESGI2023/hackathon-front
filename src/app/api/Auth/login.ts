@@ -1,5 +1,6 @@
 import { AuthLoginDto } from "@schemas/auth.schema";
 import { POST } from "../route";
+import { UserResponse } from "../Users/getUsers";
 
 export async function loginUser(userData: AuthLoginDto) {
   console.log("🚀 ~ file: login.ts:5 ~ loginUser ~ userData:", userData);
@@ -13,4 +14,5 @@ export async function loginUser(userData: AuthLoginDto) {
 
 export interface LoginResponse {
   access_token: string;
+  user: UserResponse;
 }
