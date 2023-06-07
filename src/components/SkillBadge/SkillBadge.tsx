@@ -19,10 +19,6 @@ const SkillBadge = ({ name, color, id }: SkillBadgeProps) => {
     }),
   }));
 
-  if (collected.isDragging) {
-    console.log('dragging 🚗');
-  }
-
   return collected.isDragging ? null : (
     <motion.div
       ref={drag}
