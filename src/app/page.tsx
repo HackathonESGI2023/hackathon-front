@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import homeAnimation from '@assets/animations/hr.json';
-import NavbarTest from '@components/Navbar';
-import { Button, Text } from '@nextui-org/react';
-import colors from '@styles/_colors.module.scss';
-import Lottie from 'lottie-react';
-import Link from 'next/link';
-import FeatureLabel from './components/FeatureLabel/FeatureLabel';
-import styles from './page.module.scss';
+import homeAnimation from "@assets/animations/hr.json";
+import NavbarTest from "@components/Navbar";
+import { Button, Text } from "@nextui-org/react";
+import colors from "@styles/_colors.module.scss";
+import Lottie from "lottie-react";
+import { useRouter } from "next/navigation";
+import FeatureLabel from "./components/FeatureLabel/FeatureLabel";
+import styles from "./page.module.scss";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <NavbarTest className={styles.navbar} />
@@ -17,7 +18,7 @@ export default function Home() {
         <div className={styles.lottieBox}>
           <Lottie animationData={homeAnimation} className={styles.lottie} />
           <div className={styles.content}>
-            <Text h1 size={'$7xl'}>
+            <Text h1 size={"$7xl"}>
               Booster votre carrière !
             </Text>
             <div className={styles.featureContent}>
@@ -33,13 +34,16 @@ export default function Home() {
                 label="Faites vivre la communauté CarbonIt"
                 className={styles.featureLabel}
               />
-              <Link href={'/login'}>
-                <Button size={'lg'} className={styles.cta}>
-                  <Text color={colors.white} size={'$md'}>
-                    {'Accéder à votre espace'}
-                  </Text>
-                </Button>
-              </Link>
+
+              <Button
+                size={"lg"}
+                className={styles.cta}
+                onClick={() => router.push("/login")}
+              >
+                <Text color={colors.white} size={"$md"}>
+                  {"Accéder à votre espace"}
+                </Text>
+              </Button>
             </div>
           </div>
         </div>
