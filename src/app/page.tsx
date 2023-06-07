@@ -16,7 +16,7 @@ export default function Home() {
   const [token] = useRecoilState(tokenAtom);
   return (
     <>
-      <NavbarTest className={styles.navbar} />
+      <NavbarTest />
       <main className={styles.main}>
         <div className={styles.lottieBox}>
           <Lottie animationData={homeAnimation} className={styles.lottie} />
