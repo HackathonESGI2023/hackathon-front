@@ -21,9 +21,12 @@ export const tokenAtom = atom({
   ],
 });
 
-export const userAtom = atom({
+export const userAtom = atom<UserResponse | null>({
   key: "userAtom",
-  default: isBrowser ? JSON.parse(localStorage.getItem("user") || "{}") : {},
+  default:
+    isBrowser && localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user")!)
+      : null,
   effects_UNSTABLE: [
     ({ onSet }) => {
       onSet((newValue: UserResponse | null) => {
