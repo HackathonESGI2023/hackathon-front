@@ -23,9 +23,7 @@ const SkillBadge = ({ name, color, id }: SkillBadgeProps) => {
     console.log('dragging 🚗');
   }
 
-  return collected.isDragging ? (
-    <div ref={dragPreview}>Pouet preview</div>
-  ) : (
+  return collected.isDragging ? null : (
     <motion.div
       ref={drag}
       className={styles.skillBadge}

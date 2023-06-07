@@ -1,3 +1,5 @@
+"use client";
+
 import { Grid } from "@nextui-org/react";
 import ProfileCards from "../components/Cards/ProfileCards/ProfileCards";
 
