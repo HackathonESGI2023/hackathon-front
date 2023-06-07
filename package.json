@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.1.0",
     "@nextui-org/react": "^1.0.0-beta.12",
     "@phosphor-icons/react": "^2.0.9",
+    "@prisma/client": "^4.12.0",
     "@types/node": "20.1.2",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "prettier": "^2.8.8",
+    "prisma": "^4.12.0",
     "sass": "^1.62.1",
     "stylelint": "^15.6.2",
     "stylelint-config-clean-order": "^5.0.1",
