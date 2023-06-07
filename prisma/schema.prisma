@@ -1,0 +1,190 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPPORT
+  CONSULTANT
+  TECHNICAL_OFFICER
+}
+
+model User {
+  id              Int         @id @default(autoincrement())
+  email           String      @unique
+  password        String
+  firstname       String?
+  lastname        String?
+  profile_picture String      @default("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png")
+  address         String?
+  roles           Role[]      @default([CONSULTANT])
+  UserSkill       UserSkill[]
+  EventsOwner     Event[]     @relation("EventOwner")
+  Events          Event[]
+  Mission         Mission[]
+  Contract        Contract[]
+  News            News[]
+  Workshops       Workshop[]
+  WorkshopOwner   Workshop[]  @relation("WorkshopOwner")
+  workshopId      Int?
+  slackId         String?     @unique
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+enum ContractType {
+  CDI
+  CDD
+  FREELANCE
+  STAGIAIRE
+  ALTERNANT
+}
+
+model Contract {
+  id           Int          @id @default(autoincrement())
+  contractType ContractType
+  startDate    DateTime     @default(now())
+  endDate      DateTime?
+  User         User         @relation(fields: [userId], references: [id])
+  userId       Int
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Skill {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  description String?
+  color       String?
+  type        SkillType
+  category    SkillCategory @default(OTHER)
+  UserSkill   UserSkill[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+enum SkillType {
+  HARD
+  SOFT
+}
+
+enum SkillCategory {
+  FRONTEND
+  BACKEND
+  DEVOPS
+  MOBILE
+  DESIGN
+  MANAGEMENT
+  MARKETING
+  SALES
+  OTHER
+}
+
+enum SkillLevel {
+  JUNIOR
+  INTERMEDIATE
+  SENIOR
+}
+
+model UserSkill {
+  id        Int        @id @default(autoincrement())
+  user      User       @relation(fields: [userId], references: [id])
+  userId    Int
+  skill     Skill      @relation(fields: [skillId], references: [id])
+  skillId   Int
+  level     SkillLevel @default(JUNIOR)
+  isStarred Boolean    @default(false)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+enum ActivityType {
+  MEETING
+  TRAINING
+  WORKSHOP
+  CONFERENCE
+  COURSE
+  OTHER
+}
+
+model Event {
+  id           Int          @id @default(autoincrement())
+  name         String
+  description  String?
+  activityType ActivityType
+  date         DateTime
+  address      String?
+  Creator      User         @relation(fields: [creatorId], references: [id], name: "EventOwner")
+  creatorId    Int
+  Participants User[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Mission {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  joinDate    DateTime  @default(now())
+  leaveDate   DateTime
+  Users       User      @relation(fields: [userId], references: [id])
+  userId      Int
+  Company     Company   @relation(fields: [companyId], references: [id])
+  companyId   Int
+  Projects    Project[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  image       String?
+  link        String?
+  Mission     Mission? @relation(fields: [missionId], references: [id])
+  missionId   Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Company {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  address     String?
+  Mission     Mission[]
+  logo        String    @default("https://i.pinimg.com/originals/ec/d9/c2/ecd9c2e8ed0dbbc96ac472a965e4afda.jpg")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  image       String?
+  writer      User     @relation(fields: [userId], references: [id])
+  userId      Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Workshop {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String?
+  pdfLink       String?
+  WorkshopOwner User     @relation(fields: [userId], references: [id], name: "WorkshopOwner")
+  userId        Int
+  Participants  User[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}

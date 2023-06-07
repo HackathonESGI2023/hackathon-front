@@ -1,12 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
+
+const token = localStorage.getItem("token");
 
 export async function GET(request: string) {
   const req = new URL(request);
   //   const id = searchParams.get('id');
   const res = await fetch(req, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -16,10 +19,11 @@ export async function GET(request: string) {
 export async function POST(request: string, bodyData: any) {
   const req = new URL(request);
   const res = await fetch(req, {
-    method: 'POST',
+    method: "POST",
     body: bodyData,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -29,9 +33,10 @@ export async function POST(request: string, bodyData: any) {
 export async function PATCH(request: string, bodyData: any) {
   const req = new URL(request);
   const res = await fetch(req, {
-    method: 'PATCH',
+    method: "PATCH",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bodyData),
   });
@@ -42,9 +47,10 @@ export async function PATCH(request: string, bodyData: any) {
 export async function DELETE(request: string) {
   const req = new URL(request);
   const res = await fetch(req, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
 
