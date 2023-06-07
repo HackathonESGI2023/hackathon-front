@@ -10,7 +10,7 @@ import {
 import { GET } from "../route";
 
 export async function getUsers() {
-  const res = await GET(`http://localhost:3000/users`);
+  const res = await GET(`users`);
   return res.json();
 }
 
