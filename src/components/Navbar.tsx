@@ -4,6 +4,8 @@ import { useTheme as useNextTheme } from "next-themes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { tokenAtom, userAtom } from "src/utils/recoilAtoms.utils";
 
 type NavbarTestProps = {
   className?: string;
@@ -16,6 +18,15 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
   const { isDark } = useTheme();
   const router = useRouter();
   const { setTheme } = useNextTheme();
+
+  const [token, setToken] = useRecoilState(tokenAtom);
+  const [user, setUser] = useRecoilState(userAtom);
+
+  const handleLogout = () => {
+    setToken(null);
+    setUser(null);
+    router.push("/");
+  };
 
   return (
     <Navbar
@@ -32,38 +43,50 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
           height={100}
         />
       </Navbar.Brand>
-      <Navbar.Content
-        activeColor="primary"
-        hideIn="xs"
-        variant="highlight-rounded"
-      >
-        <Navbar.Link href="#"> Features</Navbar.Link>
-        <Navbar.Link isActive href="#">
-          Customers
-        </Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Company</Navbar.Link>
-      </Navbar.Content>
-      <Navbar.Content>
-        <Switch
-          checked={isDark}
-          onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
-        />
-        <Navbar.Link color="inherit" onClick={() => router.push("/admin")}>
-          ADMIN
-        </Navbar.Link>
 
+      <Navbar.Content>
         <Navbar.Item>
-          <Button
-            auto
-            flat
-            as={Link}
-            color="primary"
-            onClick={() => router.push("/login")}
-          >
-            Login
-          </Button>
+          {!token ? (
+            <Button
+              auto
+              as={Link}
+              color="primary"
+              onClick={() => router.push("/login")}
+            >
+              Se connecter
+            </Button>
+          ) : token && user?.roles.includes("SUPPORT") ? (
+            <Button
+              auto
+              as={Link}
+              color="primary"
+              onClick={() => router.push("/dashboard")}
+            >
+              Administration
+            </Button>
+          ) : (
+            <Button
+              auto
+              as={Link}
+              color="primary"
+              onClick={() => router.push("/profile")}
+            >
+              Mon espace consultant
+            </Button>
+          )}
         </Navbar.Item>
+        {token && (
+          <Navbar.Item>
+            <Button
+              auto
+              as={Link}
+              color="primary"
+              onClick={() => handleLogout()}
+            >
+              Se déconnecter
+            </Button>
+          </Navbar.Item>
+        )}
       </Navbar.Content>
     </Navbar>
   );
