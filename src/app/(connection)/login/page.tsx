@@ -2,19 +2,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthLoginDto, authLoginSchema } from "@schemas/auth.schema";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { LoginResponse, loginUser } from "src/app/api/Auth/login";
 
 import Divider from "@components/UI/Divider";
 import Input from "@components/UI/Input";
 import { Button, Spacer } from "@nextui-org/react";
 import Link from "next/link";
-import { atom, useRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 import { toast } from "react-hot-toast";
 import styles from "./page.module.scss";
 import { tokenAtom, userAtom } from "src/utils/recoilAtoms.utils";
-import { UserResponse, getUsers } from "src/app/api/Users/getUsers";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
