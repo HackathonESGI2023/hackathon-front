@@ -1,19 +1,16 @@
 "use client";
+
 import { NextUIProvider, createTheme } from "@nextui-org/react";
 import styles from "@styles/_colors.module.scss";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import localFont from "next/font/local";
 import * as React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { RecoilRoot } from "recoil";
 
 import "./globals.scss";
 
@@ -111,34 +108,39 @@ const queryClient = new QueryClient();
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <RecoilRoot>
-      <html lang="fr">
-        <body className={larsseitFont.className} style={{ minHeight: "100vh" }}>
-          <QueryClientProvider client={queryClient}>
-            <NextThemesProvider
-              defaultTheme="light"
-              attribute="class"
-              value={{
-                light: lightTheme.className,
-                dark: darkTheme.className,
-              }}
-            >
-              <Toaster
-                position="top-center"
-                reverseOrder={false}
-                gutter={8}
-                containerClassName=""
-                containerStyle={{}}
-                toastOptions={{
-                  className: "",
-                  duration: 5000,
+      <DndProvider backend={HTML5Backend}>
+        <html lang="fr">
+          <body
+            className={larsseitFont.className}
+            style={{ minHeight: "100vh" }}
+          >
+            <QueryClientProvider client={queryClient}>
+              <NextThemesProvider
+                defaultTheme="light"
+                attribute="class"
+                value={{
+                  light: lightTheme.className,
+                  dark: darkTheme.className,
                 }}
-              />
-              <NextUIProvider theme={lightTheme}>{children}</NextUIProvider>
-            </NextThemesProvider>
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </body>
-      </html>
+              >
+                <Toaster
+                  position="top-center"
+                  reverseOrder={false}
+                  gutter={8}
+                  containerClassName=""
+                  containerStyle={{}}
+                  toastOptions={{
+                    className: "",
+                    duration: 5000,
+                  }}
+                />
+                <NextUIProvider theme={lightTheme}>{children}</NextUIProvider>
+              </NextThemesProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </body>
+        </html>
+      </DndProvider>
     </RecoilRoot>
   );
 }
