@@ -1,9 +1,10 @@
-import { Company, Mission, User } from "@prisma/client";
+import { Company, Mission, Project, User } from "@prisma/client";
 import { GET } from "../route";
 
 export interface StuffedMission extends Mission {
   Company: Company;
   Users: User;
+  Projects: Project[];
 }
 
 /**
