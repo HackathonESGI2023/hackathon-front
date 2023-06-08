@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthLoginDto, authLoginSchema } from "@schemas/auth.schema";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { LoginResponse, loginUser } from "src/app/api/Auth/login";
+import { loginUser } from "src/app/api/Auth/login";
 
 import Divider from "@components/UI/Divider";
 import Input from "@components/UI/Input";
@@ -34,7 +34,11 @@ export default function Home() {
   const [user, setUser] = useRecoilState(userAtom);
 
   const authLoginMutation = useMutation(loginUser, {
-    onSuccess: async (data: LoginResponse) => {
+    onSuccess: (data) => {
+      if (!data.access_token) {
+        toast.error("Une erreur est survenue");
+        return;
+      }
       toast.success("Vous êtes connecté !");
       setToken(data.access_token);
       setUser(data.user);
