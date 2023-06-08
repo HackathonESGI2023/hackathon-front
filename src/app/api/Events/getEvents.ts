@@ -6,7 +6,7 @@ import { GET } from "../route";
  * @returns Event[]
  */
 export const getEvents = async (): Promise<Array<Event>> => {
-  const res = await GET("http://localhost:3000/api/events");
+  const res = await GET("events");
 
   return res.json();
-}
+};
