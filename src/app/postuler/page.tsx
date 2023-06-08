@@ -90,8 +90,6 @@ export default function Postuler() {
         coverLetter: lm,
         sponsor: sponsor,
       });
-
-      console.log({ data });
     }
   };
 
