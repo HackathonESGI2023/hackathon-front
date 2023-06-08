@@ -1,9 +1,9 @@
-import { AuthRegisterDto } from '@zod/auth/auth.schema';
-import { POST } from '../route';
+import { AuthRegisterDto } from "@zod/auth/auth.schema";
+import { POST } from "../route";
 
 export async function registerUser(userData: AuthRegisterDto) {
-  const res = await POST('http://localhost:3000/auth/register/', {
-    body: JSON.stringify(userData),
+  const res = await POST("auth/register", {
+    body: userData,
   });
 
   return res.json();
