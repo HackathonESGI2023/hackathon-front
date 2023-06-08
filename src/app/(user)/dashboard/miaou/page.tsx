@@ -1,5 +1,5 @@
 "use client";
-import { Button, Card, Grid, Spacer } from "@nextui-org/react";
+import { Button, Card, Grid, Spacer, Text } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getEvents } from "src/app/api/Events/getEvents";
@@ -9,6 +9,7 @@ import { MissionsList } from "../components/MissionsList.component";
 import { SkillsChart } from "../components/SkillsChart.component";
 import { useRecoilState } from "recoil";
 import { userAtom } from "@utils/recoilAtoms.utils";
+import { userUtils } from "@utils/user.utils";
 
 export default function Miaou() {
   const { data: events, refetch: refetchEvents } = useQuery(
@@ -60,6 +61,7 @@ export default function Miaou() {
         </Grid>
       </Grid.Container>
       <Button onPress={() => refetchData()}>Refetch</Button>
+      <Text>{user !== null ? JSON.stringify(userUtils.level(user)) : ""}</Text>
     </div>
   );
 }
