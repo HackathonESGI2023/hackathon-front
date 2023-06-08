@@ -1,13 +1,5 @@
 "use client";
-import {
-  Button,
-  Card,
-  Container,
-  Grid,
-  Spacer,
-  Text,
-  Textarea,
-} from "@nextui-org/react";
+import { Button, Card, Grid, Spacer, Text, Textarea } from "@nextui-org/react";
 import {
   BracketsCurly,
   Link,
@@ -15,8 +7,8 @@ import {
   TextItalic,
   TextUnderline,
 } from "@phosphor-icons/react";
-import { Ref, Suspense, useEffect, useRef, useState } from "react";
 import colors from "@styles/_colors.module.scss";
+import { Ref, useEffect, useRef, useState } from "react";
 import { useSelectedText } from "src/hooks/input.hooks";
 
 interface WysiwygProps {
@@ -132,7 +124,6 @@ export const Wysiwyg: React.FunctionComponent<WysiwygProps> = ({
   };
 
   useEffect(() => {
-    console.log(selectedText);
     checkMarkdown(selectedText);
   }, [selectedText]);
 

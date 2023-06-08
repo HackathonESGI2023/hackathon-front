@@ -1,9 +1,10 @@
 import { AuthLoginDto } from "@schemas/auth.schema";
-import { POST } from "../route";
 import { UserResponse } from "../Users/getUsers";
+import { POST } from "../route";
 
-export const loginUser = async (userData: AuthLoginDto): Promise<LoginResponse> => {
-  console.log("🚀 ~ file: login.ts:5 ~ loginUser ~ userData:", userData);
+export const loginUser = async (
+  userData: AuthLoginDto
+): Promise<LoginResponse> => {
   const res = await POST("auth/login", userData);
 
   return res.json();

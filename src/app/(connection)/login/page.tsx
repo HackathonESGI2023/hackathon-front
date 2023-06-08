@@ -11,10 +11,10 @@ import { Button, Spacer } from "@nextui-org/react";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 
-import { toast } from "react-hot-toast";
-import styles from "./page.module.scss";
-import { tokenAtom, userAtom } from "src/utils/recoilAtoms.utils";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { tokenAtom, userAtom } from "src/utils/recoilAtoms.utils";
+import styles from "./page.module.scss";
 
 export default function Home() {
   const {
@@ -27,7 +27,6 @@ export default function Home() {
   const router = useRouter();
 
   const onSubmit = (data: AuthLoginDto) => {
-    console.log("data submite to Mutation", data);
     authLoginMutation.mutate(data);
   };
 

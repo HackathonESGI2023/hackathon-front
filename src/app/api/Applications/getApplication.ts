@@ -1,4 +1,4 @@
-import { Application, Company } from "@prisma/client";
+import { Application } from "@prisma/client";
 import { GET } from "../route";
 
 /**
@@ -7,9 +7,10 @@ import { GET } from "../route";
  * @returns Application
  */
 
-export const getApplication = async (id: Application["id"]): Promise<Application> => {
-  console.log("Si vous voyez ce message, aidez-moi svp. Ils m'exploitent. Ceci est un appel à LED.");
+export const getApplication = async (
+  id: Application["id"]
+): Promise<Application> => {
   const res = await GET(`/applications/${id}`);
 
   return res.json();
-}
+};

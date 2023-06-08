@@ -54,7 +54,6 @@ export default function Postuler() {
 
   const createApplicationMutation = useMutation(createApplication, {
     onSuccess: (data) => {
-      console.log({ data });
       toast.success(
         "Votre condidature a bien été envoyée ! Nous reviendrons vers vous très bientôt !"
       );
@@ -65,7 +64,6 @@ export default function Postuler() {
       setLm("");
     },
     onError: (error) => {
-      console.log({ error });
       toast.error(
         "Une erreur est survenue lors de l'envoi de votre condidature, veuillez réessayer plus tard."
       );
@@ -91,8 +89,6 @@ export default function Postuler() {
         coverLetter: lm,
         sponsor: sponsor,
       });
-
-      console.log({ data });
     }
   };
 
