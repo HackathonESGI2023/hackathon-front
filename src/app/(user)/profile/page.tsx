@@ -2,7 +2,7 @@
 
 import { Grid } from "@nextui-org/react";
 import colors from "@styles/_colors.module.scss";
-import ProfileCards from "../dashboard/components/ProfileCards/ProfileCards";
+import ProfileConsultantCard from "../dashboard/components/ProfileConsultantCard/ProfileConsultantCard.component";
 
 //fake user
 const userTest = {
@@ -21,7 +21,7 @@ const Profile = () => {
       <h1>Page profile</h1>
       <Grid.Container gap={3} justify="center">
         <Grid xs={6} md={3}>
-          <ProfileCards
+          <ProfileConsultantCard
             isInMision={true}
             seniorityTimeInYears={2}
             user={userTest}

@@ -18,41 +18,44 @@ import { ContractTypeEnum } from "@schemas/contract.schema";
 import { SkillsDto } from "@schemas/skills.schema";
 
 interface TemplateProps {
-  user: any;
-  isInMision: boolean;
+  profilePicture: string;
+  fullname: string;
+  isInMission: boolean;
+  seniorityTimeInYear: number;
+  pinedSkills: SkillsDto[];
+  slackId?: number;
+  progess?: number;
   userContractType?: ContractTypeEnum;
-  skills: SkillsDto[];
-  seniorityTimeInYears: number;
+  onPress?: () => void;
 }
 
-const ProfileCards: React.FunctionComponent<TemplateProps> = ({
-  user,
-  isInMision,
+const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
+  profilePicture,
+  fullname,
+  isInMission,
+  pinedSkills,
+  seniorityTimeInYear,
+  slackId,
+  progess,
   userContractType,
-  skills,
-  seniorityTimeInYears,
+  onPress,
 }) => {
   return (
     <>
-      <Card isPressable isHoverable>
+      <Card isPressable variant="flat">
         <Card.Body>
           <Row justify="flex-start" css={{ pt: "5px" }}>
             <Grid md={7}>
-              <Avatar
-                size={"xl"}
-                squared
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-              />
+              <Avatar size={"xl"} squared src={profilePicture} />
             </Grid>
             <Grid md={15}>
               <Col>
                 <Row justify="flex-start">
-                  <Text>
-                    {user.firstname} {user.lastname}
-                  </Text>
+                  <Text>{fullname}</Text>
                 </Row>
                 <Row justify="flex-start">
-                  <BadgeMission inMission={isInMision} />
+                  <BadgeMission inMission={isInMission} />
+
                   {userContractType && (
                     <BadgeContract contractType={userContractType} />
                   )}
@@ -67,16 +70,7 @@ const ProfileCards: React.FunctionComponent<TemplateProps> = ({
           <Col css={{ pt: "10px", mx: 13 }}>
             <Row justify="flex-start">
               <Grid.Container gap={1}>
-                {/* <Grid>
-                  <BadgeSkill color="#190633">React</BadgeSkill>
-                </Grid>
-                <Grid>
-                  <BadgeSkill color="#d5e0a8">Next.js</BadgeSkill>
-                </Grid>
-                <Grid>
-                  <BadgeSkill color="#d5e0a8">Next.js</BadgeSkill>
-                </Grid> */}
-                {skills.map((skill) => (
+                {pinedSkills.map((skill) => (
                   <Grid key={skill.id}>
                     <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
                   </Grid>
@@ -86,7 +80,7 @@ const ProfileCards: React.FunctionComponent<TemplateProps> = ({
             <Row justify="flex-start">
               <Grid.Container gap={1}>
                 <Grid>
-                  <BadgeSeniority seniorityTime={seniorityTimeInYears} />
+                  <BadgeSeniority seniorityTime={seniorityTimeInYear} />
                 </Grid>
                 <Grid>
                   <Tooltip content={"Meilleur employé"} rounded color="primary">
@@ -112,4 +106,4 @@ const ProfileCards: React.FunctionComponent<TemplateProps> = ({
   );
 };
 
-export default ProfileCards;
+export default ProfileConsultantCard;
