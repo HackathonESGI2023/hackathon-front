@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useDrag } from 'react-dnd';
-import styles from './SkillBadge.module.scss';
+import { textColor } from "@utils/utils";
+import { motion } from "framer-motion";
+import { useDrag } from "react-dnd";
+import styles from "./SkillBadge.module.scss";
 
 type SkillBadgeProps = {
   name: string;
@@ -12,7 +13,7 @@ type SkillBadgeProps = {
 
 const SkillBadge = ({ name, color, id }: SkillBadgeProps) => {
   const [collected, drag, dragPreview] = useDrag(() => ({
-    type: 'skillBadge',
+    type: "skillBadge",
     item: { id },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -27,7 +28,9 @@ const SkillBadge = ({ name, color, id }: SkillBadgeProps) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
     >
-      <span className={styles.label}>{name}</span>
+      <span className={styles.label} style={{ color: textColor(color) }}>
+        {name}
+      </span>
     </motion.div>
   );
 };
