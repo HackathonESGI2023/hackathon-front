@@ -16,12 +16,14 @@ import {
 import { FilePdf } from "@phosphor-icons/react";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
+import { createApplication } from "../api/Applications/createApplication";
+import { useMutation } from "react-query";
 
 export default function Postuler() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [about, setAbout] = useState<string>("");
-  const [proposing, setProposing] = useState<string>("");
+  const [sponsor, setSponsor] = useState<string>("");
 
   const cvInputRef = useRef<HTMLInputElement>(null);
   const [cv, setCv] = useState<string>("");
@@ -49,6 +51,26 @@ export default function Postuler() {
     }
   };
 
+  const createApplicationMutation = useMutation(createApplication, {
+    onSuccess: (data) => {
+      console.log({ data });
+      toast.success(
+        "Votre condidature a bien été envoyée ! Nous reviendrons vers vous très bientôt !"
+      );
+      setName("");
+      setEmail("");
+      setAbout("");
+      setCv("");
+      setLm("");
+    },
+    onError: (error) => {
+      console.log({ error });
+      toast.error(
+        "Une erreur est survenue lors de l'envoi de votre condidature, veuillez réessayer plus tard."
+      );
+    },
+  });
+
   const handleSubmit = async () => {
     if (name === "" || about === "" || cv === "" || lm === "") {
       toast.error("Veuillez remplir tous les champs");
@@ -58,8 +80,16 @@ export default function Postuler() {
         about,
         cv,
         lm,
-        proposing,
+        proposing: sponsor,
       };
+      createApplicationMutation.mutate({
+        name,
+        email,
+        text: about,
+        cv,
+        coverLetter: lm,
+        sponsor: sponsor,
+      });
 
       console.log({ data });
     }
@@ -107,6 +137,7 @@ export default function Postuler() {
                   fullWidth
                   size="xl"
                   label="Quel est votre nom ?"
+                  value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
@@ -117,6 +148,7 @@ export default function Postuler() {
                   fullWidth
                   size="xl"
                   label="Quel est votre adresse mail ?"
+                  value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
@@ -128,6 +160,7 @@ export default function Postuler() {
                   fullWidth
                   size="xl"
                   rows={5}
+                  value={about}
                   onChange={(e) => {
                     setAbout(e.target.value);
                   }}
@@ -183,9 +216,10 @@ export default function Postuler() {
                   placeholder="jeane.doe@carbon.fr"
                   fullWidth
                   size="xl"
+                  value={sponsor}
                   label="Avez-vous un parrain ? Renseignez son adresse mail pour bénéficier de la cooptation"
                   onChange={(e) => {
-                    setProposing(e.target.value);
+                    setSponsor(e.target.value);
                   }}
                 />
               </Card.Body>
