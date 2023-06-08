@@ -1,6 +1,6 @@
 "use client";
-import { Text } from "@nextui-org/react";
 import * as React from "react";
+import styles from "./header.module.scss";
 
 interface TemplateProps {
   title: string;
@@ -12,14 +12,10 @@ const Header: React.FunctionComponent<TemplateProps> = ({
   subTitle,
 }) => {
   return (
-    <>
-      <Text css={{ letterSpacing: "0.5px" }} weight="semibold" h1>
-        {title}
-      </Text>
-      <Text weight="normal" css={{ color: "#767676" }} h3>
-        {subTitle}
-      </Text>
-    </>
+    <div>
+      <h1 className={styles.title}>{title}</h1>
+      <p className={styles.subtitle}>{subTitle}</p>
+    </div>
   );
 };
 
