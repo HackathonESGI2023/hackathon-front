@@ -1,4 +1,5 @@
 import { Company } from "@prisma/client";
+import { PATCH } from "../route";
 
 /**
  * PATCH /companies/:id
@@ -6,3 +7,9 @@ import { Company } from "@prisma/client";
  * @body Partial<<Omit<Company, "id">>
  * @returns Company
  */
+
+export const updateCompany = async (id: Company["id"], company: Partial<Omit<Company, "id">>): Promise<Company> => {
+  const res = await PATCH(`/companies/${id}`, company);
+
+  return res.json();
+};

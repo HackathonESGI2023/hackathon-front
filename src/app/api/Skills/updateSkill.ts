@@ -1,4 +1,5 @@
 import { Skill } from "@prisma/client";
+import { PATCH } from "../route";
 
 /**
  * PATCH /skills/:id
@@ -6,3 +7,9 @@ import { Skill } from "@prisma/client";
  * @body Partial<<Omit<Skill, "id">>
  * @returns Skill
  */
+
+export const updateSkill = async (id: Skill["id"], skill: Partial<Omit<Skill, "id">>): Promise<Skill> => {
+  const res = await PATCH(`/skills/${id}`, skill);
+
+  return res.json();
+}

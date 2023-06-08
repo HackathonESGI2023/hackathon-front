@@ -1,3 +1,4 @@
+import { DELETE } from "../route";
 import { UserResponse } from "./getUsers";
 
 /**
@@ -5,3 +6,9 @@ import { UserResponse } from "./getUsers";
  * @param id: number
  * @returns UserResponse
  */
+
+export const deleteUser = async (id: UserResponse["id"]): Promise<UserResponse> => {
+  const res = await DELETE(`/users/${id}`);
+
+  return res.json();
+}
