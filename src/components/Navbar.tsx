@@ -34,6 +34,9 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
       variant="floating"
       maxWidth="fluid"
       className={className}
+      style={{
+        padding: "1rem",
+      }}
     >
       <Navbar.Brand>
         <Image
@@ -46,12 +49,36 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
 
       <Navbar.Content>
         <Navbar.Item>
+          <Button
+            auto
+            as={Link}
+            color="primary"
+            onPress={() => router.push("/")}
+            light
+          >
+            Accueil
+          </Button>
+        </Navbar.Item>
+        {!token && (
+          <Navbar.Item>
+            <Button
+              auto
+              as={Link}
+              color="primary"
+              light
+              onPress={() => router.push("/postuler")}
+            >
+              Postuler chez Carbon
+            </Button>
+          </Navbar.Item>
+        )}
+        <Navbar.Item>
           {!token ? (
             <Button
               auto
               as={Link}
               color="primary"
-              onClick={() => router.push("/login")}
+              onPress={() => router.push("/login")}
             >
               Se connecter
             </Button>
@@ -60,7 +87,7 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
               auto
               as={Link}
               color="primary"
-              onClick={() => router.push("/dashboard")}
+              onPress={() => router.push("/dashboard")}
             >
               Administration
             </Button>
@@ -69,7 +96,7 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
               auto
               as={Link}
               color="primary"
-              onClick={() => router.push("/profile")}
+              onPress={() => router.push("/profile")}
             >
               Mon espace consultant
             </Button>
@@ -81,7 +108,7 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
               auto
               as={Link}
               color="primary"
-              onClick={() => handleLogout()}
+              onPress={() => handleLogout()}
             >
               Se déconnecter
             </Button>

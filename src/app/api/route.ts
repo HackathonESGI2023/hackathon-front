@@ -4,8 +4,10 @@ const isBrowser = typeof window !== "undefined";
 
 const token = isBrowser ? localStorage.getItem("token") || null : null;
 
+const base_url = "http://localhost:3000";
+
 export async function GET(request: string) {
-  const req = new URL(request);
+  const req = new URL(`${base_url}/${request}`);
   //   const id = searchParams.get('id');
   const res = await fetch(req, {
     method: "GET",
@@ -19,10 +21,10 @@ export async function GET(request: string) {
 }
 
 export async function POST(request: string, bodyData: any) {
-  const req = new URL(request);
+  const req = new URL(`${base_url}/${request}`);
   const res = await fetch(req, {
     method: "POST",
-    body: bodyData,
+    body: JSON.stringify(bodyData),
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -33,7 +35,7 @@ export async function POST(request: string, bodyData: any) {
 }
 
 export async function PATCH(request: string, bodyData: any) {
-  const req = new URL(request);
+  const req = new URL(`${base_url}/${request}`);
   const res = await fetch(req, {
     method: "PATCH",
     headers: {
@@ -47,7 +49,7 @@ export async function PATCH(request: string, bodyData: any) {
 }
 
 export async function DELETE(request: string) {
-  const req = new URL(request);
+  const req = new URL(`${base_url}/${request}`);
   const res = await fetch(req, {
     method: "DELETE",
     headers: {
