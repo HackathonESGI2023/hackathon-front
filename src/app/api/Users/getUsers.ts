@@ -7,12 +7,22 @@ import {
   SkillType,
   Workshop,
   SkillCategory,
+  Company,
+  User,
+  Project,
+  Application,
 } from "@prisma/client";
 import { GET } from "../route";
 
 export async function getUsers() {
   const res = await GET(`users`);
   return res.json();
+}
+
+export interface StuffedMission extends Mission {
+  Company: Company;
+  User: User;
+  Projects: Project[];
 }
 
 export interface UserResponse {
@@ -27,7 +37,7 @@ export interface UserResponse {
   Contract: Contract[];
   Events: Event[];
   EventsOwner: Event[];
-  Missions: Mission[];
+  Mission: StuffedMission[];
   UserSkill: {
     id: number;
     isStarred: boolean;
@@ -41,4 +51,5 @@ export interface UserResponse {
   }[];
   WorkshopOwner: Workshop[];
   Workshops: Workshop[];
+  ApplicationSponsor: Application[];
 }
