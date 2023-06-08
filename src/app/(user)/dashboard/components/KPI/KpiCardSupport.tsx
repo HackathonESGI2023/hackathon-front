@@ -69,6 +69,8 @@ export const KpiCards: React.FunctionComponent<TemplateProps> = ({
                   strokeWidth={50}
                   counterClockwise
                   styles={buildStyles({
+                    trailColor: "#F5EFDF",
+                    pathColor: "#DCCEB5",
                     strokeLinecap: "butt",
                   })}
                 />
