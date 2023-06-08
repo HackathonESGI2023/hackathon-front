@@ -1,16 +1,17 @@
 "use client";
 
-import { Row } from "@nextui-org/react";
-import SkillsCard from "../components/SkillsCard/SkillsCard";
+import { Button } from "@nextui-org/react";
+import { useState } from "react";
+import SkillsModal from "../components/SkillsModal/SkillsModal";
 
 type DashboardProps = {};
 
 const Dashboard = ({}: DashboardProps) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
   return (
     <>
-      <Row>
-        <SkillsCard></SkillsCard>
-      </Row>
+      <Button onClick={() => setIsVisible(true)}>modale</Button>
+      <SkillsModal setIsVisible={setIsVisible} isVisible={isVisible} />
     </>
   );
 };
