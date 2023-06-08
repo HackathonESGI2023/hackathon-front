@@ -42,7 +42,9 @@ const DashboardSupportPage = () => {
                 type: "HARD",
               },
             ]}
-            progess={21}
+            progess={25}
+            onCrud={false}
+            slackId={123456789}
           />
         </Grid>
       </Grid.Container>

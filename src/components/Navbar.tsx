@@ -1,5 +1,5 @@
 "use client";
-import { Button, Link, Navbar, Switch, useTheme } from "@nextui-org/react";
+import { Button, Link, Navbar, useTheme } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
