@@ -1,3 +1,4 @@
+"use client";
 import { Badge } from "@nextui-org/react";
 import { ContractTypeEnum } from "@schemas/contract.schema";
 import * as React from "react";

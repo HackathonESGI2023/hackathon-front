@@ -1,4 +1,5 @@
-import { Button, Modal, Row, Text } from '@nextui-org/react';
+"use client";
+import { Button, Modal, Row, Text } from "@nextui-org/react";
 
 export const ModalAcceptContent = (props: {
   visible: boolean;
@@ -20,7 +21,7 @@ export const ModalAcceptContent = (props: {
         <Text id="modal-title" size={18}>
           Etes vous sûr de vouloir
           <Text b size={18}>
-            {' ' + actionName + ' '}
+            {" " + actionName + " "}
           </Text>
           {actionTarget}
         </Text>

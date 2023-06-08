@@ -1,8 +1,9 @@
+"use client";
 import {
   Input as NextUIInput,
   InputProps as NextUIInputProps,
-} from '@nextui-org/react';
-import { UseFormRegisterReturn } from 'react-hook-form';
+} from "@nextui-org/react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 interface InputProps extends Partial<NextUIInputProps> {
   errorMessage?: string | undefined;
@@ -14,13 +15,13 @@ const Input = ({ errorMessage, register, ...props }: InputProps) => {
     ...props,
     ...register,
     bordered: true,
-    borderWeight: 'light',
-    color: errorMessage ? 'error' : undefined,
+    borderWeight: "light",
+    color: errorMessage ? "error" : undefined,
     helperText: errorMessage,
-    helperColor: 'error',
+    helperColor: "error",
   };
 
-  return props.type === 'password' ? (
+  return props.type === "password" ? (
     <NextUIInput.Password {...commonProps} />
   ) : (
     <NextUIInput {...commonProps} />

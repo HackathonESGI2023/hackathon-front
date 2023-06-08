@@ -1,3 +1,4 @@
+"use client";
 import { Badge } from "@nextui-org/react";
 import * as React from "react";
 import { textColor } from "src/utils/utils";

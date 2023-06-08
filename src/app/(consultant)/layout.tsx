@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import NavbarTest from '@components/Navbar';
-import styles from './layout.module.scss';
+import NavbarTest from "@components/Navbar";
+import styles from "./layout.module.scss";
 
 type LoginLayoutProps = {
   children: React.ReactNode;
