@@ -1,3 +1,11 @@
-.puet {
-  color: red;
+.skillsContainer {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  align-items: stretch;
+
+  height: 100%;
+  padding: 1rem 0;
+
+  white-space: nowrap;
 }
