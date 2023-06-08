@@ -42,6 +42,8 @@ export const KpiCards: React.FunctionComponent<TemplateProps> = ({
           Consultant en mission
         </Text>
 
+        <Spacer y={1} />
+
         <Row justify="space-between">
           <Col>
             <Text weight="semibold" size={30}>

@@ -8,7 +8,7 @@ const DashboardSupportPage = () => {
       <h1>Dashboard Support Page</h1>
       <Grid.Container gap={2} justify="center" css={{ height: "300px" }}>
         <Grid xs={5}>
-          <KpiCards kpiValue={50} kpiMaxValue={120} />
+          <KpiCards kpiValue={50} kpiMaxValue={200} />
         </Grid>
       </Grid.Container>
     </div>
