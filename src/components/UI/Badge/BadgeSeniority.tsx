@@ -1,3 +1,4 @@
+"use client";
 import { Tooltip } from "@nextui-org/react";
 import { Coffee, Cookie, OrangeSlice } from "@phosphor-icons/react";
 import * as React from "react";

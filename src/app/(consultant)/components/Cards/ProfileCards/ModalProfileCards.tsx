@@ -1,3 +1,4 @@
+"use client";
 import { Button, Checkbox, Input, Modal, Row, Text } from "@nextui-org/react";
 import { MapPinLine } from "@phosphor-icons/react";
 import { useState } from "react";

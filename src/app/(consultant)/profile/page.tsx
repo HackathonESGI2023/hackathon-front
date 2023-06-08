@@ -25,19 +25,18 @@ const Dashboard = ({ children }: DashboardProps) => {
             user={userTest}
             skills={[
               {
-                _id: "1",
-                name: "React",
-                color: "#61DBFB",
+                id: 1,
+                name: "Java",
+                color: "#FF0000",
+                category: "BACKEND",
+                type: "HARD",
               },
               {
-                _id: "2",
-                name: "Node",
-                color: "#026E00",
-              },
-              {
-                _id: "3",
-                name: "Angular",
-                color: "#DD0031",
+                id: 2,
+                name: "Java",
+                color: "#190633",
+                category: "BACKEND",
+                type: "HARD",
               },
             ]}
           />

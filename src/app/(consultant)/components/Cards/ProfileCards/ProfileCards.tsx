@@ -78,7 +78,7 @@ const ProfileCards: React.FunctionComponent<TemplateProps> = ({
                 </Grid> */}
                 {skills.map((skill) => (
                   <Grid key={skill.id}>
-                    <BadgeSkill color="#190633">{skill.name}</BadgeSkill>
+                    <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
                   </Grid>
                 ))}
               </Grid.Container>
