@@ -48,7 +48,13 @@ export default function Miaou() {
             height: "25rem",
           }}
         >
-          <MissionsList missions={missions ?? []} />
+          <MissionsList
+            missions={missions ?? []}
+            crud={{
+              onUpdate: (id: number) => console.log("update", id),
+              onDelete: (id: number) => console.log("delete", id),
+            }}
+          />
         </Grid>
         <Grid
           xs={12}
