@@ -1,8 +1,7 @@
 "use client";
 
-import NavbarTest from "@components/Navbar";
 import jobInterview from "@assets/animations/job-interview.json";
-import Lottie from "lottie-react";
+import NavbarTest from "@components/Navbar";
 import {
   Button,
   Card,
@@ -14,10 +13,11 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { FilePdf } from "@phosphor-icons/react";
+import Lottie from "lottie-react";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { createApplication } from "../api/Applications/createApplication";
 import { useMutation } from "react-query";
+import { createApplication } from "../api/Applications/createApplication";
 
 export default function Postuler() {
   const [name, setName] = useState<string>("");
@@ -39,6 +39,7 @@ export default function Postuler() {
 
   const lmInputRef = useRef<HTMLInputElement>(null);
   const [lm, setLm] = useState<string>("");
+
   const handleAddLm = async (file: File) => {
     // Check if file is a pdf
     if (file.type !== "application/pdf") {
@@ -113,8 +114,8 @@ export default function Postuler() {
         justify="center"
         alignItems="center"
         css={{
-          height: "85vh",
-          width: "100vw",
+          height: "100%",
+          width: "100%",
           overflow: "hidden",
         }}
       >
@@ -125,12 +126,14 @@ export default function Postuler() {
           }}
         >
           <Grid xs={12} md={6} direction="column">
-            <Text h1 size={"$7xl"}>
+            <Text h1 size={"$6xl"}>
               Rejoignez Carbon !
             </Text>
-            <Card css={{ px: 10 }}>
+            <Card css={{ px: "2rem" }}>
               <Card.Body>
-                <Text h3>Dites nous en plus à propos de vous</Text>
+                <Text h3 css={{ pt: 8 }}>
+                  Dites nous en plus à propos de vous
+                </Text>
                 <Spacer y={1} />
                 <Input
                   placeholder="John Doe"
