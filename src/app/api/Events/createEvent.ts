@@ -6,8 +6,10 @@ import { POST } from "../route";
  * @returns Event
  */
 
-export const createEvent = async (event: Omit<Event, "id">): Promise<Event> => {
-  const res = await POST("/events", event);
+export const createEvent = async (
+  event: Omit<Event, "id" | "createdAt" | "updatedAt">
+): Promise<Event> => {
+  const res = await POST("events", event);
 
   return res.json();
-}
+};

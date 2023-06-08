@@ -8,8 +8,11 @@ import { PATCH } from "../route";
  * @returns Event
  */
 
-export const updateEvent = async (id: Event["id"], event: Partial<Omit<Event, "id">>): Promise<Event> => {
-  const res = await PATCH(`/events/${id}`, event);
+export const updateEvent = async (params: {
+  id: Event["id"];
+  event: Partial<Omit<Event, "id">>;
+}): Promise<Event> => {
+  const res = await PATCH(`events/${params.id}`, params.event);
 
   return res.json();
-}
+};
