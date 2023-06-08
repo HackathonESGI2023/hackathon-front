@@ -2,7 +2,7 @@ import { Card, Container } from "@nextui-org/react";
 import { Company, Mission, User } from "@prisma/client";
 import * as React from "react";
 import { MissionItem } from "./MissionItem.component.tsx";
-import { StuffedMission } from "src/app/api/Missions/getMissions.js";
+import { StuffedMission } from "../../../api/Missions/getMissions.js";
 
 interface MissionsListProps {
   missions: StuffedMission[];

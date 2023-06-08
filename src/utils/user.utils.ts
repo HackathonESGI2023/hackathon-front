@@ -1,4 +1,4 @@
-import { UserResponse } from "src/app/api/Users/getUsers";
+import { UserResponse } from "../app/api/Users/getUsers";
 
 const getUserLevel = (user: UserResponse) => {
   console.log(user);

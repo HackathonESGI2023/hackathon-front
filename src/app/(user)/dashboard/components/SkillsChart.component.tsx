@@ -21,7 +21,7 @@ ChartJS.register(
 );
 import { Card, Container } from "@nextui-org/react";
 import { Skill, UserSkill } from "@prisma/client";
-import { UserResponse } from "src/app/api/Users/getUsers";
+import { UserResponse } from "../../../api/Users/getUsers";
 
 interface SkillsChartProps {
   skills: UserResponse["UserSkill"];
