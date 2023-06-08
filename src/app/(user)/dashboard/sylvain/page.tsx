@@ -42,6 +42,7 @@ const DashboardSupportPage = () => {
                 type: "HARD",
               },
             ]}
+            progess={21}
           />
         </Grid>
       </Grid.Container>

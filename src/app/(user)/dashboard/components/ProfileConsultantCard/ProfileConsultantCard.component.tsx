@@ -9,7 +9,9 @@ import {
   Card,
   Col,
   Grid,
+  Progress,
   Row,
+  Spacer,
   Text,
   Tooltip,
 } from "@nextui-org/react";
@@ -40,67 +42,112 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   userContractType,
   onPress,
 }) => {
+  const levelConverter = (level: number) => {
+    return Math.floor(level / 10);
+  };
+  const levelRestConverter = (level: number) => {
+    return (level % 10) * 10;
+  };
+
   return (
     <>
-      <Card isPressable variant="flat">
-        <Card.Body>
-          <Row justify="flex-start" css={{ pt: "5px" }}>
-            <Grid md={7}>
+      <Card isPressable variant="flat" css={{ padding: "1.5rem" }}>
+        <div
+          style={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <Row justify="space-between" css={{ pt: "5px" }}>
+            <Col>
               <Avatar size={"xl"} squared src={profilePicture} />
-            </Grid>
-            <Grid md={15}>
-              <Col>
-                <Row justify="flex-start">
-                  <Text>{fullname}</Text>
-                </Row>
-                <Row justify="flex-start">
-                  <BadgeMission inMission={isInMission} />
+            </Col>
 
-                  {userContractType && (
-                    <BadgeContract contractType={userContractType} />
-                  )}
-                </Row>
-              </Col>
-            </Grid>
-            <Grid md={2}>
-              <CaretRight size={25} />
-            </Grid>
+            <Col>
+              <Row justify="flex-start">
+                <Text>{fullname}</Text>
+              </Row>
+              <Row justify="flex-start">
+                <BadgeMission inMission={isInMission} />
+                <Spacer x={0.5} />
+                {userContractType && (
+                  <BadgeContract contractType={userContractType} />
+                )}
+              </Row>
+            </Col>
+
+            <Col
+              css={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Row justify="flex-end">
+                <CaretRight size={25} />
+              </Row>
+            </Col>
           </Row>
 
-          <Col css={{ pt: "10px", mx: 13 }}>
-            <Row justify="flex-start">
-              <Grid.Container gap={1}>
-                {pinedSkills.map((skill) => (
-                  <Grid key={skill.id}>
-                    <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
-                  </Grid>
-                ))}
-              </Grid.Container>
-            </Row>
-            <Row justify="flex-start">
-              <Grid.Container gap={1}>
-                <Grid>
-                  <BadgeSeniority seniorityTime={seniorityTimeInYear} />
+          <Row justify="flex-start">
+            <Grid.Container gap={1}>
+              {pinedSkills.map((skill) => (
+                <Grid key={skill.id}>
+                  <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
                 </Grid>
-                <Grid>
-                  <Tooltip content={"Meilleur employé"} rounded color="primary">
-                    <Badge color="error" content="2" shape="circle">
-                      <Trophy size={32} color="#8ca413" weight="fill" />
-                    </Badge>
-                  </Tooltip>
-                </Grid>
+              ))}
+            </Grid.Container>
+          </Row>
 
-                <Grid>
-                  <Tooltip content={"Meilleur employé"} rounded color="primary">
-                    <Badge color="error" content="2" shape="circle">
-                      <Confetti size={32} color="#d71414" weight="fill" />
-                    </Badge>
-                  </Tooltip>
-                </Grid>
-              </Grid.Container>
+          <Row justify="flex-start">
+            <Grid.Container gap={1}>
+              <Grid>
+                <BadgeSeniority seniorityTime={seniorityTimeInYear} />
+              </Grid>
+
+              <Grid>
+                <Tooltip content={"Meilleur employé"} rounded color="primary">
+                  <Badge color="error" content="2" shape="circle">
+                    <Trophy size={32} color="#8ca413" weight="fill" />
+                  </Badge>
+                </Tooltip>
+              </Grid>
+
+              <Grid>
+                <Tooltip content={"Meilleur employé"} rounded color="primary">
+                  <Badge color="error" content="2" shape="circle">
+                    <Confetti size={32} color="#d71414" weight="fill" />
+                  </Badge>
+                </Tooltip>
+              </Grid>
+            </Grid.Container>
+          </Row>
+
+          {progess && (
+            <Row>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>Niveau {levelConverter(progess)} </Text>
+                <Progress
+                  value={levelRestConverter(progess)}
+                  shadow
+                  color="warning"
+                  status="warning"
+                />
+              </div>
             </Row>
-          </Col>
-        </Card.Body>
+          )}
+        </div>
       </Card>
     </>
   );
