@@ -1,16 +1,16 @@
 import {
+  Application,
+  Company,
   Contract,
-  Role,
   Event,
   Mission,
+  Project,
+  Role,
+  SkillCategory,
   SkillLevel,
   SkillType,
-  Workshop,
-  SkillCategory,
-  Company,
   User,
-  Project,
-  Application,
+  Workshop,
 } from "@prisma/client";
 import { GET } from "../route";
 

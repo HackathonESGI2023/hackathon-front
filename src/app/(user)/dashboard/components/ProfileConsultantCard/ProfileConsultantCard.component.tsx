@@ -6,8 +6,10 @@ import { BadgeSkill } from "@components/UI/Badge/BadgeSkill";
 import {
   Avatar,
   Badge,
+  Button,
   Card,
   Col,
+  Dropdown,
   Grid,
   Progress,
   Row,
@@ -15,7 +17,13 @@ import {
   Text,
   Tooltip,
 } from "@nextui-org/react";
-import { CaretRight, Confetti, Trophy } from "@phosphor-icons/react";
+import {
+  ChatCircle,
+  Confetti,
+  PencilLine,
+  Trash,
+  Trophy,
+} from "@phosphor-icons/react";
 import { ContractTypeEnum } from "@schemas/contract.schema";
 import { SkillsDto } from "@schemas/skills.schema";
 
@@ -29,6 +37,7 @@ interface TemplateProps {
   progess?: number;
   userContractType?: ContractTypeEnum;
   onPress?: () => void;
+  onCrud?: boolean;
 }
 
 const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
@@ -41,6 +50,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   progess,
   userContractType,
   onPress,
+  onCrud,
 }) => {
   const levelConverter = (level: number) => {
     return Math.floor(level / 10);
@@ -48,6 +58,39 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   const levelRestConverter = (level: number) => {
     return (level % 10) * 10;
   };
+
+  const itemsOnCrud = [
+    {
+      key: "send",
+      description: "Envoie avec Slack",
+      icon: <ChatCircle size={22} fill="var(--nextui-colors-secondary)" />,
+      text: "Envoyer un message",
+    },
+    {
+      key: "edit",
+      description: "Edition",
+      icon: <PencilLine size={22} fill="var(--nextui-colors-secondary)" />,
+      text: "Editer un profil",
+    },
+    {
+      key: "delete",
+      description: "Suppression",
+      icon: <Trash size={22} fill="var(--nextui-colors-secondary)" />,
+      text: "Suppression un profil",
+    },
+  ];
+
+  const items = [
+    {
+      key: "send",
+      description: "Envoie avec Slack",
+      icon: <ChatCircle size={22} fill="var(--nextui-colors-secondary)" />,
+      text: "Envoyer un message",
+    },
+  ];
+
+  !slackId && itemsOnCrud.shift();
+  !slackId && items.shift();
 
   return (
     <>
@@ -61,11 +104,18 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
           }}
         >
           <Row justify="space-between" css={{ pt: "5px" }}>
-            <Col>
+            <Col css={{ width: "60%" }}>
               <Avatar size={"xl"} squared src={profilePicture} />
             </Col>
 
-            <Col>
+            <Col
+              css={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
               <Row justify="flex-start">
                 <Text>{fullname}</Text>
               </Row>
@@ -83,11 +133,51 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
                 height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
+                justifyContent: "flex-end",
               }}
             >
-              <Row justify="flex-end">
-                <CaretRight size={25} />
+              <Row justify="flex-end" css={{ mx: 1 }}>
+                {!onCrud ? (
+                  slackId && (
+                    <Tooltip
+                      content={"Envoyer un message"}
+                      rounded
+                      color="primary"
+                    >
+                      <Button
+                        auto
+                        css={{ backgroundColor: "#FBF8F1" }}
+                        icon={
+                          <ChatCircle size={20} color="#E6D6B1" weight="fill" />
+                        }
+                      />
+                    </Tooltip>
+                  )
+                ) : (
+                  <Dropdown>
+                    <Dropdown.Button
+                      flat
+                      css={{ background: "#E6D6B1", color: "#FBF8F1" }}
+                    >
+                      Options
+                    </Dropdown.Button>
+                    <Dropdown.Menu
+                      color="secondary"
+                      aria-label="Actions"
+                      css={{ $$dropdownMenuWidth: "280px" }}
+                    >
+                      {itemsOnCrud.map((item) => (
+                        <Dropdown.Item
+                          key={item.key}
+                          description={item.description}
+                          icon={item.icon}
+                        >
+                          {item.text}
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                )}
               </Row>
             </Col>
           </Row>
