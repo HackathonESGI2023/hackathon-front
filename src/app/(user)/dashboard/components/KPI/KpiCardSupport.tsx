@@ -1,0 +1,88 @@
+"use client";
+import * as React from "react";
+
+import { Button, Card, Col, Row, Spacer, Text } from "@nextui-org/react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import styles from "./kpiCardSupport.module.scss";
+
+interface TemplateProps {
+  kpiValue: number;
+  kpiMaxValue: number;
+  kpiButtonRoute?: string;
+}
+
+export const KpiCards: React.FunctionComponent<TemplateProps> = ({
+  kpiValue,
+  kpiMaxValue,
+  kpiButtonRoute,
+}) => {
+  // calculate percentage and round it
+  const percentage = Math.round((kpiValue / kpiMaxValue) * 100);
+
+  return (
+    <Card
+      variant="flat"
+      css={{ padding: "2rem", height: "100%", background: "#FAF8F4" }}
+    >
+      <div className={styles.main}>
+        <Row>
+          <Text weight="semibold" size={30}>
+            {kpiValue}{" "}
+          </Text>
+          <Text weight="semibold" size={30}>
+            /
+          </Text>
+          <Text weight="semibold" size={30} css={{ color: "#9B9488" }}>
+            {" "}
+            {kpiMaxValue}
+          </Text>
+        </Row>
+        <Text size={15} css={{ color: "#7D7B88" }}>
+          Consultant en mission
+        </Text>
+
+        <Row justify="space-between">
+          <Col>
+            <Text weight="semibold" size={30}>
+              {percentage}
+            </Text>
+            <Text size={15} css={{ color: "#7D7B88" }}>
+              % d'occupation
+            </Text>
+          </Col>
+
+          <Col
+            css={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Row justify="center">
+              <div className={styles.chart}>
+                <CircularProgressbar
+                  value={percentage}
+                  strokeWidth={50}
+                  counterClockwise
+                  styles={buildStyles({
+                    strokeLinecap: "butt",
+                  })}
+                />
+              </div>
+            </Row>
+          </Col>
+        </Row>
+
+        <Spacer y={1} />
+
+        <div className={styles.buttonEndCard}>
+          <Button color="primary" auto className={styles.buttonEndCard}>
+            Voir les intercontrats
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+};

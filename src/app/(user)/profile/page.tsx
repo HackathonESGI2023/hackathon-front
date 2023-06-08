@@ -1,7 +1,8 @@
 "use client";
 
 import { Grid } from "@nextui-org/react";
-import ProfileCards from "../components/Cards/ProfileCards/ProfileCards";
+import colors from "@styles/_colors.module.scss";
+import ProfileCards from "../dashboard/components/ProfileCards/ProfileCards";
 
 //fake user
 const userTest = {
@@ -28,7 +29,7 @@ const Profile = () => {
               {
                 id: 1,
                 name: "Java",
-                color: "#FF0000",
+                color: colors.primaryT200,
                 category: "BACKEND",
                 type: "HARD",
               },
