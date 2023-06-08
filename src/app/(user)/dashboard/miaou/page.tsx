@@ -16,7 +16,7 @@ export default function Miaou() {
           xs={12}
           md={4}
           css={{
-            height: "20rem",
+            height: "25rem",
           }}
         >
           <EventsList events={events ?? []} />
@@ -25,7 +25,7 @@ export default function Miaou() {
           xs={12}
           md={4}
           css={{
-            height: "20rem",
+            height: "25rem",
           }}
         >
           <Card>
@@ -44,7 +44,7 @@ export default function Miaou() {
           xs={12}
           md={4}
           css={{
-            height: "20rem",
+            height: "25rem",
           }}
         >
           <div>3</div>
