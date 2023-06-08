@@ -1,15 +1,17 @@
 "use client";
-import * as React from "react";
+import { Card } from "@nextui-org/react";
 import {
   Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
   Filler,
-  Tooltip,
   Legend,
+  LineElement,
+  PointElement,
+  RadialLinearScale,
+  Tooltip,
 } from "chart.js";
+import * as React from "react";
 import { Radar } from "react-chartjs-2";
+import { UserResponse } from "../../../api/Users/getUsers";
 
 ChartJS.register(
   RadialLinearScale,
@@ -19,9 +21,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-import { Card, Container } from "@nextui-org/react";
-import { Skill, UserSkill } from "@prisma/client";
-import { UserResponse } from "../../../api/Users/getUsers";
 
 interface SkillsChartProps {
   skills: UserResponse["UserSkill"];
