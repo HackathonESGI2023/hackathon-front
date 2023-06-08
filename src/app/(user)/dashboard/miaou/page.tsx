@@ -4,9 +4,17 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getEvents } from "src/app/api/Events/getEvents";
 import { EventsList } from "../components/EventsList.component";
+import { getMissions } from "src/app/api/Missions/getMissions";
+import { MissionsList } from "../components/MissionsList.component";
 
 export default function Miaou() {
   const { data: events } = useQuery("events", getEvents);
+
+  const { data: missions } = useQuery("missions", getMissions);
+
+  useEffect(() => {
+    console.log(missions);
+  }, [missions]);
 
   return (
     <div>
@@ -28,17 +36,7 @@ export default function Miaou() {
             height: "25rem",
           }}
         >
-          <Card>
-            <Card.Body>
-              <div
-                style={{
-                  backgroundColor: "red",
-                }}
-              >
-                <Spacer y={8} />
-              </div>
-            </Card.Body>
-          </Card>
+          <MissionsList missions={missions ?? []} />
         </Grid>
         <Grid
           xs={12}
