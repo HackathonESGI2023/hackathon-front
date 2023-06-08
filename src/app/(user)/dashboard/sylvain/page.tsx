@@ -43,7 +43,7 @@ const DashboardSupportPage = () => {
               },
             ]}
             progess={25}
-            onCrud={false}
+            onCrud={true}
             slackId={123456789}
           />
         </Grid>
