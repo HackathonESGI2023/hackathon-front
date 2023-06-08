@@ -12,12 +12,11 @@ interface TemplateProps {
   kpiButtonRoute?: string;
 }
 
-export const KpiCards: React.FunctionComponent<TemplateProps> = ({
+const KpiCardsSupport: React.FunctionComponent<TemplateProps> = ({
   kpiValue,
   kpiMaxValue,
   kpiButtonRoute,
 }) => {
-  // calculate percentage and round it
   const percentage = Math.round((kpiValue / kpiMaxValue) * 100);
 
   return (
@@ -90,3 +89,5 @@ export const KpiCards: React.FunctionComponent<TemplateProps> = ({
     </Card>
   );
 };
+
+export default KpiCardsSupport;
