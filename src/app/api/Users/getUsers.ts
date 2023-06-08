@@ -6,6 +6,7 @@ import {
   SkillLevel,
   SkillType,
   Workshop,
+  SkillCategory,
 } from "@prisma/client";
 import { GET } from "../route";
 
@@ -35,6 +36,7 @@ export interface UserResponse {
       color: string;
       name: string;
       type: SkillType;
+      category: SkillCategory;
     };
   }[];
   WorkshopOwner: Workshop[];
