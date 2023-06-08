@@ -19,7 +19,7 @@ export const BadgeContract: React.FunctionComponent<BadgeProps> = ({
       disableOutline
       css={{ background: badgeColor, color: badgeTextColor }}
     >
-      {contractType.toLocaleLowerCase()}
+      {contractType}
     </Badge>
   );
 };
