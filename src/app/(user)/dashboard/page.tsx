@@ -1,6 +1,6 @@
 "use client";
 import { Grid } from "@nextui-org/react";
-import { KpiCards } from "src/app/(user)/dashboard/components/KPI/KpiCardSupport";
+import { KpiCards } from "src/app/(user)/dashboard/components/KPI/KpiCardSupport.component";
 
 const DashboardSupportPage = () => {
   return (
