@@ -5,6 +5,7 @@ export const authLoginSchema = usersSchema.pick({
   email: true,
   password: true,
 });
+
 export type AuthLoginDto = z.infer<typeof authLoginSchema>;
 
 export const authRegisterSchema = usersSchema

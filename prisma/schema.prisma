@@ -17,26 +17,27 @@ enum Role {
 }
 
 model User {
-  id              Int         @id @default(autoincrement())
-  email           String      @unique
-  password        String
-  firstname       String?
-  lastname        String?
-  profile_picture String      @default("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png")
-  address         String?
-  roles           Role[]      @default([CONSULTANT])
-  UserSkill       UserSkill[]
-  EventsOwner     Event[]     @relation("EventOwner")
-  Events          Event[]
-  Mission         Mission[]
-  Contract        Contract[]
-  News            News[]
-  Workshops       Workshop[]
-  WorkshopOwner   Workshop[]  @relation("WorkshopOwner")
-  workshopId      Int?
-  slackId         String?     @unique
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id                 Int           @id @default(autoincrement())
+  email              String        @unique
+  password           String
+  firstname          String?
+  lastname           String?
+  profile_picture    String        @default("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png")
+  address            String?
+  roles              Role[]        @default([CONSULTANT])
+  UserSkill          UserSkill[]
+  EventsOwner        Event[]       @relation("EventOwner")
+  Events             Event[]
+  Mission            Mission[]
+  Contract           Contract[]
+  News               News[]
+  Workshops          Workshop[]
+  WorkshopOwner      Workshop[]    @relation("WorkshopOwner")
+  workshopId         Int?
+  slackId            String?       @unique
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  ApplicationSponsor Application[]
 }
 
 enum ContractType {
@@ -187,4 +188,17 @@ model Workshop {
   Participants  User[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model Application {
+  id          Int      @id @default(autoincrement())
+  name        String
+  text        String
+  email       String
+  cv          String
+  coverLetter String
+  Sponsor     User?    @relation(fields: [sponsorId], references: [id])
+  sponsorId   Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

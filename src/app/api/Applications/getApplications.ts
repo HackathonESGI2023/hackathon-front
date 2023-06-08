@@ -1,6 +1,13 @@
-import { Company } from "@prisma/client";
+import { Application } from "@prisma/client";
+import { GET } from "../route";
 
 /**
  * GET /applications
- * @returns Company[]
+ * @returns Application[]
  */
+
+export const getApplications = async (): Promise<Array<Application>> => {
+  const res = await GET("/applications");
+
+  return res.json();
+};
