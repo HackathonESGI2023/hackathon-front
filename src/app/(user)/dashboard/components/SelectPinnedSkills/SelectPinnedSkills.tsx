@@ -2,7 +2,7 @@
 
 import SkillBadge from "@components/SkillBadge/SkillBadge";
 import SkillBadgeSlot from "@components/SkillBadgeSlot/SkillBadgeSlot";
-import { Button, Col, Modal, Text } from "@nextui-org/react";
+import { Button, Col, Modal, Row, Text } from "@nextui-org/react";
 import { Skill } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -61,6 +61,12 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
     });
   };
 
+  const sortedBadges = badges
+    .filter((badge) => badge.slot === null)
+    .sort((a, b) => a.category.localeCompare(b.category));
+
+  let encounteredCategories = [];
+
   return (
     <>
       <Button onClick={() => setIsVisible(true)}>pinned skills</Button>
@@ -113,17 +119,35 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
               className={styles.title}
               style={{ display: "flex", flexWrap: "wrap", overflow: "scroll" }}
             >
-              {badges
-                .filter((badge) => badge.slot === null)
-                .map((badge) => (
-                  <SkillBadge
-                    key={badge.id}
-                    name={badge.name}
-                    color={badge.color}
-                    id={badge.id}
-                    onDrop={handleDrop}
-                  />
-                ))}
+              {sortedBadges.map((badge) => {
+                let categoryLabel = null;
+
+                if (!encounteredCategories.includes(badge.category)) {
+                  categoryLabel = (
+                    <>
+                      <Row style={{ marginTop: "1.5rem" }}>
+                        <Text size={"$2xl"} weight={"bold"}>
+                          {badge.category}
+                        </Text>
+                      </Row>
+                    </>
+                  );
+                  encounteredCategories.push(badge.category);
+                }
+
+                return (
+                  <>
+                    {categoryLabel}
+                    <SkillBadge
+                      key={badge.id}
+                      name={badge.name}
+                      color={badge.color}
+                      id={badge.id}
+                      onDrop={handleDrop}
+                    />
+                  </>
+                );
+              })}
             </Col>
           </div>
         </Modal.Body>
