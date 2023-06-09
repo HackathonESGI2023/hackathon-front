@@ -6,7 +6,7 @@ import { UserResponse } from "./getUsers";
  */
 
 export const getAllUsers = async (): Promise<Array<UserResponse>> => {
-  const res = await GET("/users");
+  const res = await GET("users/all");
 
   return res.json();
-}
+};
