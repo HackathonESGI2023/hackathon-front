@@ -29,9 +29,10 @@ import { SkillsDto } from "@schemas/skills.schema";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteUser } from "src/app/api/Users/deleteUser";
-import ModalProfile from "./Modal/ModalProfile";
+import ModalProfile from "./ModalProfile";
 
 interface TemplateProps {
+  userP: any;
   userId: number;
   profilePicture: string;
   fullname: string;
@@ -46,6 +47,7 @@ interface TemplateProps {
 }
 
 const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
+  userP,
   userId,
   profilePicture,
   fullname,
@@ -275,7 +277,12 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
           )}
         </div>
       </Card>
-      <ModalProfile visible={visible} onClose={closeHandler} userId={userId} />
+      <ModalProfile
+        visible={visible}
+        onClose={closeHandler}
+        userId={userId}
+        userT={userP}
+      />
     </>
   );
 };

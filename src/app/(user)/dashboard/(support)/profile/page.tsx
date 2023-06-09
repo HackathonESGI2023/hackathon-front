@@ -145,6 +145,7 @@ const Profile = () => {
                 }}
               >
                 <ProfileConsultantCard
+                  userP={user}
                   userId={user.id}
                   fullname={user.firstname + " " + user.lastname}
                   profilePicture={user.profile_picture}
