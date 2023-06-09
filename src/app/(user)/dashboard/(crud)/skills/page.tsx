@@ -264,7 +264,7 @@ export default function MissionsCrud() {
           >
             <Card.Header>
               <Text h3>
-                {updating ? "Mettre à jour" : "Ajouter"} une compétences
+                {updating ? "Mettre à jour" : "Ajouter"} une compétence
               </Text>
             </Card.Header>
 
