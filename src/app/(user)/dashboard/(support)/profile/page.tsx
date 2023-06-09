@@ -6,13 +6,17 @@ import { Col, Input, Select } from "antd";
 import moment from "moment";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { getSkills } from "src/app/api/Skills/getSkills";
 import { getAllUsers } from "src/app/api/Users/getAllUsers";
 import ProfileConsultantCard from "../../components/ProfileConsultantCard/ProfileConsultantCard.component";
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
+  const [skillsOptions, setSkillsOptions] = useState([]);
+
   const [searchByNames, setSearchByNames] = useState("");
   const [selectedContractType, setSelectedContractType] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
 
   const { data } = useQuery(["user"], getAllUsers, {
     onSuccess: (data) => {
@@ -20,7 +24,6 @@ const Profile = () => {
         user.roles.includes("CONSULTANT")
       );
       setUsers(filteredData);
-      console.log(filteredData);
     },
   });
 
@@ -31,6 +34,17 @@ const Profile = () => {
     { value: "STAGIAIRE", label: "STAGIAIRE" },
   ];
 
+  const { data: skills } = useQuery(["skills"], getSkills, {
+    onSuccess: (data) => {
+      setSkillsOptions(
+        data.map((skill) => ({
+          value: skill.name,
+          label: skill.name,
+        }))
+      );
+    },
+  });
+
   const filteredUsers = users.filter(
     (user) =>
       (user?.firstname.toLowerCase().includes(searchByNames.toLowerCase()) ||
@@ -38,6 +52,10 @@ const Profile = () => {
       (selectedContractType.length === 0 ||
         user?.Contract?.some((contract) =>
           selectedContractType.includes(contract.contractType)
+        )) &&
+      (selectedSkills.length === 0 ||
+        user?.UserSkill?.some((skill) =>
+          selectedSkills.includes(skill.skill.name)
         ))
   );
 
@@ -51,6 +69,10 @@ const Profile = () => {
 
   const handleChange = (value: []) => {
     setSelectedContractType(value);
+  };
+
+  const handleSkillsChange = (e) => {
+    setSelectedSkills(e);
   };
 
   return (
@@ -72,6 +94,13 @@ const Profile = () => {
             placeholder="Type de contrat"
             onChange={handleChange}
             options={contractsTypeOptions}
+          />
+          <Select
+            mode="tags"
+            style={{ width: "100%" }}
+            placeholder="Compétences"
+            onChange={handleSkillsChange}
+            options={skillsOptions}
           />
         </Col>
         <Col style={{ overflowY: "auto", overflowX: "hidden", width: "100%" }}>
