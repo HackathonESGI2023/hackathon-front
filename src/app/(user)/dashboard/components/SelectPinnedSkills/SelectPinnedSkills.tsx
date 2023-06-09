@@ -2,24 +2,38 @@
 
 import SkillBadge from "@components/SkillBadge/SkillBadge";
 import SkillBadgeSlot from "@components/SkillBadgeSlot/SkillBadgeSlot";
-import { Button, Modal, Row, Text } from "@nextui-org/react";
-import { useState } from "react";
+import { Button, Col, Modal, Text } from "@nextui-org/react";
+import { Skill } from "@prisma/client";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { getSkills } from "src/app/api/Skills/getSkills";
 import styles from "./SelectPinnedSkills.module.scss";
 
 type SelectPinnedSkillsProps = {};
 
+interface Badge extends Skill {
+  slot: number | null;
+}
+
 const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
   const [slots, setSlots] = useState([null, null, null]);
+  const [badges, setBadges] = useState([] as Badge[]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const [badges, setBadges] = useState([
-    { id: 1, name: "React", color: "red", slot: null },
-    { id: 2, name: "TypeScript", color: "green", slot: null },
-    { id: 3, name: "Next.js", color: "blue", slot: null },
-    { id: 4, name: "Angular", color: "white", slot: null },
-    { id: 5, name: "Vue.js", color: "yellow", slot: null },
-    { id: 6, name: "Svelte", color: "purple", slot: null },
-  ]);
+  const { data: skills, isLoading, isError } = useQuery("skills", getSkills);
+
+  skills && console.log(skills);
+
+  useEffect(() => {
+    if (skills && !isLoading && !isError) {
+      const dndBadges = skills.map((skill) => ({
+        ...skill,
+        slot: null,
+      }));
+      console.log("dndBadges", dndBadges);
+      setBadges(dndBadges);
+    }
+  }, [skills, isLoading, isError]); // dependencies
 
   const handleDrop = (droppedBadgeId, droppedItem) => {
     setBadges((oldBadges) => {
@@ -64,22 +78,19 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
             Mettez en valeur 3 compétences sur votre profil
           </Text>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          style={{ height: "100%", width: "100%", overflow: "hidden" }}
+        >
           <div className={styles.container}>
-            <Row align="center">
-              {badges
-                .filter((badge) => badge.slot === null)
-                .map((badge) => (
-                  <SkillBadge
-                    key={badge.id}
-                    name={badge.name}
-                    color={badge.color}
-                    id={badge.id}
-                    onDrop={handleDrop}
-                  />
-                ))}
-            </Row>
-            <Row align="center">
+            <Col
+              className={styles.title}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "space-around",
+              }}
+            >
               {slots.map((slotId, index) => (
                 <SkillBadgeSlot key={index} onDrop={handleDrop} id={index}>
                   {badges
@@ -95,7 +106,25 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
                     ))}
                 </SkillBadgeSlot>
               ))}
-            </Row>
+            </Col>
+
+            <Col
+              span={24}
+              className={styles.title}
+              style={{ display: "flex", flexWrap: "wrap", overflow: "scroll" }}
+            >
+              {badges
+                .filter((badge) => badge.slot === null)
+                .map((badge) => (
+                  <SkillBadge
+                    key={badge.id}
+                    name={badge.name}
+                    color={badge.color}
+                    id={badge.id}
+                    onDrop={handleDrop}
+                  />
+                ))}
+            </Col>
           </div>
         </Modal.Body>
         <Modal.Footer>
