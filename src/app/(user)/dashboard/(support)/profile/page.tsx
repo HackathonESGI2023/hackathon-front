@@ -1,6 +1,6 @@
 "use client";
 
-import { Grid, Row } from "@nextui-org/react";
+import { Grid, Row, Spacer } from "@nextui-org/react";
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { Col, Input, Select } from "antd";
 import moment from "moment";
@@ -12,6 +12,8 @@ import ProfileConsultantCard from "../../components/ProfileConsultantCard/Profil
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
+  console.log("users in profile", users);
+
   const [skillsOptions, setSkillsOptions] = useState([]);
 
   const [searchByNames, setSearchByNames] = useState("");
@@ -50,8 +52,6 @@ const Profile = () => {
       );
     },
   });
-
-  console.log(users);
 
   const filteredUsers = users.filter(
     (user) =>
@@ -102,7 +102,9 @@ const Profile = () => {
             prefix={
               <MagnifyingGlass size={32} color="#f14e09" weight="light" />
             }
+            style={{ marginTop: "1rem" }}
           />
+          <Spacer y={1} />
           <Select
             mode="tags"
             style={{ width: "100%" }}
@@ -110,6 +112,7 @@ const Profile = () => {
             onChange={handleMissionChange}
             options={inMissionOptions}
           />
+          <Spacer y={1} />
           <Select
             mode="tags"
             style={{ width: "100%" }}
@@ -117,6 +120,7 @@ const Profile = () => {
             onChange={handleChange}
             options={contractsTypeOptions}
           />
+          <Spacer y={1} />
           <Select
             mode="tags"
             style={{ width: "100%" }}
@@ -142,6 +146,7 @@ const Profile = () => {
                 }}
               >
                 <ProfileConsultantCard
+                  id={user.id}
                   fullname={user.firstname + " " + user.lastname}
                   profilePicture={user.profile_picture}
                   isInMission={user.Mission.length > 0}

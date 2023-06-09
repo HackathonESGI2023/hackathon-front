@@ -28,6 +28,7 @@ import { ContractTypeEnum } from "@schemas/contract.schema";
 import { SkillsDto } from "@schemas/skills.schema";
 
 interface TemplateProps {
+  id: number;
   profilePicture: string;
   fullname: string;
   isInMission: boolean;
@@ -41,6 +42,7 @@ interface TemplateProps {
 }
 
 const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
+  id,
   profilePicture,
   fullname,
   isInMission,
@@ -65,18 +67,27 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
       description: "Envoie avec Slack",
       icon: <ChatCircle size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Envoyer un message",
+      function: () => {
+        console.log(id);
+      },
     },
     {
       key: "edit",
       description: "Edition",
       icon: <PencilLine size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Editer un profil",
+      function: () => {
+        console.log(id);
+      },
     },
     {
       key: "delete",
       description: "Suppression",
       icon: <Trash size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Suppression un profil",
+      function: () => {
+        console.log(id);
+      },
     },
   ];
 
@@ -167,12 +178,10 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
                       css={{ $$dropdownMenuWidth: "280px" }}
                     >
                       {itemsOnCrud.map((item) => (
-                        <Dropdown.Item
-                          key={item.key}
-                          description={item.description}
-                          icon={item.icon}
-                        >
-                          {item.text}
+                        <Dropdown.Item key={item.key} icon={item.icon}>
+                          <Button light onPress={item.function}>
+                            {item.text}
+                          </Button>
                         </Dropdown.Item>
                       ))}
                     </Dropdown.Menu>
