@@ -7,7 +7,9 @@ import { POST } from "../route";
  * @returns News
  */
 
-export const createNews = async (news: Omit<News, "id">): Promise<News> => {
+export const createNews = async (
+  news: Omit<News, "id" | "updatedAt" | "createdAt">
+): Promise<News> => {
   const res = await POST("news", news);
 
   return res.json();
