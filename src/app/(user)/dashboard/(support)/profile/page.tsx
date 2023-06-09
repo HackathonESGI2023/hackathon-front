@@ -17,6 +17,7 @@ const Profile = () => {
   const [searchByNames, setSearchByNames] = useState("");
   const [selectedContractType, setSelectedContractType] = useState([]);
   const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedInMission, setSelectedInMission] = useState([]);
 
   const { data } = useQuery(["user"], getAllUsers, {
     onSuccess: (data) => {
@@ -34,6 +35,11 @@ const Profile = () => {
     { value: "STAGIAIRE", label: "STAGIAIRE" },
   ];
 
+  const inMissionOptions = [
+    { value: 0, label: "En intercontract" },
+    { value: 1, label: "En mission" },
+  ];
+
   const { data: skills } = useQuery(["skills"], getSkills, {
     onSuccess: (data) => {
       setSkillsOptions(
@@ -44,6 +50,8 @@ const Profile = () => {
       );
     },
   });
+
+  console.log(users);
 
   const filteredUsers = users.filter(
     (user) =>
@@ -56,7 +64,10 @@ const Profile = () => {
       (selectedSkills.length === 0 ||
         user?.UserSkill?.some((skill) =>
           selectedSkills.includes(skill.skill.name)
-        ))
+        )) &&
+      (selectedInMission.length === 0 ||
+        // compter le nombre de missions en cours
+        user?.Mission?.length > 0 === selectedInMission.includes(1))
   );
 
   const handleSearchChangeByNames = (e) => {
@@ -75,11 +86,15 @@ const Profile = () => {
     setSelectedSkills(e);
   };
 
+  const handleMissionChange = (value: []) => {
+    setSelectedInMission(value);
+  };
+
   return (
     <>
       <h1>Profile</h1>
       <Row css={{ height: "100%" }}>
-        <Col span={3} style={{ height: "85vh" }}>
+        <Col span={3}>
           <Input
             size="small"
             placeholder="Chercher par nom"
@@ -87,6 +102,13 @@ const Profile = () => {
             prefix={
               <MagnifyingGlass size={32} color="#f14e09" weight="light" />
             }
+          />
+          <Select
+            mode="tags"
+            style={{ width: "100%" }}
+            placeholder="En mission?"
+            onChange={handleMissionChange}
+            options={inMissionOptions}
           />
           <Select
             mode="tags"
@@ -103,7 +125,12 @@ const Profile = () => {
             options={skillsOptions}
           />
         </Col>
-        <Col style={{ overflowY: "auto", overflowX: "hidden", width: "100%" }}>
+        <Col
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        >
           <Grid.Container gap={2}>
             {filteredUsers.map((user) => (
               <Grid
