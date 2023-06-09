@@ -21,6 +21,7 @@ import { createMission } from "src/app/api/Missions/createMission";
 import { updateMission } from "src/app/api/Missions/updateMission";
 import { deleteMission } from "src/app/api/Missions/deleteMission";
 import toast from "react-hot-toast";
+import { getAllUsers } from "src/app/api/Users/getAllUsers";
 
 export default function MissionsCrud() {
   const { data: missions, refetch: refetchMissions } = useQuery(
@@ -34,7 +35,7 @@ export default function MissionsCrud() {
   );
   const { data: usersResponse, refetch: refetchUsers } = useQuery(
     "usersMissions",
-    getUsers
+    getAllUsers
   );
 
   const [updating, setUpdating] = useState<boolean>(false);
