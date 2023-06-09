@@ -7,7 +7,7 @@ import { POST } from "../route";
  * @returns Event
  */
 export const joinEvent = async (id: Event["id"]): Promise<Event> => {
-  const res = await POST(`/events/${id}/join`, {});
+  const res = await POST(`events/${id}/join`, {});
 
   return res.json();
-}
+};

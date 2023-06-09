@@ -7,7 +7,7 @@ import { GET } from "../route";
  */
 
 export const getWorkshops = async (): Promise<Array<Workshop>> => {
-  const res = await GET("/workshops");
+  const res = await GET("workshops");
 
   return res.json();
-}
+};

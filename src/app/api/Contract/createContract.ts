@@ -6,8 +6,10 @@ import { POST } from "../route";
  * @returns Contract
  */
 
-export const createContract = async (contract: Partial<Omit<Contract, "id">>): Promise<Contract> => {
-  const res = await POST("/contract", contract);
+export const createContract = async (
+  contract: Partial<Omit<Contract, "id">>
+): Promise<Contract> => {
+  const res = await POST("contract", contract);
 
   return res.json();
 };

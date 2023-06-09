@@ -7,9 +7,11 @@ import { Project } from "@prisma/client";
  * @returns Project
  */
 
-export const updateProject = async (id: Project["id"], project: Partial<Omit<Project, "id">>): Promise<Project> => {
-  const res = await PATCH(`/projects/${id}`, project);
+export const updateProject = async (
+  id: Project["id"],
+  project: Partial<Omit<Project, "id">>
+): Promise<Project> => {
+  const res = await PATCH(`projects/${id}`, project);
 
   return res.json();
-}
-
+};

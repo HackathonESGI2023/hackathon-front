@@ -8,7 +8,7 @@ import { POST } from "../route";
  */
 
 export const createNews = async (news: Omit<News, "id">): Promise<News> => {
-  const res = await POST("/news", news);
+  const res = await POST("news", news);
 
   return res.json();
-}
+};

@@ -10,7 +10,7 @@ import { GET } from "../route";
 export const getApplication = async (
   id: Application["id"]
 ): Promise<Application> => {
-  const res = await GET(`/applications/${id}`);
+  const res = await GET(`applications/${id}`);
 
   return res.json();
 };
