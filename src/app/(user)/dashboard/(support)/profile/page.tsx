@@ -33,10 +33,10 @@ const Profile = () => {
 
   const filteredUsers = users.filter(
     (user) =>
-      (user.firstname.toLowerCase().includes(searchByNames.toLowerCase()) ||
-        user.lastname.toLowerCase().includes(searchByNames.toLowerCase())) &&
+      (user?.firstname.toLowerCase().includes(searchByNames.toLowerCase()) ||
+        user?.lastname.toLowerCase().includes(searchByNames.toLowerCase())) &&
       (selectedContractType.length === 0 ||
-        user?.Contract.some((contract) =>
+        user?.Contract?.some((contract) =>
           selectedContractType.includes(contract.contractType)
         ))
   );
@@ -89,7 +89,7 @@ const Profile = () => {
                   fullname={user.firstname + " " + user.lastname}
                   profilePicture={user.profile_picture}
                   isInMission={user.Mission.length > 0}
-                  userContractType={user.Contract[0].contractType}
+                  userContractType={user?.Contract[0]?.contractType}
                   pinedSkills={user.UserSkill.filter((skill) => skill.isStarred)
                     .map((skill) => skill.skill)
                     .slice(0, 3)}
