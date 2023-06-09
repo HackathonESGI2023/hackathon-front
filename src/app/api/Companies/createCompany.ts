@@ -6,8 +6,10 @@ import { POST } from "../route";
  * @returns Company
  */
 
-export const createCompany = async (company: Omit<Company, "id">): Promise<Company> => {
-  const res = await POST("/companies", company);
+export const createCompany = async (
+  company: Omit<Company, "id" | "createdAt" | "updatedAt">
+): Promise<Company> => {
+  const res = await POST("companies", company);
 
   return res.json();
 };

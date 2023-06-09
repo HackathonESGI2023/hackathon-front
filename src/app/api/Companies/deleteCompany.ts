@@ -8,7 +8,7 @@ import { DELETE } from "../route";
  */
 
 export const deleteCompany = async (id: Company["id"]): Promise<Company> => {
-  const res = await DELETE(`/companies/${id}`);
+  const res = await DELETE(`companies/${id}`);
 
   return res.json();
 };
