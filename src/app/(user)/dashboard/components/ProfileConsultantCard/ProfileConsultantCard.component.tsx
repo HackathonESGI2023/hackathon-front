@@ -26,9 +26,13 @@ import {
 } from "@phosphor-icons/react";
 import { ContractTypeEnum } from "@schemas/contract.schema";
 import { SkillsDto } from "@schemas/skills.schema";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteUser } from "src/app/api/Users/deleteUser";
+import ModalProfile from "./Modal/ModalProfile";
 
 interface TemplateProps {
-  id: number;
+  userId: number;
   profilePicture: string;
   fullname: string;
   isInMission: boolean;
@@ -42,7 +46,7 @@ interface TemplateProps {
 }
 
 const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
-  id,
+  userId,
   profilePicture,
   fullname,
   isInMission,
@@ -54,12 +58,30 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   onPress,
   onCrud,
 }) => {
+  const queryClient = useQueryClient();
+
+  const [visible, setVisible] = useState(false);
+  const handler = () => setVisible(true);
+  const closeHandler = () => {
+    setVisible(false);
+  };
+
   const levelConverter = (level: number) => {
     return Math.floor(level / 10);
   };
   const levelRestConverter = (level: number) => {
     return (level % 10) * 10;
   };
+
+  const onSubmitDeleteUser = () => {
+    deleteUserMutation.mutate(userId);
+  };
+
+  const deleteUserMutation = useMutation(deleteUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
+    },
+  });
 
   const itemsOnCrud = [
     {
@@ -68,7 +90,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
       icon: <ChatCircle size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Envoyer un message",
       function: () => {
-        console.log(id);
+        console.log(userId);
       },
     },
     {
@@ -77,7 +99,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
       icon: <PencilLine size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Editer un profil",
       function: () => {
-        console.log(id);
+        console.log(userId);
       },
     },
     {
@@ -86,7 +108,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
       icon: <Trash size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Suppression un profil",
       function: () => {
-        console.log(id);
+        onSubmitDeleteUser();
       },
     },
   ];
@@ -105,7 +127,12 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
 
   return (
     <>
-      <Card isPressable variant="flat" css={{ padding: "1.5rem" }}>
+      <Card
+        isPressable
+        variant="flat"
+        css={{ padding: "1.5rem" }}
+        onPress={handler}
+      >
         <div
           style={{
             height: "100%",
@@ -248,6 +275,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
           )}
         </div>
       </Card>
+      <ModalProfile visible={visible} onClose={closeHandler} userId={userId} />
     </>
   );
 };

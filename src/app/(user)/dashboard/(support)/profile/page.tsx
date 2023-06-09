@@ -12,7 +12,6 @@ import ProfileConsultantCard from "../../components/ProfileConsultantCard/Profil
 
 const Profile = () => {
   const [users, setUsers] = useState([]);
-  console.log("users in profile", users);
 
   const [skillsOptions, setSkillsOptions] = useState([]);
 
@@ -146,7 +145,7 @@ const Profile = () => {
                 }}
               >
                 <ProfileConsultantCard
-                  id={user.id}
+                  userId={user.id}
                   fullname={user.firstname + " " + user.lastname}
                   profilePicture={user.profile_picture}
                   isInMission={user.Mission.length > 0}
