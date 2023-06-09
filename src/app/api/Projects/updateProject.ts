@@ -1,4 +1,5 @@
 import { Project } from "@prisma/client";
+import { PATCH } from "../route";
 
 /**
  * PATCH /projects/:id
@@ -7,11 +8,11 @@ import { Project } from "@prisma/client";
  * @returns Project
  */
 
-export const updateProject = async (
-  id: Project["id"],
-  project: Partial<Omit<Project, "id">>
-): Promise<Project> => {
-  const res = await PATCH(`projects/${id}`, project);
+export const updateProject = async (params: {
+  id: Project["id"];
+  project: Partial<Omit<Project, "id">>;
+}): Promise<Project> => {
+  const res = await PATCH(`projects/${params.id}`, params.project);
 
   return res.json();
 };

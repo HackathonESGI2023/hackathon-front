@@ -14,8 +14,8 @@ import {
 } from "@prisma/client";
 import { GET } from "../route";
 
-export async function getUsers(): Promise<UserResponse[]> {
-  const res = await GET(`users/all`);
+export async function getUsers(): Promise<UserResponse> {
+  const res = await GET(`users`);
   return res.json();
 }
 
