@@ -3,37 +3,37 @@
 import SkillBadge from "@components/SkillBadge/SkillBadge";
 import SkillBadgeSlot from "@components/SkillBadgeSlot/SkillBadgeSlot";
 import { Button, Col, Modal, Row, Text } from "@nextui-org/react";
-import { Skill } from "@prisma/client";
+import { userAtom } from "@utils/recoilAtoms.utils";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { getSkills } from "src/app/api/Skills/getSkills";
+import { useRecoilState } from "recoil";
 import styles from "./SelectPinnedSkills.module.scss";
 
 type SelectPinnedSkillsProps = {};
 
-interface Badge extends Skill {
+interface Badge {
+  id: number;
+  name: string;
+  color: string;
+  category: string;
   slot: number | null;
 }
 
 const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
   const [slots, setSlots] = useState([null, null, null]);
-  const [badges, setBadges] = useState([] as Badge[]);
+  const [badges, setBadges] = useState<Badge[]>([]);
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const { data: skills, isLoading, isError } = useQuery("skills", getSkills);
-
-  skills && console.log(skills);
+  const [user, setUser] = useRecoilState(userAtom);
+  const userskills = user?.UserSkill;
 
   useEffect(() => {
-    if (skills && !isLoading && !isError) {
-      const dndBadges = skills.map((skill) => ({
-        ...skill,
-        slot: null,
-      }));
-      console.log("dndBadges", dndBadges);
-      setBadges(dndBadges);
+    if (userskills) {
+      const skills = userskills?.map((us) => {
+        return { ...us.skill, id: us.id, slot: null };
+      });
+      setBadges(skills);
     }
-  }, [skills, isLoading, isError]); // dependencies
+  }, [userskills]);
 
   const handleDrop = (droppedBadgeId, droppedItem) => {
     setBadges((oldBadges) => {
