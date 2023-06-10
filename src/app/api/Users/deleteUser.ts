@@ -7,8 +7,10 @@ import { UserResponse } from "./getUsers";
  * @returns UserResponse
  */
 
-export const deleteUser = async (id: UserResponse["id"]): Promise<UserResponse> => {
-  const res = await DELETE(`/users/${id}`);
+export const deleteUser = async (
+  id: UserResponse["id"]
+): Promise<UserResponse> => {
+  const res = await DELETE(`users/${id}`);
 
   return res.json();
-}
+};

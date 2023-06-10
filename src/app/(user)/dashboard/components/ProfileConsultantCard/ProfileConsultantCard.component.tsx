@@ -26,8 +26,15 @@ import {
 } from "@phosphor-icons/react";
 import { ContractTypeEnum } from "@schemas/contract.schema";
 import { SkillsDto } from "@schemas/skills.schema";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteUser } from "src/app/api/Users/deleteUser";
+import ModalEditProfile from "./ModalProfile";
+import ModalProfileSeeMore from "./ModalProfileSeeMore";
 
 interface TemplateProps {
+  userP: any;
+  userId: number;
   profilePicture: string;
   fullname: string;
   isInMission: boolean;
@@ -41,6 +48,8 @@ interface TemplateProps {
 }
 
 const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
+  userP,
+  userId,
   profilePicture,
   fullname,
   isInMission,
@@ -52,6 +61,20 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   onPress,
   onCrud,
 }) => {
+  const queryClient = useQueryClient();
+
+  const [visible, setVisible] = useState(false);
+  const [visibleSeeMore, setVisibleSeeMore] = useState(false);
+  const handleEditionModal = () => setVisible(true);
+  const handleSeeMoreModal = () => setVisibleSeeMore(true);
+
+  const closeHandler = () => {
+    setVisible(false);
+  };
+  const closeHandlerSeeMore = () => {
+    setVisibleSeeMore(false);
+  };
+
   const levelConverter = (level: number) => {
     return Math.floor(level / 10);
   };
@@ -59,24 +82,43 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
     return (level % 10) * 10;
   };
 
+  const onSubmitDeleteUser = () => {
+    deleteUserMutation.mutate(userId);
+  };
+
+  const deleteUserMutation = useMutation(deleteUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
+    },
+  });
+
   const itemsOnCrud = [
     {
       key: "send",
       description: "Envoie avec Slack",
       icon: <ChatCircle size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Envoyer un message",
+      function: () => {
+        console.log(userId);
+      },
     },
     {
       key: "edit",
       description: "Edition",
       icon: <PencilLine size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Editer un profil",
+      function: () => {
+        handleEditionModal();
+      },
     },
     {
       key: "delete",
       description: "Suppression",
       icon: <Trash size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Suppression un profil",
+      function: () => {
+        onSubmitDeleteUser();
+      },
     },
   ];
 
@@ -94,7 +136,12 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
 
   return (
     <>
-      <Card isPressable variant="flat" css={{ padding: "1.5rem" }}>
+      <Card
+        isPressable
+        variant="flat"
+        css={{ padding: "1.5rem" }}
+        onPress={handleSeeMoreModal}
+      >
         <div
           style={{
             height: "100%",
@@ -167,12 +214,10 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
                       css={{ $$dropdownMenuWidth: "280px" }}
                     >
                       {itemsOnCrud.map((item) => (
-                        <Dropdown.Item
-                          key={item.key}
-                          description={item.description}
-                          icon={item.icon}
-                        >
-                          {item.text}
+                        <Dropdown.Item key={item.key} icon={item.icon}>
+                          <Button light onPress={item.function}>
+                            {item.text}
+                          </Button>
                         </Dropdown.Item>
                       ))}
                     </Dropdown.Menu>
@@ -239,6 +284,17 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
           )}
         </div>
       </Card>
+      <ModalEditProfile
+        visible={visible}
+        onClose={closeHandler}
+        userId={userId}
+        userT={userP}
+      />
+      <ModalProfileSeeMore
+        visible={visibleSeeMore}
+        onClose={closeHandlerSeeMore}
+        userT={userP}
+      />
     </>
   );
 };
