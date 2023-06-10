@@ -36,6 +36,7 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
   const closeHandler = () => {
     onClose();
   };
+
   const queryClient = useQueryClient();
 
   const [user, setUser] = useState({

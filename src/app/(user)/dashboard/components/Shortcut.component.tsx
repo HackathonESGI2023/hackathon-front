@@ -10,11 +10,16 @@ import {
 } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { useState } from "react";
+import ModalCreateUser from "./ModalCreateUser/ModalCreateUser.component";
 
 interface TemplateProps {}
 
 const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
   const router = useRouter();
+  const [visible, setVisible] = useState(false);
+  const handleModal = () => setVisible(true);
+  const closeHandler = () => setVisible(false);
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Text h3>Raccourcies</Text>
@@ -70,6 +75,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                     backgroundColor: "#F0FCF8",
                     color: "#2A2031",
                   }}
+                  onPress={handleModal}
                 >
                   Utilisateur
                 </Button>
@@ -141,6 +147,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
           </Container>
         </Card.Body>
       </Card>
+      <ModalCreateUser visible={visible} onClose={closeHandler} />
     </div>
   );
 };

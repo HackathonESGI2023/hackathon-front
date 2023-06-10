@@ -1,13 +1,13 @@
 "use client";
 import {
+  Avatar,
   Button,
-  Modal,
-  Text,
   Grid,
   Input,
-  Spacer,
+  Modal,
   Radio,
-  Avatar,
+  Spacer,
+  Text,
 } from "@nextui-org/react";
 import { Role } from "@prisma/client";
 import { toBase64 } from "@utils/files.utils";
@@ -15,18 +15,17 @@ import { Select } from "antd";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
-import { registerUser } from "src/app/api/Auth/register";
 import { getSlackUsers } from "src/app/api/Slack/getUsers";
 import { createUser } from "src/app/api/Users/createUser";
 
 interface ModalCreateUserProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  visible: boolean;
+  onClose: () => void;
 }
 
 const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
-  open,
-  setOpen,
+  visible,
+  onClose,
 }) => {
   // Function that generate a random password
   const generatePassword = () => {
@@ -38,6 +37,10 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
       retVal += charset.charAt(Math.floor(Math.random() * n));
     }
     return retVal;
+  };
+
+  const closeHandler = () => {
+    onClose();
   };
 
   const [profilePicture, setProfilePicture] = React.useState<string>(
@@ -83,7 +86,7 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
       setAddress("");
       setRole(Role.CONSULTANT);
       setSlackId("");
-      setOpen(false);
+      closeHandler();
       toast.success("Utilisateur créé avec succès");
     },
     onError: (error: any) => {
@@ -92,7 +95,7 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
   });
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)} width="50vw" closeButton>
+    <Modal open={visible} onClose={closeHandler} width="50vw" closeButton>
       <Modal.Header>
         <Text h3>Ajout d'un nouvel utilisateur</Text>
       </Modal.Header>
