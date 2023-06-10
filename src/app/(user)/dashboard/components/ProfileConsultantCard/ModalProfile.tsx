@@ -128,7 +128,7 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
             slackUsers
               ? [
                   // @ts-ignore
-                  ...slackUsers?.members?.map((user) => ({
+                  slackUsers?.members?.map((user) => ({
                     label: user.real_name,
                     value: user.id,
                   })),

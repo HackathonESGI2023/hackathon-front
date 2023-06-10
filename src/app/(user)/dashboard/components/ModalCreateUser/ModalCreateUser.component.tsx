@@ -209,7 +209,7 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
             slackUsers
               ? [
                   // @ts-ignore
-                  ...slackUsers?.members?.map((user) => ({
+                  slackUsers?.members?.map((user) => ({
                     label: `${user.real_name} (${
                       user.profile?.email ?? "Email masquée"
                     })`,

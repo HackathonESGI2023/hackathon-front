@@ -42,7 +42,7 @@ export default function Home() {
       toast.success("Vous êtes connecté !");
       setToken(data.access_token);
       setUser(data.user);
-      router.push("/");
+      router.push("/dashboard");
     },
   });
 
