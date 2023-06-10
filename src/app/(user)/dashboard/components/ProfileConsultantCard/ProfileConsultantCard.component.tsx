@@ -11,6 +11,7 @@ import {
   Col,
   Dropdown,
   Grid,
+  Modal,
   Progress,
   Row,
   Spacer,
@@ -31,6 +32,11 @@ import { useMutation, useQueryClient } from "react-query";
 import { deleteUser } from "src/app/api/Users/deleteUser";
 import ModalEditProfile from "./ModalProfile";
 import ModalProfileSeeMore from "./ModalProfileSeeMore";
+import { Wysiwyg } from "@components/Wysiwyg/Wysiwyg.component";
+import { sendMessage } from "src/app/api/Slack/sendMessage";
+import toast from "react-hot-toast";
+import { useRecoilState } from "recoil";
+import { userAtom } from "@utils/recoilAtoms.utils";
 
 interface TemplateProps {
   userP: any;
@@ -65,8 +71,20 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
 
   const [visible, setVisible] = useState(false);
   const [visibleSeeMore, setVisibleSeeMore] = useState(false);
+  const [visibleSendMessage, setVisibleSendMessage] = useState(false);
+  const [message, setMessage] = useState("");
   const handleEditionModal = () => setVisible(true);
   const handleSeeMoreModal = () => setVisibleSeeMore(true);
+  const handleSendMessageModal = () => setVisibleSendMessage(true);
+
+  const sendMessageMutation = useMutation(sendMessage, {
+    onSuccess: () => {
+      toast.success("Message envoyé !");
+    },
+    onError: () => {
+      toast.error("Erreur lors de l'envoie du message");
+    },
+  });
 
   const closeHandler = () => {
     setVisible(false);
@@ -99,7 +117,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
       icon: <ChatCircle size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Envoyer un message",
       function: () => {
-        console.log(userId);
+        handleSendMessageModal();
       },
     },
     {
@@ -295,6 +313,23 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
         onClose={closeHandlerSeeMore}
         userT={userP}
       />
+      <Modal
+        open={visibleSendMessage}
+        onClose={() => setVisibleSendMessage(false)}
+        closeButton
+        width="50vw"
+      >
+        <Wysiwyg
+          value={message}
+          setValue={setMessage}
+          width="100%"
+          onSubmit={() => {
+            sendMessageMutation.mutate({ message, receiverId: userP.id });
+            setVisibleSendMessage(false);
+            setMessage("");
+          }}
+        />
+      </Modal>
     </>
   );
 };
