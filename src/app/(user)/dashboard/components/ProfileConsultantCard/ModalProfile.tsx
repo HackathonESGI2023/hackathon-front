@@ -3,6 +3,8 @@ import { Button, Input, Modal, Text } from "@nextui-org/react";
 
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { updateUser } from "src/app/api/Users/patchUser";
 
 interface TemplateProps {
   visible: boolean;
@@ -11,7 +13,7 @@ interface TemplateProps {
   userT: any;
 }
 
-const ModalProfile: React.FunctionComponent<TemplateProps> = ({
+const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
   visible,
   onClose,
   userId,
@@ -20,18 +22,38 @@ const ModalProfile: React.FunctionComponent<TemplateProps> = ({
   const closeHandler = () => {
     onClose();
   };
-
+  const queryClient = useQueryClient();
   const [firstname, setFirstname] = useState(userT.firstname);
   const [lastname, setLastname] = useState(userT.lastname);
   const [email, setEmail] = useState(userT.email);
 
+  const [user, setUser] = useState({
+    firstname: userT.firstname,
+    lastname: userT.lastname,
+    email: userT.email,
+  });
+
   useEffect(() => {
     if (!visible) {
-      setFirstname(userT.firstname);
-      setLastname(userT.lastname);
-      setEmail(userT.email);
+      setUser({
+        firstname: userT.firstname,
+        lastname: userT.lastname,
+        email: userT.email,
+      });
     }
   }, [visible]);
+
+  const editUserMutation = useMutation(updateUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
+    },
+  });
+
+  const onSubmitEditUser = () => {
+    console.log(user);
+
+    editUserMutation.mutate(user);
+  };
 
   return (
     <Modal
@@ -54,8 +76,8 @@ const ModalProfile: React.FunctionComponent<TemplateProps> = ({
           bordered
           label="Prénom"
           placeholder="Prénom"
-          value={firstname}
-          onChange={(e) => setFirstname(e.target.value)}
+          value={user.firstname}
+          onChange={(e) => setUser({ ...user, firstname: e.target.value })}
           color="default"
         />
         <Input
@@ -63,17 +85,8 @@ const ModalProfile: React.FunctionComponent<TemplateProps> = ({
           bordered
           label="Nom"
           placeholder="Nom"
-          value={lastname}
-          onChange={(e) => setLastname(e.target.value)}
-          color="default"
-        />
-        <Input
-          rounded
-          bordered
-          label="Email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={user.lastname}
+          onChange={(e) => setUser({ ...user, lastname: e.target.value })}
           color="default"
         />
       </Modal.Body>
@@ -81,7 +94,7 @@ const ModalProfile: React.FunctionComponent<TemplateProps> = ({
         <Button auto flat color="error" onPress={closeHandler}>
           Close
         </Button>
-        <Button auto onPress={closeHandler}>
+        <Button auto onPress={onSubmitEditUser}>
           Sauvegarder
         </Button>
       </Modal.Footer>
@@ -89,4 +102,4 @@ const ModalProfile: React.FunctionComponent<TemplateProps> = ({
   );
 };
 
-export default ModalProfile;
+export default ModalEditProfile;

@@ -17,8 +17,10 @@ export type UpdateUserRequest = Pick<
  * @returns User
  */
 
-export const updateUser = async (user: Partial<Omit<UpdateUserRequest, "id">>): Promise<User> => {
-  const res = await PATCH("/users", user);
+export const updateUser = async (
+  user: Partial<Omit<UpdateUserRequest, "id">>
+): Promise<User> => {
+  const res = await PATCH("users", user);
 
   return res.json();
 };

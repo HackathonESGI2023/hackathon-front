@@ -29,7 +29,7 @@ import { SkillsDto } from "@schemas/skills.schema";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteUser } from "src/app/api/Users/deleteUser";
-import ModalProfile from "./ModalProfile";
+import ModalEditProfile from "./ModalProfile";
 
 interface TemplateProps {
   userP: any;
@@ -63,7 +63,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   const queryClient = useQueryClient();
 
   const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
+  const handleEditionModal = () => setVisible(true);
   const closeHandler = () => {
     setVisible(false);
   };
@@ -101,7 +101,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
       icon: <PencilLine size={22} fill="var(--nextui-colors-secondary)" />,
       text: "Editer un profil",
       function: () => {
-        console.log(userId);
+        handleEditionModal();
       },
     },
     {
@@ -129,12 +129,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
 
   return (
     <>
-      <Card
-        isPressable
-        variant="flat"
-        css={{ padding: "1.5rem" }}
-        onPress={handler}
-      >
+      <Card isPressable variant="flat" css={{ padding: "1.5rem" }}>
         <div
           style={{
             height: "100%",
@@ -277,7 +272,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
           )}
         </div>
       </Card>
-      <ModalProfile
+      <ModalEditProfile
         visible={visible}
         onClose={closeHandler}
         userId={userId}
