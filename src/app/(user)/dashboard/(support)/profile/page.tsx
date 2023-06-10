@@ -22,7 +22,7 @@ const Profile = () => {
 
   const { data } = useQuery(["user"], getAllUsers, {
     onSuccess: (data) => {
-      const filteredData = data.filter((user) =>
+      const filteredData: any = data.filter((user) =>
         user.roles.includes("CONSULTANT")
       );
       setUsers(filteredData);
@@ -42,18 +42,24 @@ const Profile = () => {
   ];
 
   const { data: skills } = useQuery(["skills"], getSkills, {
-    onSuccess: (data) => {
-      setSkillsOptions(
-        data.map((skill) => ({
-          value: skill.name,
-          label: skill.name,
-        }))
-      );
+    onSuccess: (data: any) => {
+      // setSkillsOptions(
+      //   data.map((skill) => ({
+      //     value: skill.name,
+      //     label: skill.name,
+      //   }))
+      // );
+      setSkillsOptions(data);
     },
   });
 
+  const filterSKillsOptions = skillsOptions.map((skill: any) => ({
+    value: skill.name,
+    label: skill.name,
+  }));
+
   const filteredUsers = users.filter(
-    (user) =>
+    (user: any) =>
       (user?.firstname.toLowerCase().includes(searchByNames.toLowerCase()) ||
         user?.lastname.toLowerCase().includes(searchByNames.toLowerCase())) &&
       (selectedContractType.length === 0 ||
@@ -126,7 +132,7 @@ const Profile = () => {
             style={{ width: "100%" }}
             placeholder="Compétences"
             onChange={handleSkillsChange}
-            options={skillsOptions}
+            options={filterSKillsOptions}
           />
         </Col>
         <Col
