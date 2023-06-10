@@ -44,6 +44,8 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
           alt="Acme Logo"
           width={100}
           height={100}
+          onClick={() => router.push("/")}
+          style={{ cursor: "pointer" }}
         />
       </Navbar.Brand>
 
