@@ -1,7 +1,8 @@
-import { Card, Container } from "@nextui-org/react";
+import { Button, Card, Container, Grid } from "@nextui-org/react";
 import * as React from "react";
 import { StuffedMission } from "../../../api/Missions/getMissions.js";
-import { MissionItem } from "./MissionItem.component.tsx";
+import { PencilLine, Trash } from "@phosphor-icons/react";
+import { MissionItem } from "./MissionItem.component";
 
 interface MissionsListProps {
   missions: StuffedMission[];
@@ -44,13 +45,7 @@ export const MissionsList: React.FunctionComponent<MissionsListProps> = ({
       >
         <Container>
           {missions?.map((mission) => (
-            <MissionItem
-              key={mission.id}
-              gap={1}
-              css={{
-                marginBottom: "1rem",
-              }}
-            >
+            <Grid.Container>
               <Grid xs={12} md={crud ? 10 : 12}>
                 <MissionItem
                   companyLogo={mission.Company.logo}

@@ -1,8 +1,6 @@
 import { UserResponse } from "../app/api/Users/getUsers";
 
 const getUserLevel = (user: UserResponse) => {
-  console.log(user);
-
   // Time at Carbon
   let monthesAtCarbon = 0;
   const contracts = user.Contract;
