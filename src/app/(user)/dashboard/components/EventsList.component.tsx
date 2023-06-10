@@ -28,7 +28,7 @@ export const EventsList: React.FunctionComponent<EventsListProps> = ({
   const [search, setSearch] = React.useState("");
 
   React.useEffect(() => {
-    search === ""
+    search !== ""
       ? setFilteredEvents(
           events.filter((event) =>
             event.name.toLowerCase().includes(search.toLowerCase())
