@@ -11,7 +11,7 @@ export interface SlackMessageRequest {
   message: string;
 }
 
-export const sendMessage = async (): Promise<UsersListResponse> => {
+export const getSlackUsers = async (): Promise<UsersListResponse> => {
   const res = await GET(`slack/users`);
 
   return res.json();
