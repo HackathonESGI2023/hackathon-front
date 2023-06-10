@@ -67,6 +67,11 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
 
   let encounteredCategories = [];
 
+  const pouet = () => {
+    const selectedSkills = badges.filter((badge) => badge.slot !== null);
+    console.log(selectedSkills);
+  };
+
   return (
     <>
       <Button onClick={() => setIsVisible(true)}>pinned skills</Button>
@@ -152,6 +157,7 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
+          <Button onClick={pouet}>Test envoie requete</Button>
           <Button auto flat color="error" onPress={() => setIsVisible(false)}>
             Close
           </Button>
