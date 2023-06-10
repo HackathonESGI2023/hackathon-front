@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 
-import { Button, Card, Col, Row, Spacer, Text } from "@nextui-org/react";
+import { Card, Col, Row, Spacer, Text } from "@nextui-org/react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import styles from "./kpiCardSupport.module.scss";
@@ -77,14 +77,7 @@ const KpiCardsSupport: React.FunctionComponent<TemplateProps> = ({
             </Row>
           </Col>
         </Row>
-
         <Spacer y={1} />
-
-        <div className={styles.buttonEndCard}>
-          <Button color="primary" auto className={styles.buttonEndCard}>
-            Voir les intercontrats
-          </Button>
-        </div>
       </div>
     </Card>
   );

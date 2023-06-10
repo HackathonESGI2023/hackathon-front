@@ -89,7 +89,7 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
               color="primary"
               onPress={() => router.push("/dashboard")}
             >
-              Administration
+              Dashboard
             </Button>
           ) : (
             <Button
