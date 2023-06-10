@@ -9,7 +9,6 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { RecoilRoot } from "recoil";
 
 import "./globals.scss";
@@ -136,7 +135,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 />
                 <NextUIProvider theme={lightTheme}>{children}</NextUIProvider>
               </NextThemesProvider>
-              <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
           </body>
         </html>
