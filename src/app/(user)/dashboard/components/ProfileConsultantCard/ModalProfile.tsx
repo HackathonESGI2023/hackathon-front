@@ -123,14 +123,18 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
           showSearch
           size="large"
           dropdownStyle={{ zIndex: 999999 }}
-          options={[
-            // @ts-ignore
-            ...slackUsers?.members?.map((user) => ({
-              label: user.real_name,
-              value: user.id,
-            })),
-            { label: "Aucun utilisateur associé", value: "-1" },
-          ]}
+          options={
+            slackUsers
+              ? [
+                  // @ts-ignore
+                  ...slackUsers?.members?.map((user) => ({
+                    label: user.real_name,
+                    value: user.id,
+                  })),
+                  { label: "Aucun utilisateur associé", value: "-1" },
+                ]
+              : []
+          }
         />
       </Modal.Body>
       <Modal.Footer>
