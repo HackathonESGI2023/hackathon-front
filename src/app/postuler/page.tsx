@@ -14,13 +14,17 @@ import {
 } from "@nextui-org/react";
 import { FilePdf } from "@phosphor-icons/react";
 import Lottie from "lottie-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
 import { createApplication } from "../api/Applications/createApplication";
 import { toBase64 } from "@utils/files.utils";
+import { useRecoilState } from "recoil";
+import { tokenAtom } from "@utils/recoilAtoms.utils";
+import { useRouter } from "next/navigation";
 
 export default function Postuler() {
+  const [token, setToken] = useRecoilState(tokenAtom);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [about, setAbout] = useState<string>("");
@@ -52,6 +56,13 @@ export default function Postuler() {
       );
     }
   };
+
+  const router = useRouter();
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    }
+  }, [token]);
 
   const createApplicationMutation = useMutation(createApplication, {
     onSuccess: (data) => {
