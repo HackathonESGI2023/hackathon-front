@@ -1,10 +1,12 @@
 "use client";
 import { Button, Input, Modal, Text } from "@nextui-org/react";
+import { Select } from "antd";
 
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { getSlackUsers } from "src/app/api/Slack/getUsers";
 import { updateUser } from "src/app/api/Users/patchUser";
 
 interface TemplateProps {
@@ -20,6 +22,17 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
   userId,
   userT,
 }) => {
+  const { data: slackUsers, refetch: refetchSlackUsers } = useQuery(
+    "slackUsers",
+    getSlackUsers
+  );
+
+  const [slackUserId, setSlackUserId] = useState<string>("");
+
+  useEffect(() => {
+    console.log("slackUsers", slackUsers);
+  }, [slackUsers]);
+
   const closeHandler = () => {
     onClose();
   };
@@ -56,7 +69,7 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
 
   const onSubmitEditUser = () => {
     console.log("user", user);
-    editUserMutation.mutate(user);
+    editUserMutation.mutate({ ...user, slackId: slackUserId });
   };
 
   return (
@@ -101,6 +114,23 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
           value={user.address}
           onChange={(e) => setUser({ ...user, address: e.target.value })}
           color="default"
+        />
+        <Select
+          defaultValue="-1"
+          style={{ width: "100%" }}
+          onChange={(value) => setSlackUserId(value)}
+          value={slackUserId}
+          showSearch
+          size="large"
+          dropdownStyle={{ zIndex: 999999 }}
+          options={[
+            // @ts-ignore
+            ...slackUsers?.members?.map((user) => ({
+              label: user.real_name,
+              value: user.id,
+            })),
+            { label: "Aucun utilisateur associé", value: "-1" },
+          ]}
         />
       </Modal.Body>
       <Modal.Footer>
