@@ -3,6 +3,7 @@ import { Button, Input, Modal, Text } from "@nextui-org/react";
 
 import * as React from "react";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import { updateUser } from "src/app/api/Users/patchUser";
 
@@ -23,13 +24,11 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
     onClose();
   };
   const queryClient = useQueryClient();
-  const [firstname, setFirstname] = useState(userT.firstname);
-  const [lastname, setLastname] = useState(userT.lastname);
-  const [email, setEmail] = useState(userT.email);
 
   const [user, setUser] = useState({
     firstname: userT.firstname,
     lastname: userT.lastname,
+    address: userT.address,
     email: userT.email,
   });
 
@@ -38,6 +37,7 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
       setUser({
         firstname: userT.firstname,
         lastname: userT.lastname,
+        address: userT.address,
         email: userT.email,
       });
     }
@@ -46,12 +46,16 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
   const editUserMutation = useMutation(updateUser, {
     onSuccess: () => {
       queryClient.invalidateQueries("user");
+      closeHandler();
+      toast.success("Utilisateur modifié avec succès");
+    },
+    onError: (error) => {
+      toast.error("Erreur lors de la modification de l'utilisateur");
     },
   });
 
   const onSubmitEditUser = () => {
-    console.log(user);
-
+    console.log("user", user);
     editUserMutation.mutate(user);
   };
 
@@ -87,6 +91,15 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
           placeholder="Nom"
           value={user.lastname}
           onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+          color="default"
+        />
+        <Input
+          rounded
+          bordered
+          label="Adresse"
+          placeholder="Adresse"
+          value={user.address}
+          onChange={(e) => setUser({ ...user, address: e.target.value })}
           color="default"
         />
       </Modal.Body>

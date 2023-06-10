@@ -66,7 +66,8 @@ const Profile = () => {
         )) &&
       (selectedInMission.length === 0 ||
         // compter le nombre de missions en cours
-        user?.Mission?.length > 0 === selectedInMission.includes(1))
+        user?.Mission?.length > 0 === selectedInMission.includes(1)) &&
+      user?.roles.includes("CONSULTANT")
   );
 
   const handleSearchChangeByNames = (e) => {

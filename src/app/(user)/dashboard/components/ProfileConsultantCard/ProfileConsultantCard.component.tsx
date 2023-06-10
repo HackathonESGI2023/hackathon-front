@@ -30,6 +30,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteUser } from "src/app/api/Users/deleteUser";
 import ModalEditProfile from "./ModalProfile";
+import ModalProfileSeeMore from "./ModalProfileSeeMore";
 
 interface TemplateProps {
   userP: any;
@@ -63,9 +64,15 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
   const queryClient = useQueryClient();
 
   const [visible, setVisible] = useState(false);
+  const [visibleSeeMore, setVisibleSeeMore] = useState(false);
   const handleEditionModal = () => setVisible(true);
+  const handleSeeMoreModal = () => setVisibleSeeMore(true);
+
   const closeHandler = () => {
     setVisible(false);
+  };
+  const closeHandlerSeeMore = () => {
+    setVisibleSeeMore(false);
   };
 
   const levelConverter = (level: number) => {
@@ -129,7 +136,12 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
 
   return (
     <>
-      <Card isPressable variant="flat" css={{ padding: "1.5rem" }}>
+      <Card
+        isPressable
+        variant="flat"
+        css={{ padding: "1.5rem" }}
+        onPress={handleSeeMoreModal}
+      >
         <div
           style={{
             height: "100%",
@@ -276,6 +288,11 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
         visible={visible}
         onClose={closeHandler}
         userId={userId}
+        userT={userP}
+      />
+      <ModalProfileSeeMore
+        visible={visibleSeeMore}
+        onClose={closeHandlerSeeMore}
         userT={userP}
       />
     </>
