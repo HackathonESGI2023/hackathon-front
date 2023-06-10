@@ -5,7 +5,9 @@ import SkillBadgeSlot from "@components/SkillBadgeSlot/SkillBadgeSlot";
 import { Button, Col, Modal, Row, Text } from "@nextui-org/react";
 import { userAtom } from "@utils/recoilAtoms.utils";
 import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { useRecoilState } from "recoil";
+import { upsertSkills } from "src/app/api/Users/upsertSkills";
 import styles from "./SelectPinnedSkills.module.scss";
 
 type SelectPinnedSkillsProps = {};
@@ -67,9 +69,36 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
 
   let encounteredCategories = [];
 
-  const pouet = () => {
+  const prepareNewUser = () => {
     const selectedSkills = badges.filter((badge) => badge.slot !== null);
-    console.log(selectedSkills);
+    const newUser = { ...user };
+    const newUserSkills = newUser.UserSkill?.map((us) => {
+      const skill = selectedSkills.find((s) => s.id === us.id);
+      if (skill) {
+        return { ...us, isStarred: true };
+      }
+      return { ...us, isStarred: false };
+    });
+    newUser.UserSkill = newUserSkills;
+    return newUser;
+  };
+
+  const updateUserMutation = useMutation(upsertSkills, {
+    onSuccess: (data) => {
+      console.log("data", data);
+    },
+    onError: (error) => {
+      console.log("error", error);
+    },
+  });
+
+  const handleMutation = () => {
+    const updatedUser = prepareNewUser();
+    const pouet = {
+      ...updatedUser,
+      skills: updatedUser.UserSkill,
+    };
+    updateUserMutation.mutate(pouet.skills);
   };
 
   return (
@@ -157,7 +186,7 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={pouet}>Test envoie requete</Button>
+          <Button onClick={handleMutation}>Test envoie requete</Button>
           <Button auto flat color="error" onPress={() => setIsVisible(false)}>
             Close
           </Button>

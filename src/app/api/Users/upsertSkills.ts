@@ -1,4 +1,5 @@
-import { SkillLevel } from "@prisma/client";
+import { SkillLevel, User } from "@prisma/client";
+import { POST } from "../route";
 export interface UpsertSkillsRequest {
   skills: {
     id: number;
@@ -11,3 +12,11 @@ export interface UpsertSkillsRequest {
  * @body UpsertSkillsRequest
  * @returns void
  */
+
+export const upsertSkills = async (
+  user: Partial<Omit<UpsertSkillsRequest, "id">>
+): Promise<User> => {
+  const res = await POST("users/skills", user);
+
+  return res.json();
+};
