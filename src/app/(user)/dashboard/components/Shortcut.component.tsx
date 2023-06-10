@@ -8,11 +8,13 @@ import {
   MagnifyingGlass,
   UserCirclePlus,
 } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 interface TemplateProps {}
 
 const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
+  const router = useRouter();
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Text h3>Raccourcies</Text>
@@ -52,6 +54,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                     backgroundColor: "#FBF8F0",
                     color: "#160B15",
                   }}
+                  onClick={() => router.push("/dashboard/profile")}
                 >
                   Profils
                 </Button>
@@ -82,6 +85,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                     backgroundColor: "#FEF0FE",
                     color: "#160B15",
                   }}
+                  onClick={() => router.push("/dashboard/contracts")}
                 >
                   Contrats
                 </Button>
@@ -97,6 +101,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                     backgroundColor: "#F0FCF8",
                     color: "#2A2031",
                   }}
+                  onClick={() => router.push("/dashboard/missions")}
                 >
                   Missions
                 </Button>
@@ -112,6 +117,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                     backgroundColor: "#FAF8F0",
                     color: "#160B15",
                   }}
+                  onClick={() => router.push("/dashboard/workshops")}
                 >
                   Formations
                 </Button>
@@ -126,6 +132,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                     backgroundColor: "#F5EFDF",
                     color: "#160B15",
                   }}
+                  onClick={() => router.push("/dashboard/events")}
                 >
                   Evenements
                 </Button>
