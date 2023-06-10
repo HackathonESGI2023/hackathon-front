@@ -1,4 +1,4 @@
-import { Button, Card, Container, Grid } from "@nextui-org/react";
+import { Button, Card, Container, Grid, Text } from "@nextui-org/react";
 import { PencilLine, Trash } from "@phosphor-icons/react";
 import * as React from "react";
 import { StuffedMission } from "../../../api/Missions/getMissions.js";
@@ -32,8 +32,8 @@ export const MissionsList: React.FunctionComponent<MissionsListProps> = ({
       : setFilteredMissions(missions);
   }, [search, missions]);
   return (
-    <div>
-      {/* <Text h3>Les missions</Text> */}
+    <div style={{ width: "100%" }}>
+      <Text h3>Les missions</Text>
       <Card
         variant="flat"
         css={{
