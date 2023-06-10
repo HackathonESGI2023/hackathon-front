@@ -6,8 +6,14 @@ import { POST } from "../route";
  * @returns Workshop
  */
 
-export const createWorkshop = async (workshop: Omit<Workshop, "id">): Promise<Workshop> => {
-  const res = await POST("/workshops", workshop);
+export const createWorkshop = async (
+  workshop: Omit<Workshop, "id" | "updatedAt" | "createdAt">
+): Promise<Workshop> => {
+  const { userId, ...workshopData } = workshop;
+  const res = await POST("workshops", {
+    workshopOwner: userId,
+    ...workshopData,
+  });
 
   return res.json();
-}
+};

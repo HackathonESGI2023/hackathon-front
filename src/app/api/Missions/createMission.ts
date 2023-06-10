@@ -6,9 +6,10 @@ import { POST } from "../route";
  * @returns Mission
  */
 
-export const createMission = async (mission: Partial<Omit<Mission, "id">>): Promise<Mission> => {
-  const res = await POST("/missions", mission);
+export const createMission = async (
+  mission: Partial<Omit<Mission, "id">>
+): Promise<Mission> => {
+  const res = await POST("missions", mission);
 
   return res.json();
-}
-
+};

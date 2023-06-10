@@ -12,7 +12,7 @@ export interface SlackMessageRequest {
 }
 
 export const sendMessage = async (): Promise<UsersListResponse> => {
-  const res = await GET(`/slack/users`);
+  const res = await GET(`slack/users`);
 
   return res.json();
-}
+};

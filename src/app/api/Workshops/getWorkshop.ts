@@ -8,7 +8,7 @@ import { GET } from "../route";
  */
 
 export const getWorkshop = async (id: Workshop["id"]): Promise<Workshop> => {
-  const res = await GET(`/workshops/${id}`);
+  const res = await GET(`workshops/${id}`);
 
   return res.json();
-}
+};

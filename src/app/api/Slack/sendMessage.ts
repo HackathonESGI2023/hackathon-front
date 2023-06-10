@@ -12,8 +12,10 @@ export interface SlackMessageRequest {
   message: string;
 }
 
-export const sendMessage = async (slackMessageRequest: SlackMessageRequest): Promise<ChatPostMessageResponse> => {
-  const res = await POST("/slack/message", slackMessageRequest);
+export const sendMessage = async (
+  slackMessageRequest: SlackMessageRequest
+): Promise<ChatPostMessageResponse> => {
+  const res = await POST("slack/message", slackMessageRequest);
 
   return res.json();
 };

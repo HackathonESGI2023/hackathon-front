@@ -8,7 +8,7 @@ import { DELETE } from "../route";
  */
 
 export const leaveEvent = async (id: Event["id"]): Promise<Event> => {
-  const res = await DELETE(`/events/${id}/leave`);
+  const res = await DELETE(`events/${id}/leave`);
 
   return res.json();
-}
+};

@@ -37,11 +37,6 @@ export const SkillsChart: React.FunctionComponent<SkillsChartProps> = ({
   const skillCategoriesCount = uniqueSkillCategories.map((category) => {
     return skills.filter((skill) => skill.skill.category === category).length;
   });
-
-  React.useEffect(() => {
-    console.log(uniqueSkillCategories, skillCategoriesCount);
-  }, [skillCategoriesCount]);
-
   return (
     <Card
       variant="flat"

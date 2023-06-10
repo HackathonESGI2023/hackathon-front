@@ -6,8 +6,10 @@ import { POST } from "../route";
  * @returns Skill
  */
 
-export const createSkill = async (skill: Omit<Skill, "id">): Promise<Skill> => {
-  const res = await POST("/skills", skill);
+export const createSkill = async (
+  skill: Omit<Skill, "id" | "createdAt" | "updatedAt">
+): Promise<Skill> => {
+  const res = await POST("skills", skill);
 
   return res.json();
-}
+};

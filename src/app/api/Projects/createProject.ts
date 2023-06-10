@@ -6,9 +6,10 @@ import { POST } from "../route";
  * @returns Project
  */
 
-export const createProject = async (project: Omit<Project, "id">): Promise<Project> => {
-  const res = await POST("/projects", project);
+export const createProject = async (
+  project: Omit<Project, "id" | "createdAt" | "updatedAt">
+): Promise<Project> => {
+  const res = await POST("projects", project);
 
   return res.json();
-}
-
+};

@@ -8,8 +8,11 @@ import { PATCH } from "../route";
  * @returns Company
  */
 
-export const updateCompany = async (id: Company["id"], company: Partial<Omit<Company, "id">>): Promise<Company> => {
-  const res = await PATCH(`/companies/${id}`, company);
+export const updateCompany = async (params: {
+  id: Company["id"];
+  company: Partial<Omit<Company, "id">>;
+}): Promise<Company> => {
+  const res = await PATCH(`companies/${params.id}`, params.company);
 
   return res.json();
 };
