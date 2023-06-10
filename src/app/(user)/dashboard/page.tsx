@@ -1,10 +1,8 @@
 "use client";
 import { Grid } from "@nextui-org/react";
 import { Briefcase, Buildings, Calendar } from "@phosphor-icons/react";
-import { userAtom } from "@utils/recoilAtoms.utils";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { useRecoilState } from "recoil";
 import { getEvents } from "src/app/api/Events/getEvents";
 import { getMissions } from "src/app/api/Missions/getMissions";
 import { getAllUsers } from "src/app/api/Users/getAllUsers";
@@ -15,31 +13,30 @@ import { MissionsList } from "./components/MissionsList.component";
 import ShortcutDashboard from "./components/Shortcut.component";
 
 const DashboardSupportPage = () => {
-  const [user, setUser] = useRecoilState(userAtom);
   const [eventFetch, setEventFetch] = useState([]);
   const [missionFetch, setMissionFetch] = useState([]);
   const [consultantFetch, setConsultantFetch] = useState([]);
   const [consultantInMission, setConsultantInMission] = useState([]);
 
   const { data: eventsData } = useQuery("events", getEvents, {
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       setEventFetch(data);
     },
   });
 
   const { data: missionsData } = useQuery("missions", getMissions, {
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       setMissionFetch(data);
     },
   });
 
   const { data: usersData } = useQuery("users", getAllUsers, {
     onSuccess: (data) => {
-      const consultants = data.filter((user) =>
+      const consultants: any = data.filter((user) =>
         user.roles.includes("CONSULTANT")
       );
       const consultantsInMission = consultants.filter(
-        (consultant) => consultant.Mission.length > 0
+        (consultant: any) => consultant.Mission.length > 0
       );
       setConsultantFetch(consultants);
       setConsultantInMission(consultantsInMission);

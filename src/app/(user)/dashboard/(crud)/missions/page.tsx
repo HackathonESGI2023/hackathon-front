@@ -9,19 +9,18 @@ import {
   Textarea,
   Tooltip,
 } from "@nextui-org/react";
-import { useMutation, useQuery } from "react-query";
-import { getMissions, StuffedMission } from "src/app/api/Missions/getMissions";
-import { MissionsList } from "../../components/MissionsList.component";
-import { useEffect, useState } from "react";
 import { ArrowsClockwise } from "@phosphor-icons/react";
 import { Select } from "antd";
-import { getCompanies } from "src/app/api/Companies/getCompanies";
-import { getUsers } from "src/app/api/Users/getUsers";
-import { createMission } from "src/app/api/Missions/createMission";
-import { updateMission } from "src/app/api/Missions/updateMission";
-import { deleteMission } from "src/app/api/Missions/deleteMission";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { getCompanies } from "src/app/api/Companies/getCompanies";
+import { createMission } from "src/app/api/Missions/createMission";
+import { deleteMission } from "src/app/api/Missions/deleteMission";
+import { getMissions } from "src/app/api/Missions/getMissions";
+import { updateMission } from "src/app/api/Missions/updateMission";
 import { getAllUsers } from "src/app/api/Users/getAllUsers";
+import { MissionsList } from "../../components/MissionsList.component";
 
 export default function MissionsCrud() {
   const { data: missions, refetch: refetchMissions } = useQuery(
