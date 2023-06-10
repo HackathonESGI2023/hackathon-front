@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import {
   Avatar,
@@ -76,7 +77,7 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
 
   React.useEffect(() => {
     refetchSlackUsers();
-  }, [open]);
+  }, [visible]);
 
   const createUserMutation = useMutation(createUser, {
     onSuccess: () => {

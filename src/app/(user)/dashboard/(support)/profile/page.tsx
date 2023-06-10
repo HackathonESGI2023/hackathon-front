@@ -43,12 +43,6 @@ const Profile = () => {
 
   const { data: skills } = useQuery(["skills"], getSkills, {
     onSuccess: (data: any) => {
-      // setSkillsOptions(
-      //   data.map((skill) => ({
-      //     value: skill.name,
-      //     label: skill.name,
-      //   }))
-      // );
       setSkillsOptions(data);
     },
   });
@@ -142,7 +136,7 @@ const Profile = () => {
           }}
         >
           <Grid.Container gap={2}>
-            {filteredUsers.map((user) => (
+            {filteredUsers.map((user: any) => (
               <Grid
                 key={user.id}
                 xs={6}
