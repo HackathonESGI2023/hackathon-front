@@ -10,6 +10,7 @@ import { SkillsChart } from "../components/SkillsChart.component";
 import { useRecoilState } from "recoil";
 import { userAtom } from "@utils/recoilAtoms.utils";
 import { userUtils } from "@utils/user.utils";
+import ModalCreateUser from "../components/ModalCreateUser/ModalCreateUser.component";
 
 export default function Miaou() {
   const { data: events, refetch: refetchEvents } = useQuery(
@@ -23,6 +24,7 @@ export default function Miaou() {
   );
 
   const [user, setUser] = useRecoilState(userAtom);
+  const [open, setOpen] = useState<boolean>(false);
 
   const refetchData = () => {
     refetchEvents();
@@ -68,6 +70,7 @@ export default function Miaou() {
       </Grid.Container>
       <Button onPress={() => refetchData()}>Refetch</Button>
       <Text>{user !== null ? JSON.stringify(userUtils.level(user)) : ""}</Text>
+      <ModalCreateUser open={true} setOpen={setOpen} />
     </div>
   );
 }
