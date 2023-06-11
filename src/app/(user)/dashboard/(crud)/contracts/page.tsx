@@ -1,6 +1,5 @@
 "use client";
 import {
-  Avatar,
   Button,
   Card,
   Grid,
@@ -8,22 +7,20 @@ import {
   Spacer,
   Table,
   Text,
-  Textarea,
   Tooltip,
 } from "@nextui-org/react";
-import { useMutation, useQuery } from "react-query";
-import { use, useEffect, useRef, useState } from "react";
 import { ArrowsClockwise } from "@phosphor-icons/react";
-import toast from "react-hot-toast";
-import { useRecoilState } from "recoil";
-import { userAtom } from "@utils/recoilAtoms.utils";
 import { ContractType } from "@prisma/client";
+import { userAtom } from "@utils/recoilAtoms.utils";
 import { Select } from "antd";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { useRecoilState } from "recoil";
 import { createContract } from "src/app/api/Contract/createContract";
-import { updateContract } from "src/app/api/Contract/updateContract";
-import { getUsers } from "src/app/api/Users/getUsers";
-import { getContracts } from "src/app/api/Contract/getContracts";
 import { deleteContract } from "src/app/api/Contract/deleteContract";
+import { getContracts } from "src/app/api/Contract/getContracts";
+import { updateContract } from "src/app/api/Contract/updateContract";
 import { getAllUsers } from "src/app/api/Users/getAllUsers";
 
 export default function MissionsCrud() {
@@ -276,7 +273,7 @@ export default function MissionsCrud() {
                 <Table.Pagination
                   noMargin
                   align="center"
-                  rowsPerPage={11}
+                  rowsPerPage={9}
                   onPageChange={(page) => console.log({ page })}
                 />
               </Table>

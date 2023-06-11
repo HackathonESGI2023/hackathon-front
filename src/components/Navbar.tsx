@@ -22,10 +22,16 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
   const [token, setToken] = useRecoilState(tokenAtom);
   const [user, setUser] = useRecoilState(userAtom);
 
+  // const handleLogout = async () => {
+  //   router.push("/");
+  //   setToken(null);
+  //   setUser(null);
+  // };
+
   const handleLogout = () => {
+    router.push("/");
     setToken(null);
     setUser(null);
-    router.push("/");
   };
 
   return (
@@ -98,7 +104,7 @@ const NavbarTest = ({ className }: NavbarTestProps) => {
               auto
               as={Link}
               color="primary"
-              onPress={() => router.push("/profile")}
+              onPress={() => router.push("/dashboard")}
             >
               Mon espace consultant
             </Button>

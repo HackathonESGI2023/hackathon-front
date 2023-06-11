@@ -3,13 +3,13 @@ import { BadgeContract } from "@components/UI/Badge/BadgeContract";
 import { BadgeMission } from "@components/UI/Badge/BadgeMission";
 import { BadgeSeniority } from "@components/UI/Badge/BadgeSeniority";
 import { BadgeSkill } from "@components/UI/Badge/BadgeSkill";
+import { Wysiwyg } from "@components/Wysiwyg/Wysiwyg.component";
 import {
   Avatar,
   Badge,
   Button,
   Card,
   Col,
-  Dropdown,
   Grid,
   Modal,
   Progress,
@@ -28,15 +28,12 @@ import {
 import { ContractTypeEnum } from "@schemas/contract.schema";
 import { SkillsDto } from "@schemas/skills.schema";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
+import { sendMessage } from "src/app/api/Slack/sendMessage";
 import { deleteUser } from "src/app/api/Users/deleteUser";
 import ModalEditProfile from "./ModalProfile";
 import ModalProfileSeeMore from "./ModalProfileSeeMore";
-import { Wysiwyg } from "@components/Wysiwyg/Wysiwyg.component";
-import { sendMessage } from "src/app/api/Slack/sendMessage";
-import toast from "react-hot-toast";
-import { useRecoilState } from "recoil";
-import { userAtom } from "@utils/recoilAtoms.utils";
 
 interface TemplateProps {
   userP: any;
@@ -202,44 +199,20 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
               }}
             >
               <Row justify="flex-end" css={{ mx: 1 }}>
-                {!onCrud ? (
-                  slackId && (
-                    <Tooltip
-                      content={"Envoyer un message"}
-                      rounded
-                      color="primary"
-                    >
-                      <Button
-                        auto
-                        css={{ backgroundColor: "#FBF8F1" }}
-                        icon={
-                          <ChatCircle size={20} color="#E6D6B1" weight="fill" />
-                        }
-                      />
-                    </Tooltip>
-                  )
-                ) : (
-                  <Dropdown>
-                    <Dropdown.Button
-                      flat
-                      css={{ background: "#E6D6B1", color: "#FBF8F1" }}
-                    >
-                      Options
-                    </Dropdown.Button>
-                    <Dropdown.Menu
-                      color="secondary"
-                      aria-label="Actions"
-                      css={{ $$dropdownMenuWidth: "280px" }}
-                    >
-                      {itemsOnCrud.map((item) => (
-                        <Dropdown.Item key={item.key} icon={item.icon}>
-                          <Button light onPress={item.function}>
-                            {item.text}
-                          </Button>
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                  </Dropdown>
+                {onCrud && slackId && (
+                  <Tooltip
+                    content={"Envoyer un message"}
+                    rounded
+                    color="primary"
+                  >
+                    <Button
+                      auto
+                      css={{ backgroundColor: "#FBF8F1" }}
+                      icon={
+                        <ChatCircle size={20} color="#E6D6B1" weight="fill" />
+                      }
+                    />
+                  </Tooltip>
                 )}
               </Row>
             </Col>
@@ -247,11 +220,12 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
 
           <Row justify="flex-start">
             <Grid.Container gap={1}>
-              {pinedSkills.map((skill) => (
-                <Grid key={skill.id}>
-                  <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
-                </Grid>
-              ))}
+              {pinedSkills?.length > 0 &&
+                pinedSkills.map((skill) => (
+                  <Grid key={skill.id}>
+                    <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
+                  </Grid>
+                ))}
             </Grid.Container>
           </Row>
 
