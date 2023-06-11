@@ -3,8 +3,11 @@
 .skillBadge {
   cursor: pointer;
 
-  display: inline-block;
+  display: block;
 
+  width: fit-content;
+  min-width: 5rem;
+  min-height: 2.2rem;
   margin: 0.5rem;
   padding: 0.5rem 1rem;
 
