@@ -48,7 +48,7 @@ export const MissionsList: React.FunctionComponent<MissionsListProps> = ({
           }}
         >
           <Container>
-            {missions?.map((mission) => (
+            {missions?.map((mission: any) => (
               <Grid.Container key={mission.id}>
                 <Grid xs={12} md={crud ? 10 : 12}>
                   <MissionItem

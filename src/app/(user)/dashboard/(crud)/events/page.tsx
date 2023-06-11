@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import {
   Button,
@@ -9,22 +10,20 @@ import {
   Textarea,
   Tooltip,
 } from "@nextui-org/react";
-import { useMutation, useQuery } from "react-query";
-import { getMissions, StuffedMission } from "src/app/api/Missions/getMissions";
-import { MissionsList } from "../../components/MissionsList.component";
-import { useEffect, useState } from "react";
 import { ArrowsClockwise } from "@phosphor-icons/react";
-import { Select } from "antd";
-import { updateMission } from "src/app/api/Missions/updateMission";
-import toast from "react-hot-toast";
-import { getEvents } from "src/app/api/Events/getEvents";
-import { EventsList } from "../../components/EventsList.component";
 import { ActivityType } from "@prisma/client";
-import { useRecoilState } from "recoil";
 import { userAtom } from "@utils/recoilAtoms.utils";
+import { Select } from "antd";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { useRecoilState } from "recoil";
 import { createEvent } from "src/app/api/Events/createEvent";
-import { updateEvent } from "src/app/api/Events/updateEvent";
 import { deleteEvent } from "src/app/api/Events/deleteEvent";
+import { getEvents } from "src/app/api/Events/getEvents";
+import { updateEvent } from "src/app/api/Events/updateEvent";
+import { updateMission } from "src/app/api/Missions/updateMission";
+import { EventsList } from "../../components/EventsList.component";
 
 export default function MissionsCrud() {
   const { data: events, refetch: refetchEvents } = useQuery(

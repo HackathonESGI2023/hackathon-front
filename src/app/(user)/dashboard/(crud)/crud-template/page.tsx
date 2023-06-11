@@ -1,22 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
-import {
-  Button,
-  Card,
-  Grid,
-  Input,
-  Spacer,
-  Text,
-  Textarea,
-  Tooltip,
-} from "@nextui-org/react";
-import { useMutation, useQuery } from "react-query";
-import { getMissions, StuffedMission } from "src/app/api/Missions/getMissions";
-import { MissionsList } from "../../components/MissionsList.component";
-import { useEffect, useState } from "react";
+import { Button, Card, Grid, Spacer, Text, Tooltip } from "@nextui-org/react";
 import { ArrowsClockwise } from "@phosphor-icons/react";
-import toast from "react-hot-toast";
-import { useRecoilState } from "recoil";
 import { userAtom } from "@utils/recoilAtoms.utils";
+import { useState } from "react";
+import { useRecoilState } from "recoil";
 
 export default function MissionsCrud() {
   const [user, setUser] = useRecoilState(userAtom);
