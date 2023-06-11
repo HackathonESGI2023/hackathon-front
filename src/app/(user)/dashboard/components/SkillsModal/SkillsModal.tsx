@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Modal, Text } from "@nextui-org/react";
+import { UserSkill } from "@prisma/client";
 import SkillsCategoryCard from "../SkillsCategoryCard/SkillsCategoryCard";
 import styles from "./SkillsModal.module.scss";
 
@@ -9,9 +10,16 @@ import styles from "./SkillsModal.module.scss";
 type SkillsModalProps = {
   isVisible: boolean;
   setIsVisible: (isVisible: boolean) => void;
+  skills: UserSkill[];
 };
 
-const SkillsModal = ({ setIsVisible, isVisible }: SkillsModalProps) => {
+const SkillsModal = ({ setIsVisible, isVisible, skills }: SkillsModalProps) => {
+  const skillsCategories = [
+    ...new Set(
+      skills.filter((us) => us.skill.category).map((us) => us.skill.category)
+    ),
+  ];
+
   return (
     <Modal
       scroll
@@ -24,27 +32,23 @@ const SkillsModal = ({ setIsVisible, isVisible }: SkillsModalProps) => {
     >
       <Modal.Header>
         <Text id="modal-title" size={18}>
-          Modal with a lot of content
+          Pannel de compétences
         </Text>
       </Modal.Header>
       <Modal.Body>
         <div className={styles.skillsContainer}>
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
-          <SkillsCategoryCard label="Catégorie" />
+          {skillsCategories.map((category) => (
+            <SkillsCategoryCard
+              key={category}
+              label={category}
+              skills={skills.filter((us) => us.skill.category === category)}
+            />
+          ))}
         </div>
       </Modal.Body>
       <Modal.Footer>
         <Button auto flat color="error" onPress={() => setIsVisible(false)}>
-          Close
-        </Button>
-        <Button auto onPress={() => setIsVisible(false)}>
-          Agree
+          Fermer
         </Button>
       </Modal.Footer>
     </Modal>

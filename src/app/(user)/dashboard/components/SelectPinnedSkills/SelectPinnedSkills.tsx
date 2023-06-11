@@ -3,6 +3,7 @@
 import SkillBadge from "@components/SkillBadge/SkillBadge";
 import SkillBadgeSlot from "@components/SkillBadgeSlot/SkillBadgeSlot";
 import { Button, Col, Modal, Row, Text } from "@nextui-org/react";
+import { SkillLevel } from "@prisma/client";
 import { userAtom } from "@utils/recoilAtoms.utils";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
@@ -95,10 +96,12 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
   const handleMutation = () => {
     const updatedUser = prepareNewUser();
     const pouet = {
-      ...updatedUser,
-      skills: updatedUser.UserSkill,
+      skills: updatedUser.UserSkill?.map((us) => {
+        return { id: us.id, isStarred: us.isStarred, level: SkillLevel.JUNIOR };
+      }),
     };
-    updateUserMutation.mutate(pouet.skills);
+    console.log("pouet", pouet);
+    updateUserMutation.mutate(pouet);
   };
 
   return (
@@ -186,7 +189,7 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleMutation}>Test envoie requete</Button>
+          {/* <Button onClick={handleMutation}>Test envoie requete</Button> */}
           <Button auto flat color="error" onPress={() => setIsVisible(false)}>
             Close
           </Button>

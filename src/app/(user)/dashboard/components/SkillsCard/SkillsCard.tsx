@@ -1,61 +1,76 @@
+"use client";
+
 import SkillBadge from "@components/SkillBadge/SkillBadge";
-import { Card, Row, Text } from "@nextui-org/react";
+import { Card, Row, Spacer, Text } from "@nextui-org/react";
 import { UserSkill } from "@prisma/client";
 import colors from "@styles/_colors.module.scss";
 import { useState } from "react";
+import SkillsModal from "../SkillsModal";
 
 type SkillsCardProps = {
-  userSkills: UserSkill[];
+  softSkills: UserSkill[];
+  hardSkills: UserSkill[];
 };
 
-const SkillsCard = ({}: SkillsCardProps) => {
-  const [badges, setBadges] = useState([
-    { id: 1, name: "React", color: "red", slot: null },
-    { id: 2, name: "TypeScript", color: "green", slot: null },
-    { id: 3, name: "Next.js", color: "blue", slot: null },
-    { id: 4, name: "Angular", color: "white", slot: null },
-    { id: 5, name: "Vue.js", color: "yellow", slot: null },
-    { id: 6, name: "Svelte", color: "purple", slot: null },
-  ]);
+const SkillsCard = ({ softSkills, hardSkills }: SkillsCardProps) => {
+  const [isSkillsModalVisible, setIsSkillsModalVisible] =
+    useState<boolean>(false);
+
+  console.log("ouio", isSkillsModalVisible);
 
   return (
-    <Card
-      style={{
-        height: "100%",
-        width: "30rem",
-        background: colors.white,
-        padding: "1.5rem",
-      }}
+    <div
+      onClick={() => setIsSkillsModalVisible(true)}
+      style={{ width: "100%" }}
     >
-      <Text weight={"medium"} color={colors.primary}>
-        Hardskills
-      </Text>
+      <Card
+        isHoverable
+        variant="flat"
+        style={{
+          height: "100%",
+          width: "100%",
+          backgroundColor: "#FDFCFC",
+          padding: "1.5rem",
+          cursor: "pointer",
+        }}
+      >
+        <Text weight={"medium"} color={colors.primary}>
+          Hardskills
+        </Text>
 
-      <Row style={{ overflow: "scroll" }}>
-        {badges.map((skill) => (
-          <SkillBadge
-            key={skill.id}
-            name={skill.name}
-            color={skill.color}
-            id={skill.id}
-          />
-        ))}
-      </Row>
+        <Row style={{ overflow: "scroll" }}>
+          {hardSkills.slice(0, 4).map((skill) => (
+            <SkillBadge
+              key={skill.id}
+              name={skill.skill.name}
+              color={skill.skill.color}
+              id={skill.id}
+            />
+          ))}
+        </Row>
 
-      <Text weight={"medium"} color={colors.primary}>
-        Softskills
-      </Text>
-      <Row style={{ overflow: "scroll" }}>
-        {badges.map((skill) => (
-          <SkillBadge
-            key={skill.id}
-            name={skill.name}
-            color={skill.color}
-            id={skill.id}
-          />
-        ))}
-      </Row>
-    </Card>
+        <Spacer y={1} />
+
+        <Text weight={"medium"} color={colors.primary}>
+          Softskills
+        </Text>
+        <Row style={{ overflow: "scroll" }}>
+          {softSkills.slice(0, 4).map((skill) => (
+            <SkillBadge
+              key={skill.id}
+              name={skill.skill.name}
+              color={skill.skill.color}
+              id={skill.id}
+            />
+          ))}
+        </Row>
+        <SkillsModal
+          setIsVisible={setIsSkillsModalVisible}
+          isVisible={isSkillsModalVisible}
+          skills={[...softSkills, ...hardSkills]}
+        />
+      </Card>
+    </div>
   );
 };
 
