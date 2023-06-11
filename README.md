@@ -94,7 +94,7 @@ or use the following commands :
 
 
 
-### 3.1 - Setup frontend
+### 4.1 - Setup frontend
 
 1. Go to /hackaton-front
 2. Verify that you have node 19. installed locally on your machine
