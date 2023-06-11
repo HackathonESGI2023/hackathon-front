@@ -10,7 +10,6 @@ import {
   Button,
   Card,
   Col,
-  Dropdown,
   Grid,
   Modal,
   Progress,
@@ -200,44 +199,20 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
               }}
             >
               <Row justify="flex-end" css={{ mx: 1 }}>
-                {!onCrud ? (
-                  slackId && (
-                    <Tooltip
-                      content={"Envoyer un message"}
-                      rounded
-                      color="primary"
-                    >
-                      <Button
-                        auto
-                        css={{ backgroundColor: "#FBF8F1" }}
-                        icon={
-                          <ChatCircle size={20} color="#E6D6B1" weight="fill" />
-                        }
-                      />
-                    </Tooltip>
-                  )
-                ) : (
-                  <Dropdown>
-                    <Dropdown.Button
-                      flat
-                      css={{ background: "#E6D6B1", color: "#FBF8F1" }}
-                    >
-                      Options
-                    </Dropdown.Button>
-                    <Dropdown.Menu
-                      color="secondary"
-                      aria-label="Actions"
-                      css={{ $$dropdownMenuWidth: "280px" }}
-                    >
-                      {itemsOnCrud.map((item) => (
-                        <Dropdown.Item key={item.key} icon={item.icon}>
-                          <Button light onPress={item.function}>
-                            {item.text}
-                          </Button>
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                  </Dropdown>
+                {onCrud && slackId && (
+                  <Tooltip
+                    content={"Envoyer un message"}
+                    rounded
+                    color="primary"
+                  >
+                    <Button
+                      auto
+                      css={{ backgroundColor: "#FBF8F1" }}
+                      icon={
+                        <ChatCircle size={20} color="#E6D6B1" weight="fill" />
+                      }
+                    />
+                  </Tooltip>
                 )}
               </Row>
             </Col>

@@ -59,7 +59,7 @@ const DashboardConsultant = () => {
               "years"
             )}
             slackId={user?.slackId}
-            onCrud={true}
+            onCrud={false}
           />
         </Grid>
         <Grid xs={6} md style={{ height: "16rem" }}>
@@ -80,7 +80,7 @@ const DashboardConsultant = () => {
         </Grid>
 
         <Grid xs md css={{ height: "48vh" }}>
-          <ShortcutDashboard />
+          <ShortcutDashboard disabledButton={true} />
         </Grid>
       </Grid.Container>
     </div>
