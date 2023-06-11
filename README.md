@@ -54,11 +54,24 @@ SLACK_CLIENT_SECRET="xoxb-5365967909319-5377622002213-WvMFBXkw7YUZOnwrayK6CL3I"
 APP_NAME="BRIGDE by Carbon"
 ```
 
-3. Run the project with docker
+You can use this makefile command to run all the commands at once :
 
 ```bash
   make turboinstall  
 ```
+
+or use the following commands :
+
+3. Run the project with docker
+
+  
+```bash
+  make build
+  make up
+```
+  
+ 
+
 
 4. Generate the database
 
@@ -79,11 +92,7 @@ APP_NAME="BRIGDE by Carbon"
   make fix-bcrypt
 ```
 
-7. Restart the project
 
-```bash
-  make restart
-```
 
 ### 3.1 - Setup frontend
 
