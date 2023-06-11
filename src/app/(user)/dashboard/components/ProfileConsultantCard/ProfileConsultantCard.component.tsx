@@ -10,6 +10,7 @@ import {
   Button,
   Card,
   Col,
+  Dropdown,
   Grid,
   Modal,
   Progress,
@@ -32,7 +33,6 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import { sendMessage } from "src/app/api/Slack/sendMessage";
 import { deleteUser } from "src/app/api/Users/deleteUser";
-import SelectPinnedSkills from "../SelectPinnedSkills/SelectPinnedSkills";
 import ModalEditProfile from "./ModalProfile";
 import ModalProfileSeeMore from "./ModalProfileSeeMore";
 
@@ -200,20 +200,28 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
               }}
             >
               <Row justify="flex-end" css={{ mx: 1 }}>
-                {onCrud && slackId && (
-                  <Tooltip
-                    content={"Envoyer un message"}
-                    rounded
-                    color="primary"
-                  >
-                    <Button
-                      auto
-                      css={{ backgroundColor: "#FBF8F1" }}
-                      icon={
-                        <ChatCircle size={20} color="#E6D6B1" weight="fill" />
-                      }
-                    />
-                  </Tooltip>
+                {onCrud && (
+                  <Dropdown>
+                    <Dropdown.Button
+                      flat
+                      css={{ background: "#E6D6B1", color: "#FBF8F1" }}
+                    >
+                      Options
+                    </Dropdown.Button>
+                    <Dropdown.Menu
+                      color="secondary"
+                      aria-label="Actions"
+                      css={{ $$dropdownMenuWidth: "280px" }}
+                    >
+                      {itemsOnCrud.map((item) => (
+                        <Dropdown.Item key={item.key} icon={item.icon}>
+                          <Button light onPress={item.function}>
+                            {item.text}
+                          </Button>
+                        </Dropdown.Item>
+                      ))}
+                    </Dropdown.Menu>
+                  </Dropdown>
                 )}
               </Row>
             </Col>
