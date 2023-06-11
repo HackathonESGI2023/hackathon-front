@@ -1,3 +1,4 @@
+"use client";
 import SkillBadge from "@components/SkillBadge/SkillBadge";
 import { Card, Row, Spacer, Text } from "@nextui-org/react";
 import { UserSkill } from "@prisma/client";

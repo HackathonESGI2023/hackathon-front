@@ -1,12 +1,5 @@
-import {
-  Card,
-  Col,
-  Container,
-  Grid,
-  Row,
-  Spacer,
-  Text,
-} from "@nextui-org/react";
+"use client";
+import { Card, Container, Grid, Row, Text } from "@nextui-org/react";
 import {
   AppWindow,
   Barbell,

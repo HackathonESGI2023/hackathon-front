@@ -1,3 +1,4 @@
+"use client";
 import SkillBadge from "@components/SkillBadge";
 import { Card, Col, Row, Spacer, Text } from "@nextui-org/react";
 import { Buildings } from "@phosphor-icons/react";

@@ -1,3 +1,4 @@
+"use client";
 import { Button, Card, Container, Grid, Input, Text } from "@nextui-org/react";
 import { PencilLine, Trash } from "@phosphor-icons/react";
 import { Event } from "@prisma/client";

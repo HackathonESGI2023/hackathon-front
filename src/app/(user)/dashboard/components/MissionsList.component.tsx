@@ -1,3 +1,4 @@
+"use client";
 import { Button, Card, Container, Grid, Text } from "@nextui-org/react";
 import { PencilLine, Trash } from "@phosphor-icons/react";
 import * as React from "react";

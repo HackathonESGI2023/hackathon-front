@@ -1,3 +1,4 @@
+"use client";
 import { Grid } from "@nextui-org/react";
 import { userAtom } from "@utils/recoilAtoms.utils";
 import moment from "moment";
