@@ -1,5 +1,6 @@
 import { Grid } from "@nextui-org/react";
 import { userAtom } from "@utils/recoilAtoms.utils";
+import moment from "moment";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { useRecoilState } from "recoil";
@@ -7,6 +8,7 @@ import { getEvents } from "src/app/api/Events/getEvents";
 import { getMissions } from "src/app/api/Missions/getMissions";
 import { EventsList } from "../EventsList.component";
 import { MissionsList } from "../MissionsList.component";
+import ProfileConsultantCard from "../ProfileConsultantCard";
 import ShortcutDashboard from "../Shortcut.component";
 import SkillsCard from "../SkillsCard/SkillsCard";
 import { SkillsChart } from "../SkillsChart.component";
@@ -41,8 +43,8 @@ const DashboardConsultant = () => {
   return (
     <div>
       <Grid.Container gap={2} justify="space-between">
-        <Grid xs={6} md={4} style={{ height: "10rem" }}>
-          {/* <ProfileConsultantCard
+        <Grid xs={6} md={4} style={{ height: "16rem" }}>
+          <ProfileConsultantCard
             userP={user}
             userId={user.id}
             fullname={user.firstname + " " + user.lastname}
@@ -55,7 +57,7 @@ const DashboardConsultant = () => {
             seniorityTimeInYear={moment().diff(moment(user.createdAt), "years")}
             slackId={user.slackId}
             onCrud={true}
-          /> */}
+          />
         </Grid>
         <Grid xs={6} md style={{ height: "16rem" }}>
           <SkillsCard softSkills={softSkills} hardSkills={hardSkills} />
