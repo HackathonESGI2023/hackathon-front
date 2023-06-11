@@ -46,6 +46,8 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
                 marginBottom: "1rem",
                 height: "100%",
                 pb: 0,
+                display: "flex",
+                flexDirection: "column",
               }}
               justify="space-between"
             >

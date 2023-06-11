@@ -7,6 +7,7 @@ import { getEvents } from "src/app/api/Events/getEvents";
 import { getMissions } from "src/app/api/Missions/getMissions";
 import { EventsList } from "../EventsList.component";
 import { MissionsList } from "../MissionsList.component";
+import ShortcutDashboard from "../Shortcut.component";
 import SkillsCard from "../SkillsCard/SkillsCard";
 import { SkillsChart } from "../SkillsChart.component";
 
@@ -74,7 +75,7 @@ const DashboardConsultant = () => {
         </Grid>
 
         <Grid xs md css={{ height: "48vh" }}>
-          {/* <ShortcutDashboard /> */}
+          <ShortcutDashboard />
         </Grid>
       </Grid.Container>
     </div>
