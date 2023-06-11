@@ -23,7 +23,7 @@ const ModalProfileSeeMore: React.FunctionComponent<TemplateProps> = ({
   const [mission, setMission] = useState<any>([]);
 
   useState(() => {
-    if (userT.Mission.length > 0) {
+    if (userT?.Mission.length > 0) {
       setInMission("Oui");
       setMission(userT.Mission);
     } else {
@@ -41,11 +41,11 @@ const ModalProfileSeeMore: React.FunctionComponent<TemplateProps> = ({
       width="30%"
     >
       <Modal.Header>
-        <Avatar size={"xl"} squared src={userT.profile_picture} />
+        <Avatar size={"xl"} squared src={userT?.profile_picture} />
       </Modal.Header>
       <Modal.Body>
-        <Input label="Prénom" value={userT.firstname} />
-        <Input label="Nom" value={userT.lastname} />
+        <Input label="Prénom" value={userT?.firstname} />
+        <Input label="Nom" value={userT?.lastname} />
         <Input label="En mission?" value={inMission} />
 
         {mission.length > 0 &&
@@ -53,13 +53,13 @@ const ModalProfileSeeMore: React.FunctionComponent<TemplateProps> = ({
             return (
               <Card css={{ mw: "400px" }} key={mission.id}>
                 <Card.Body>
-                  <Text h5>Entreprise : {mission.Company.name}</Text>
-                  <Text h6>Nom de la mission: {mission.name}</Text>
+                  <Text h5>Entreprise : {mission?.Company.name}</Text>
+                  <Text h6>Nom de la mission: {mission?.name}</Text>
                 </Card.Body>
               </Card>
             );
           })}
-        <Input label="Adresse" value={userT.address} />
+        <Input label="Adresse" value={userT?.address} />
         <Input label="Numéro de téléphone" value="06 12 34 56 78" />
         <Input label="Salaire mensuel" value="2800€ (valeur random)" />
       </Modal.Body>

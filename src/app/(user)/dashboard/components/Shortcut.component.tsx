@@ -13,9 +13,13 @@ import * as React from "react";
 import { useState } from "react";
 import ModalCreateUser from "./ModalCreateUser/ModalCreateUser.component";
 
-interface TemplateProps {}
+interface TemplateProps {
+  disabledButton?: boolean;
+}
 
-const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
+const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({
+  disabledButton,
+}) => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
   const handleModal = () => setVisible(true);
@@ -53,6 +57,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
             >
               <Grid xs>
                 <Button
+                  disabled={disabledButton}
                   size={"lg"}
                   icon={<MagnifyingGlass size={25} />}
                   color="success"
@@ -69,6 +74,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
 
               <Grid xs>
                 <Button
+                  disabled={disabledButton}
                   size={"lg"}
                   icon={<UserCirclePlus size={25} />}
                   color="success"
@@ -85,6 +91,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
 
               <Grid xs>
                 <Button
+                  disabled={disabledButton}
                   size={"lg"}
                   icon={<Handshake size={22} />}
                   color="success"
@@ -101,6 +108,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
 
               <Grid xs>
                 <Button
+                  disabled={disabledButton}
                   size={"lg"}
                   icon={<Briefcase size={22} />}
                   color="success"
@@ -117,6 +125,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
 
               <Grid xs>
                 <Button
+                  disabled={disabledButton}
                   size={"lg"}
                   icon={<Brain size={22} />}
                   color="success"
@@ -133,6 +142,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({}) => {
 
               <Grid xs>
                 <Button
+                  disabled={disabledButton}
                   size={"lg"}
                   icon={<CalendarPlus size={22} />}
                   css={{
