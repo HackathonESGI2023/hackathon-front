@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 interface SkillsChartProps {
-  skills: UserResponse["UserSkill"];
+  skills?: UserResponse["UserSkill"];
 }
 
 export const SkillsChart: React.FunctionComponent<SkillsChartProps> = ({
@@ -37,6 +37,7 @@ export const SkillsChart: React.FunctionComponent<SkillsChartProps> = ({
   const skillCategoriesCount = uniqueSkillCategories.map((category) => {
     return skills.filter((skill) => skill.skill.category === category).length;
   });
+
   return (
     <Card
       variant="flat"

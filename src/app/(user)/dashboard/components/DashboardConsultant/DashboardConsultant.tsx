@@ -46,16 +46,19 @@ const DashboardConsultant = () => {
         <Grid xs={6} md={4} style={{ height: "16rem" }}>
           <ProfileConsultantCard
             userP={user}
-            userId={user.id}
-            fullname={user.firstname + " " + user.lastname}
-            profilePicture={user.profile_picture}
-            isInMission={user.Mission.length > 0}
+            userId={user?.id}
+            fullname={user?.firstname + " " + user?.lastname}
+            profilePicture={user?.profile_picture}
+            isInMission={user?.Mission.length > 0}
             userContractType={user?.Contract[0]?.contractType}
-            pinedSkills={user.UserSkill.filter((skill) => skill.isStarred)
+            pinedSkills={user?.UserSkill.filter((skill) => skill.isStarred)
               .map((skill) => skill.skill)
               .slice(0, 3)}
-            seniorityTimeInYear={moment().diff(moment(user.createdAt), "years")}
-            slackId={user.slackId}
+            seniorityTimeInYear={moment().diff(
+              moment(user?.createdAt),
+              "years"
+            )}
+            slackId={user?.slackId}
             onCrud={true}
           />
         </Grid>

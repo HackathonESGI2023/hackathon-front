@@ -14,8 +14,9 @@ import { Role } from "@prisma/client";
 import { toBase64 } from "@utils/files.utils";
 import { Select } from "antd";
 import * as React from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getSlackUsers } from "src/app/api/Slack/getUsers";
 import { createUser } from "src/app/api/Users/createUser";
 
@@ -55,6 +56,8 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
   const [role, setRole] = React.useState<Role>(Role.CONSULTANT);
   const [slackId, setSlackId] = React.useState<string>("");
 
+  const queryClient = useQueryClient();
+
   const pictureRef = React.useRef<HTMLInputElement>(null);
   const handleAddProfilePicture = async (file: File) => {
     // Check if file is an image
@@ -75,7 +78,7 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
     getSlackUsers
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     refetchSlackUsers();
   }, [visible]);
 
@@ -209,7 +212,7 @@ const ModalCreateUser: React.FunctionComponent<ModalCreateUserProps> = ({
             slackUsers
               ? [
                   // @ts-ignore
-                  ...slackUsers?.members?.map((user) => ({
+                  ...(slackUsers.members ?? []).map((user) => ({
                     label: `${user.real_name} (${
                       user.profile?.email ?? "Email masquée"
                     })`,

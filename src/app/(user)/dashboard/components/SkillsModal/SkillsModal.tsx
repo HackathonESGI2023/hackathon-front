@@ -10,7 +10,7 @@ import styles from "./SkillsModal.module.scss";
 type SkillsModalProps = {
   isVisible: boolean;
   setIsVisible: (isVisible: boolean) => void;
-  skills: UserSkill[];
+  skills?: UserSkill[];
 };
 
 const SkillsModal = ({ setIsVisible, isVisible, skills }: SkillsModalProps) => {

@@ -40,19 +40,19 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
   const queryClient = useQueryClient();
 
   const [user, setUser] = useState({
-    firstname: userT.firstname,
-    lastname: userT.lastname,
-    address: userT.address,
-    email: userT.email,
+    firstname: userT?.firstname,
+    lastname: userT?.lastname,
+    address: userT?.address,
+    email: userT?.email,
   });
 
   useEffect(() => {
     if (!visible) {
       setUser({
-        firstname: userT.firstname,
-        lastname: userT.lastname,
-        address: userT.address,
-        email: userT.email,
+        firstname: userT?.firstname,
+        lastname: userT?.lastname,
+        address: userT?.address,
+        email: userT?.email,
       });
     }
   }, [visible]);
@@ -84,7 +84,7 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
         <Text id="modal-title" size={18}>
           Edition du profil de{" "}
           <Text b size={18}>
-            {userT.firstname} {userT.lastname}
+            {userT?.firstname} {userT?.lastname}
           </Text>
         </Text>
       </Modal.Header>
@@ -125,10 +125,9 @@ const ModalEditProfile: React.FunctionComponent<TemplateProps> = ({
           size="large"
           dropdownStyle={{ zIndex: 999999 }}
           options={
-            slackUsers
+            slackUsers && slackUsers.members
               ? [
-                  // @ts-ignore
-                  ...slackUsers?.members?.map((user) => ({
+                  ...slackUsers.members.map((user) => ({
                     label: user.real_name,
                     value: user.id,
                   })),

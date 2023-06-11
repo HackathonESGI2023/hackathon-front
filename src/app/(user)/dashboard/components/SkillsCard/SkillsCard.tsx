@@ -1,5 +1,3 @@
-"use client";
-
 import SkillBadge from "@components/SkillBadge/SkillBadge";
 import { Card, Row, Spacer, Text } from "@nextui-org/react";
 import { UserSkill } from "@prisma/client";
@@ -8,15 +6,13 @@ import { useState } from "react";
 import SkillsModal from "../SkillsModal";
 
 type SkillsCardProps = {
-  softSkills: UserSkill[];
-  hardSkills: UserSkill[];
+  softSkills?: UserSkill[];
+  hardSkills?: UserSkill[];
 };
 
-const SkillsCard = ({ softSkills, hardSkills }: SkillsCardProps) => {
+const SkillsCard = ({ softSkills = [], hardSkills = [] }: SkillsCardProps) => {
   const [isSkillsModalVisible, setIsSkillsModalVisible] =
     useState<boolean>(false);
-
-  console.log("ouio", isSkillsModalVisible);
 
   return (
     <div
@@ -39,14 +35,17 @@ const SkillsCard = ({ softSkills, hardSkills }: SkillsCardProps) => {
         </Text>
 
         <Row style={{ overflow: "scroll" }}>
-          {hardSkills.slice(0, 4).map((skill) => (
-            <SkillBadge
-              key={skill.id}
-              name={skill.skill.name}
-              color={skill.skill.color}
-              id={skill.id}
-            />
-          ))}
+          {hardSkills &&
+            hardSkills
+              .slice(0, 4)
+              .map((skill) => (
+                <SkillBadge
+                  key={skill.id}
+                  name={skill.skill.name}
+                  color={skill.skill.color}
+                  id={skill.id}
+                />
+              ))}
         </Row>
 
         <Spacer y={1} />
@@ -55,14 +54,17 @@ const SkillsCard = ({ softSkills, hardSkills }: SkillsCardProps) => {
           Softskills
         </Text>
         <Row style={{ overflow: "scroll" }}>
-          {softSkills.slice(0, 4).map((skill) => (
-            <SkillBadge
-              key={skill.id}
-              name={skill.skill.name}
-              color={skill.skill.color}
-              id={skill.id}
-            />
-          ))}
+          {softSkills &&
+            softSkills
+              .slice(0, 4)
+              .map((skill) => (
+                <SkillBadge
+                  key={skill.id}
+                  name={skill.skill.name}
+                  color={skill.skill.color}
+                  id={skill.id}
+                />
+              ))}
         </Row>
         <SkillsModal
           setIsVisible={setIsSkillsModalVisible}

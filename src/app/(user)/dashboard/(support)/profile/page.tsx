@@ -47,10 +47,12 @@ const Profile = () => {
     },
   });
 
-  const filterSKillsOptions = skillsOptions.map((skill: any) => ({
-    value: skill.name,
-    label: skill.name,
-  }));
+  const filterSKillsOptions = Array.isArray(skillsOptions)
+    ? skillsOptions.map((skill: any) => ({
+        value: skill.name,
+        label: skill.name,
+      }))
+    : [];
 
   const filteredUsers = users.filter(
     (user: any) =>
