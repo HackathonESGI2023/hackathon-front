@@ -227,7 +227,6 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
                     <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
                   </Grid>
                 ))}
-              <SelectPinnedSkills />
             </Grid.Container>
           </Row>
 

@@ -4,6 +4,7 @@ import { Card, Row, Spacer, Text } from "@nextui-org/react";
 import { UserSkill } from "@prisma/client";
 import colors from "@styles/_colors.module.scss";
 import { useState } from "react";
+import SelectPinnedSkills from "../SelectPinnedSkills";
 import SkillsModal from "../SkillsModal";
 
 type SkillsCardProps = {
@@ -31,9 +32,12 @@ const SkillsCard = ({ softSkills = [], hardSkills = [] }: SkillsCardProps) => {
           cursor: "pointer",
         }}
       >
-        <Text weight={"medium"} color={colors.primary}>
-          Hardskills
-        </Text>
+        <Row justify="space-between">
+          <Text weight={"medium"} color={colors.primary}>
+            Hardskills
+          </Text>
+          <SelectPinnedSkills />
+        </Row>
 
         <Row style={{ overflow: "scroll" }}>
           {hardSkills &&
