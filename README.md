@@ -108,7 +108,15 @@ APP_NAME="BRIGDE by Carbon"
   npm run start
 ```
 
-## ⚠️ Recurring problems in the project ⚠️
+## 4 - Roles
+
+| Email                  | Password | Role       |
+| ---------------------- | -------- | ---------- |
+| consultant@example.com | @Test123 | CONSULTANT |
+| support@example.com    | @Test123 | SUPPORT    |
+
+
+## ⚠️ 5 - Recurring problems in the project ⚠️
 
 1. The front-end can sometimes stop receiving information from the back-end.
 
@@ -120,7 +128,7 @@ Restart the back-end docker
 
 2. Seeds for the "Project" section may bug on Apple M1/M2 chipsets
 
-## List of features
+## 6 - List of features
 
 Any additional information goes here
 
