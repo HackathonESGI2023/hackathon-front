@@ -106,7 +106,7 @@ const SelectPinnedSkills = ({}: SelectPinnedSkillsProps) => {
 
   return (
     <>
-      <Button onClick={() => setIsVisible(true)}>pinned skills</Button>
+      <Button onClick={() => setIsVisible(true)}>Compétences épinglés</Button>
       <Modal
         scroll
         fullScreen

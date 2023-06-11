@@ -32,6 +32,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "react-query";
 import { sendMessage } from "src/app/api/Slack/sendMessage";
 import { deleteUser } from "src/app/api/Users/deleteUser";
+import SelectPinnedSkills from "../SelectPinnedSkills/SelectPinnedSkills";
 import ModalEditProfile from "./ModalProfile";
 import ModalProfileSeeMore from "./ModalProfileSeeMore";
 
@@ -226,6 +227,7 @@ const ProfileConsultantCard: React.FunctionComponent<TemplateProps> = ({
                     <BadgeSkill color={skill.color}>{skill.name}</BadgeSkill>
                   </Grid>
                 ))}
+              <SelectPinnedSkills />
             </Grid.Container>
           </Row>
 
