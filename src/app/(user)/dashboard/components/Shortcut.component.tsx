@@ -26,7 +26,7 @@ const ShortcutDashboard: React.FunctionComponent<TemplateProps> = ({
   const closeHandler = () => setVisible(false);
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <Text h3>Raccourcies</Text>
+      <Text h3>Raccourcis</Text>
 
       <Card
         variant="flat"
