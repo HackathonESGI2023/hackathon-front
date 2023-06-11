@@ -1,0 +1,25 @@
+@import '/src/styles/';
+
+.skillBadge {
+  cursor: pointer;
+
+  display: block;
+
+  width: fit-content;
+  min-width: 5rem;
+  min-height: 2.2rem;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgb(0 0 0 / 10%);
+}
+
+.label {
+  color: $primary;
+}
