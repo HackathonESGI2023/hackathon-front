@@ -27,7 +27,7 @@ interface SkillsChartProps {
 }
 
 export const SkillsChart: React.FunctionComponent<SkillsChartProps> = ({
-  skills,
+  skills = [],
 }) => {
   const uniqueSkillCategories = skills
     .map((skill) => skill.skill.category)
